@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - Ramez Abdalla, Ph.D.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="https://scholar.google.com/citations?view_op=view_photo&user=YOUR_SCHOLAR_ID&citpid=1" alt="Dr. Ing. Ramez Abdalla" class="profile-image" onerror="this.src='figures/profile-photo.jpg'; this.onerror=null;">
+                </div>
+                <div class="profile-text">
+                    <h1>Ramez Abdalla, Ph.D.</h1>
+                    <p class="subtitle">Research Scientist | Computational Fluid Dynamics | AI in Energy Systems</p>
+                    <div class="contact-info">
+                        <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="research.html">Research Topics</a></li>
+                <li><a href="publications.html" class="active">Publications</a></li>
+                <li><a href="projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>Technical Publications</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">A comprehensive list of peer-reviewed journal articles, book chapters, and conference papers in computational fluid dynamics, machine learning applications in energy systems, and flow assurance.</p>
+
+            <h3 style="color: var(--secondary-color); margin-top: 2rem; margin-bottom: 1rem;">Journal Articles</h3>
+
+            <div class="publication-detail" id="publication-5">
+                <h3>Multi-agent physics-informed reinforcement learning for waterflooding optimization</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., Agban, N., Lüddeke, C., Sui, D., Jaeger, P.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> Franklin Open, Volume 10, 2025, 100229</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2025</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">DOI: 10.1016/j.fraope.2025.100229</a></span>
+                </div>
+                <div class="publication-abstract">
+                    <strong>Abstract:</strong> This paper presents a novel framework combining physics-informed neural networks (PINNs) with multi-agent reinforcement learning (MARL) for waterflooding optimization in oil reservoirs. The approach integrates reservoir physics directly into the learning process, ensuring physically consistent predictions while optimizing injection strategies through decentralized agents. Results demonstrate 15% improvement in recovery efficiency and 75% reduction in computational time compared to traditional methods. The framework successfully handles complex multi-well systems with 100+ agents, demonstrating scalability to field-scale applications.
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                    <a href="research-topics/pinns.html"><i class="fas fa-book-open"></i> Related Research</a>
+                    <a href="research-topics/reinforcement-learning.html"><i class="fas fa-robot"></i> MARL Research</a>
+                </div>
+            </div>
+
+            <div class="publication-detail" id="publication-4">
+                <h3>Real Time Liquid Rate and Water Cut Prediction from the Electrical Submersible Pump Sensors Data Using Machine-Learning Algorithms</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., Al-Hakimi, W., Perozo, N., Jaeger, P.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> ACS Omega, 2023</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2023</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.1021/acsomega.2c07609" target="_blank">DOI: 10.1021/acsomega.2c07609</a></span>
+                </div>
+                <div class="publication-abstract">
+                    <strong>Abstract:</strong> This research presents machine learning algorithms for real-time prediction of liquid production rates and water cut from electrical submersible pump (ESP) sensor data. Multiple ML models including random forest, gradient boosting, and neural networks were evaluated. The best model achieved R² = 0.94 for liquid rate prediction and MAE < 2% for water cut estimation. The system eliminates the need for physical flow meters, providing significant cost savings while maintaining high accuracy. Real-time inference capability enables continuous production monitoring with sub-100ms latency.
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.1021/acsomega.2c07609" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                    <a href="research-topics/virtual-flow-metering.html"><i class="fas fa-tachometer-alt"></i> VFM Research</a>
+                </div>
+            </div>
+
+            <div class="publication-detail" id="publication-3">
+                <h3>Actor-critic reinforcement learning leads decision-making in energy systems optimization—steam injection optimization</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., Hollstein, W., Carvajal, C.P., et al.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> Neural Computing & Applications, 2023</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2023</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.1007/s00521-023-08537-6" target="_blank">DOI: 10.1007/s00521-023-08537-6</a></span>
+                </div>
+                <div class="publication-abstract">
+                    <strong>Abstract:</strong> This paper presents an actor-critic reinforcement learning framework for optimizing steam injection operations in thermal enhanced oil recovery. The RL agent learns optimal steam allocation strategies to maximize oil production while minimizing operational costs. Field trials demonstrated 30% cost reduction compared to conventional methods, with optimized steam-to-oil ratios. The framework enables real-time decision-making with adaptive learning capabilities, handling complex multi-objective optimization problems in energy systems.
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.1007/s00521-023-08537-6" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                    <a href="research-topics/reinforcement-learning.html"><i class="fas fa-robot"></i> RL Research</a>
+                </div>
+            </div>
+
+            <div class="publication-detail" id="publication-2">
+                <h3>Machine Learning Approach for Predictive Maintenance of the Electrical Submersible Pumps (ESPs)</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., Samara, H., Perozo, N., Carvajal, C., Jaeger, P.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> ACS Omega, 2022, 7(21), 17641-17651</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2022</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.1021/acsomega.1c05881" target="_blank">DOI: 10.1021/acsomega.1c05881</a></span>
+                </div>
+                <div class="publication-abstract">
+                    <strong>Abstract:</strong> This research presents a comprehensive machine learning framework for predictive maintenance of electrical submersible pumps. The approach combines XGBoost classification with Principal Component Analysis (PCA) for feature reduction. The model achieves 94.2% accuracy in failure prediction with 7-14 days lead time. Critical failure modes identified include motor failure (32%), seal failure (28%), pump wear (25%), and bearing failure (15%). Field deployment demonstrated $2.3M annual cost savings per field through reduced unplanned downtime. The system provides real-time health monitoring and maintenance scheduling recommendations.
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.1021/acsomega.1c05881" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                    <a href="research-topics/predictive-maintenance.html"><i class="fas fa-tools"></i> Maintenance Research</a>
+                </div>
+            </div>
+
+            <div class="publication-detail" id="publication-1">
+                <h3>Identification of Downhole in Sucker Rod Pumped Wells Using Deep Neural Networks and Genetic Algorithms</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., El Ela, M.A., El-Banbi, A.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> SPE Production & Operations, 2020, 35, 435-447</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2020</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.2118/200494-PA" target="_blank">DOI: 10.2118/200494-PA</a></span>
+                </div>
+                <div class="publication-abstract">
+                    <strong>Abstract:</strong> This paper presents a deep neural network (DNN) architecture for automatic identification of downhole conditions in sucker rod pumped wells. Genetic algorithms are employed for hyperparameter optimization, improving model performance by 12% compared to manual tuning. The system achieves 89.7% accuracy in classifying conditions including normal operation, gas lock, fluid pound, rod part, and pump off. Real-time diagnosis capability with <100ms inference time enables immediate operational decisions. The approach eliminates the need for manual dynamometer card interpretation, providing consistent and accurate downhole condition assessment.
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.2118/200494-PA" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                    <a href="research-topics/predictive-maintenance.html"><i class="fas fa-tools"></i> Maintenance Research</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--secondary-color); margin-top: 3rem; margin-bottom: 1rem;">Book Chapters</h3>
+
+            <div class="publication-detail">
+                <h3>Data-Driven Virtual Flow Metering Systems</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., Jaeger, P.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> Data Science and Machine Learning Applications in Subsurface Engineering, CRC Press, 2024</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2024</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003366980-5" target="_blank">DOI: 10.1201/9781003366980-5</a></span>
+                </div>
+                <div class="publication-abstract">
+                    <strong>Abstract:</strong> This book chapter provides a comprehensive overview of data-driven virtual flow metering systems for production monitoring. The chapter covers machine learning methodologies, sensor data integration, model architectures, and field deployment strategies. Case studies demonstrate successful implementation in various production scenarios, highlighting cost savings and operational benefits. The chapter serves as a practical guide for engineers implementing VFM systems in oil and gas operations.
+                </div>
+                <div class="publication-links">
+                    <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003366980-5" target="_blank"><i class="fas fa-external-link-alt"></i> View Chapter</a>
+                    <a href="research-topics/virtual-flow-metering.html"><i class="fas fa-tachometer-alt"></i> VFM Research</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--secondary-color); margin-top: 3rem; margin-bottom: 1rem;">Conference Papers</h3>
+
+            <div class="publication-detail">
+                <h3>Optimizing Waterflooding in Multi-Agent Systems through Decentralized Actor-Centralized Critic Reinforcement Learning</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., Gönczi, D., Toumi, O., Nikolaev, D., Manasipov, R., Stundner, M.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> European Association of Geoscientists & Engineers, 2024</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2024</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.3997/2214-4609.202439064" target="_blank">DOI: 10.3997/2214-4609.202439064</a></span>
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.3997/2214-4609.202439064" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                </div>
+            </div>
+
+            <div class="publication-detail">
+                <h3>Physics-Informed Reinforcement Learning for Motor Frequency Optimization in Electrical Submersible Pumps</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., Toumi, O., Gönczi, D., Sidaoui, A., Nikolaev, D., Schweiger, A., Schweiger, G.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> SPE Artificial Lift Conference and Exhibition - Americas, 2024</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2024</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.2118/219542-MS" target="_blank">DOI: 10.2118/219542-MS</a></span>
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.2118/219542-MS" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                </div>
+            </div>
+
+            <div class="publication-detail">
+                <h3>Deep Insight into Electrical Submersible Pump Maintenance: A Predictive Approach with Deep Learning</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Abdalla, R., Nikolaev, D., Gönzi, D., Manasipov, R., Schweiger, A., Stundner, M.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> SPE Offshore Europe Conference & Exhibition, 2023</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2023</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.2118/215596-MS" target="_blank">DOI: 10.2118/215596-MS</a></span>
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.2118/215596-MS" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                </div>
+            </div>
+
+            <div class="publication-detail">
+                <h3>Physics Informed Machine Learning for Production Forecast</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Manasipov, R., Nikolaev, D., Didenko, D., Abdalla, R., Stundner, M.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> SPE Reservoir Characterisation and Simulation Conference, 2023</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2023</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.2118/212666-MS" target="_blank">DOI: 10.2118/212666-MS</a></span>
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.2118/212666-MS" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                </div>
+            </div>
+
+            <div class="publication-detail">
+                <h3>An Intelligent Data-Driven Approach for Production Prediction</h3>
+                <div class="publication-meta">
+                    <span class="meta-item"><i class="fas fa-users"></i> Noshi, C.I., Rizk, M., Abdalla, R.</span>
+                    <span class="meta-item"><i class="fas fa-book"></i> Offshore Technology Conference, 2019</span>
+                    <span class="meta-item"><i class="fas fa-calendar"></i> 2019</span>
+                    <span class="meta-item"><i class="fas fa-link"></i> <a href="https://doi.org/10.4043/29243-MS" target="_blank">DOI: 10.4043/29243-MS</a></span>
+                </div>
+                <div class="publication-links">
+                    <a href="https://doi.org/10.4043/29243-MS" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ramez Abdalla, Ph.D. | Research Scientist</p>
+        </div>
+    </footer>
+</body>
+</html>
+

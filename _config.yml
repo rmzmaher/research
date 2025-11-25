@@ -1,0 +1,29 @@
+# GitHub Pages Configuration
+title: Ramez Abdalla, Ph.D. - Research Profile
+description: Research Scientist specializing in Computational Fluid Dynamics, AI in Energy Systems, and Flow Assurance
+author: Ramez Abdalla
+email: ramez.maher.abdalla@gmail.com
+
+# Theme (optional - using custom CSS)
+theme: null
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - get-scholar-image.md
+  - resume.tex
+  - GIT_SETUP_INSTRUCTIONS.md
+  - QUICK_PUSH_GUIDE.md
+  - TEMP_PUSH_INSTRUCTIONS.md
+  - setup-git.ps1
+  - push-to-rmzmaher.ps1
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+

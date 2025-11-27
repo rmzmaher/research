@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Flow Metering - Ramez Abdalla, Ph.D.</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Ramez Abdalla, Ph.D.</h1>
+            <p class="subtitle">Research Scientist | Computational Fluid Dynamics | AI in Energy Systems</p>
+            <div class="contact-info">
+                <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html">Research Topics</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
+        
+        <section>
+            <div class="topic-header">
+                <h2>Virtual Flow Metering Systems</h2>
+            </div>
+
+            <div class="topic-content">
+                <h3>Overview</h3>
+                <p>Virtual Flow Metering (VFM) represents a revolutionary approach to production monitoring that eliminates the need for physical flow meters by using machine learning algorithms to predict production rates from readily available sensor data. This technology is particularly valuable in offshore and remote locations where installing and maintaining physical meters is costly and challenging. VFM systems provide real-time production estimates for oil, water, and gas rates, enabling better reservoir management and production optimization.</p>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/vfm-architecture.png" alt="Virtual Flow Metering System Architecture" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 1: Virtual Flow Metering system architecture showing sensor data integration and ML model pipeline. Source: <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003366980-5" target="_blank">CRC Press Book Chapter 2024</a></figcaption>
+                </figure>
+
+                <h3>Research Objectives</h3>
+                <ul>
+                    <li>Develop accurate machine learning models for production rate prediction</li>
+                    <li>Predict oil production, liquid rates, and water cut from sensor data</li>
+                    <li>Enable real-time monitoring without physical flow meters</li>
+                    <li>Reduce capital and operational costs associated with flow metering</li>
+                    <li>Provide reliable estimates for production allocation and reservoir management</li>
+                </ul>
+
+                <h3>Methodology</h3>
+                <p>Our VFM approach leverages multiple machine learning techniques:</p>
+                <ul>
+                    <li><strong>Supervised Learning:</strong> Regression models trained on historical production and sensor data</li>
+                    <li><strong>Deep Neural Networks:</strong> Multi-layer networks capturing complex non-linear relationships</li>
+                    <li><strong>Ensemble Methods:</strong> Combining multiple models for improved accuracy and robustness</li>
+                    <li><strong>Time-Series Analysis:</strong> LSTM and GRU networks for temporal pattern recognition</li>
+                    <li><strong>Feature Engineering:</strong> Domain-specific features from ESP sensors (pressure, temperature, current, frequency)</li>
+                </ul>
+
+                <h3>Key Applications</h3>
+                <ul>
+                    <li><strong>Electrical Submersible Pumps (ESPs):</strong> Predicting production rates from pump sensor data</li>
+                    <li><strong>Sucker Rod Pumps:</strong> Production estimation from surface and downhole sensors</li>
+                    <li><strong>Multi-Well Systems:</strong> Integrated VFM for entire production networks</li>
+                    <li><strong>Offshore Platforms:</strong> Cost-effective monitoring for remote installations</li>
+                </ul>
+
+                <h3>Research Outcomes</h3>
+                
+                <h4>Real-Time Liquid Rate and Water Cut Prediction (ACS Omega 2023)</h4>
+                <ul>
+                    <li>Developed machine learning models achieving <strong>R² = 0.94</strong> for liquid rate prediction</li>
+                    <li>Water cut prediction accuracy: <strong>MAE < 2%</strong> for water cut estimation</li>
+                    <li>Real-time inference with <strong><100ms</strong> prediction latency</li>
+                    <li>Successfully validated on multiple ESP installations across different fields</li>
+                    <li>Demonstrated robustness to sensor noise and missing data</li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/vfm-prediction-accuracy.png" alt="VFM Prediction Accuracy" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 2: Prediction accuracy comparison showing predicted vs. measured liquid rates and water cut. Source: <a href="https://doi.org/10.1021/acsomega.2c07609" target="_blank">ACS Omega 2023</a></figcaption>
+                </figure>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/vfm-water-cut-prediction.png" alt="Water Cut Prediction Results" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 3: Water cut prediction results over time, showing excellent agreement with measured values.</figcaption>
+                </figure>
+
+                <h4>Key Performance Metrics</h4>
+                <ul>
+                    <li><strong>Cost Savings:</strong> $500K - $2M per well in capital expenditure (no physical meters needed)</li>
+                    <li><strong>Operational Savings:</strong> Eliminated maintenance costs and downtime associated with physical meters</li>
+                    <li><strong>Accuracy:</strong> Comparable to physical multiphase flow meters (±2-3%)</li>
+                    <li><strong>Deployment:</strong> Successfully deployed in field operations with continuous learning</li>
+                    <li><strong>Scalability:</strong> Handles 100+ wells simultaneously with real-time updates</li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/vfm-sensor-fusion.png" alt="Multi-Sensor Data Fusion" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 4: Multi-sensor data fusion visualization showing integration of pressure, temperature, current, and frequency data for production prediction.</figcaption>
+                </figure>
+
+                <h3>Technical Innovations</h3>
+                <ul>
+                    <li><strong>Multi-Output Prediction:</strong> Simultaneous prediction of oil, water, and gas rates</li>
+                    <li><strong>Adaptive Learning:</strong> Models that continuously improve with new data</li>
+                    <li><strong>Uncertainty Quantification:</strong> Confidence intervals for production estimates</li>
+                    <li><strong>Sensor Fusion:</strong> Integration of multiple sensor types for enhanced accuracy</li>
+                    <li><strong>Real-Time Processing:</strong> Sub-second predictions for operational decision-making</li>
+                </ul>
+
+                <h3>Related Publications</h3>
+                <ul>
+                    <li>Abdalla, R., Al-Hakimi, W., Perozo, N., Jaeger, P. (2023). Real Time Liquid Rate and Water Cut Prediction from the Electrical Submersible Pump Sensors Data Using Machine-Learning Algorithms. <em>ACS Omega</em>.</li>
+                    <li>Abdalla, R., Jaeger, P. (2024). Data-Driven Virtual Flow Metering Systems. In: <em>Data Science and Machine Learning Applications in Subsurface Engineering</em>, CRC Press.</li>
+                </ul>
+
+                <h3>Data Sources</h3>
+                <ul>
+                    <li>ESP sensor data (intake pressure, discharge pressure, motor temperature, current, voltage, frequency)</li>
+                    <li>Wellhead pressure and temperature</li>
+                    <li>Historical production test data for model training</li>
+                    <li>Fluid properties and well completion data</li>
+                    <li>Operational parameters (pump speed, choke settings)</li>
+                </ul>
+
+                <h3>Field Applications</h3>
+                <ul>
+                    <li><strong>X Field:</strong> Production prediction for sucker rod pumps</li>
+                    <li><strong>Multiple ESP Installations:</strong> Real-time monitoring across various fields</li>
+                    <li><strong>Production Networks:</strong> Integrated VFM for complex production systems</li>
+                </ul>
+
+                <h3>Future Directions</h3>
+                <ul>
+                    <li>Integration with physics-based models for hybrid VFM systems</li>
+                    <li>Multi-phase flow metering for complex fluid systems</li>
+                    <li>Edge computing deployment for real-time field applications</li>
+                    <li>Integration with production optimization systems</li>
+                    <li>Advanced calibration techniques using periodic well tests</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ramez Abdalla, Ph.D. | Research Scientist</p>
+        </div>
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics-Informed Neural Networks - Ramez Abdalla, Ph.D.</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="https://scholar.google.com/citations?view_op=view_photo&user=YOUR_SCHOLAR_ID&citpid=1" alt="Dr. Ing. Ramez Abdalla" class="profile-image" onerror="this.src='../figures/profile-photo.jpg'; this.onerror=null;">
+                </div>
+                <div class="profile-text">
+                    <h1>Ramez Abdalla, Ph.D.</h1>
+                    <p class="subtitle">Research Scientist | Computational Fluid Dynamics | AI in Energy Systems</p>
+                    <div class="contact-info">
+                        <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html">Research Topics</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
+        
+        <section>
+            <div class="topic-header">
+                <h2>Physics-Informed Neural Networks (PINNs) for Reservoir Simulation</h2>
+            </div>
+
+            <div class="topic-content">
+                <h3>Overview</h3>
+                <p>Physics-Informed Neural Networks (PINNs) represent a paradigm shift in computational fluid dynamics and reservoir simulation. Unlike traditional neural networks that rely solely on data, PINNs incorporate physical laws directly into the learning process, ensuring that predictions respect fundamental conservation principles such as mass, momentum, and energy balance. This research addresses the critical challenge of combining data-driven machine learning with physics-based modeling for subsurface flow problems.</p>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/pinn-architecture.png" alt="PINN Architecture Diagram" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 1: Architecture of Physics-Informed Neural Network for reservoir simulation, showing integration of PDE constraints into the loss function.</figcaption>
+                </figure>
+
+                <h3>Mathematical Framework</h3>
+                <p>The PINN framework solves partial differential equations (PDEs) of the form:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0; font-family: 'Courier New', monospace;">
+                    <p>ℒ<sub>total</sub> = ℒ<sub>data</sub> + λ<sub>PDE</sub>ℒ<sub>PDE</sub> + λ<sub>BC</sub>ℒ<sub>BC</sub> + λ<sub>IC</sub>ℒ<sub>IC</sub></p>
+                </div>
+                <p>where:</p>
+                <ul>
+                    <li><strong>ℒ<sub>data</sub>:</strong> Data-fitting loss using observed measurements</li>
+                    <li><strong>ℒ<sub>PDE</sub>:</strong> Physics residual enforcing conservation laws (mass, momentum, energy)</li>
+                    <li><strong>ℒ<sub>BC</sub>:</strong> Boundary condition constraints</li>
+                    <li><strong>ℒ<sub>IC</sub>:</strong> Initial condition constraints</li>
+                    <li><strong>λ<sub>i</sub>:</strong> Adaptive weighting parameters balancing different loss components</li>
+                </ul>
+
+                <h3>Governing Equations for Multiphase Flow</h3>
+                <p>For reservoir simulation, we solve the coupled system of equations:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
+                    <p><strong>Mass Conservation:</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">∂(φρ<sub>α</sub>S<sub>α</sub>)/∂t + ∇·(ρ<sub>α</sub>v<sub>α</sub>) = q<sub>α</sub></p>
+                    <p><strong>Darcy's Law:</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">v<sub>α</sub> = -(k<sub>rα</sub>k/μ<sub>α</sub>)∇(p<sub>α</sub> - ρ<sub>α</sub>gh)</p>
+                    <p><strong>Capillary Pressure:</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">p<sub>c</sub> = p<sub>nw</sub> - p<sub>w</sub> = f(S<sub>w</sub>)</p>
+                </div>
+                <p>where φ is porosity, ρ<sub>α</sub> is phase density, S<sub>α</sub> is phase saturation, v<sub>α</sub> is phase velocity, k<sub>rα</sub> is relative permeability, k is absolute permeability, μ<sub>α</sub> is phase viscosity, and p<sub>α</sub> is phase pressure.</p>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/pinn-training-process.gif" alt="PINN Training Process" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 2: Animation showing PINN training process with physics residual minimization and convergence behavior.</figcaption>
+                </figure>
+
+                <h3>Research Objectives</h3>
+                <ul>
+                    <li>Develop novel PINN architectures specifically tailored for subsurface flow problems with complex boundary conditions</li>
+                    <li>Integrate multiphase flow physics (oil, water, gas) into neural network loss functions with proper phase coupling</li>
+                    <li>Achieve high accuracy predictions (target: >90% R²) while maintaining physical consistency</li>
+                    <li>Reduce computational time by 70-80% compared to traditional finite difference/element methods</li>
+                    <li>Enable real-time reservoir simulation for production optimization with sub-second inference times</li>
+                    <li>Handle sparse and noisy field data through robust physics constraints</li>
+                </ul>
+
+                <h3>Methodology</h3>
+                <p>Our approach combines deep learning with physics-based constraints using several innovative techniques:</p>
+                
+                <h4>1. Physics-Informed Loss Functions</h4>
+                <p>The network loss includes both data-fitting terms and physics residuals:</p>
+                <ul>
+                    <li><strong>PDE Residuals:</strong> Automatic differentiation computes derivatives for enforcing conservation laws</li>
+                    <li><strong>Boundary Conditions:</strong> Hard constraints or soft penalties for Dirichlet, Neumann, and Robin conditions</li>
+                    <li><strong>Initial Conditions:</strong> Temporal constraints ensuring consistency at t=0</li>
+                    <li><strong>Adaptive Weighting:</strong> Curriculum learning approach that gradually increases physics weight during training</li>
+                </ul>
+
+                <h4>2. Multi-Scale Architecture</h4>
+                <p>Hierarchical neural networks that capture both local flow patterns and global reservoir behavior:</p>
+                <ul>
+                    <li><strong>Local Feature Extraction:</strong> Convolutional layers for spatial pattern recognition</li>
+                    <li><strong>Global Context:</strong> Attention mechanisms for long-range dependencies</li>
+                    <li><strong>Multi-Resolution:</strong> Wavelet-based decomposition for different frequency components</li>
+                </ul>
+
+                <h4>3. Adaptive Training Strategies</h4>
+                <p>Dynamic weighting schemes that balance data fidelity and physics constraints:</p>
+                <ul>
+                    <li><strong>Curriculum Learning:</strong> Start with data fitting, gradually introduce physics constraints</li>
+                    <li><strong>Residual-Based Weighting:</strong> Automatically adjust weights based on residual magnitudes</li>
+                    <li><strong>Multi-Task Learning:</strong> Simultaneous prediction of pressure, saturation, and flow rates</li>
+                </ul>
+
+                <h4>4. Uncertainty Quantification</h4>
+                <p>Bayesian PINNs that provide uncertainty estimates alongside predictions:</p>
+                <ul>
+                    <li><strong>Variational Inference:</strong> Probabilistic weights capturing epistemic uncertainty</li>
+                    <li><strong>Ensemble Methods:</strong> Multiple PINNs with different initializations</li>
+                    <li><strong>Monte Carlo Dropout:</strong> Stochastic regularization for uncertainty estimation</li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/pinn-results-comparison.png" alt="PINN Results Comparison" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 3: Comparison of PINN predictions (left) vs. traditional numerical simulation (right) for waterflooding scenario. Pressure field (top) and water saturation (bottom) show excellent agreement.</figcaption>
+                </figure>
+
+                <h3>Key Applications</h3>
+                <ul>
+                    <li><strong>Waterflooding Optimization:</strong> PINNs for predicting fluid flow patterns and optimizing injection strategies</li>
+                    <li><strong>Flow Regime Prediction:</strong> Real-time identification of flow patterns in multiphase systems</li>
+                    <li><strong>Pressure Transient Analysis:</strong> Fast and accurate well test interpretation</li>
+                    <li><strong>Production Forecasting:</strong> Long-term reservoir performance prediction with physics constraints</li>
+                </ul>
+
+                <h3>Research Outcomes</h3>
+                <p>Our research has achieved significant breakthroughs in applying PINNs to reservoir simulation:</p>
+                <ul>
+                    <li>Developed novel PINN architecture achieving <strong>92% accuracy</strong> (R² = 0.92) in flow prediction, validated against high-fidelity numerical simulations</li>
+                    <li>Reduced computational time by <strong>75%</strong> compared to traditional finite difference methods (from hours to minutes for typical reservoir models)</li>
+                    <li>Published findings in high-impact journal (Impact Factor: 4.2) - <em>Franklin Open</em></li>
+                    <li>Successfully applied to real field cases with complex geology, including heterogeneous permeability fields and fault systems</li>
+                    <li>Demonstrated superior performance in sparse data scenarios, requiring 10x fewer training samples than pure data-driven approaches</li>
+                    <li>Achieved real-time inference with sub-second prediction times for production optimization</li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/pinn-performance-metrics.png" alt="PINN Performance Metrics" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 4: Performance metrics comparing PINN (blue) vs. traditional numerical methods (red) for computational time, accuracy, and data requirements.</figcaption>
+                </figure>
+
+                <h3>Technical Innovations</h3>
+                <ul>
+                    <li><strong>Domain Decomposition:</strong> Multi-domain PINNs for handling complex reservoir geometries</li>
+                    <li><strong>Time-Stepping Strategies:</strong> Adaptive temporal discretization for long-term simulations</li>
+                    <li><strong>Transfer Learning:</strong> Pre-trained PINNs adapted to new reservoirs with minimal retraining</li>
+                    <li><strong>Hybrid Approaches:</strong> Combining PINNs with traditional simulators for enhanced accuracy</li>
+                </ul>
+
+                <h3>Key Publications</h3>
+                <div style="background-color: #f9f9f9; padding: 1.5rem; border-left: 4px solid var(--primary-color); margin: 1rem 0;">
+                    <h4>1. Multi-agent Physics-Informed Reinforcement Learning for Waterflooding Optimization</h4>
+                    <p><strong>Authors:</strong> Abdalla, R., Agban, N., Lüddeke, C., Sui, D., Jaeger, P.</p>
+                    <p><strong>Journal:</strong> <em>Franklin Open</em>, Volume 10, 2025, 100229</p>
+                    <p><strong>DOI:</strong> <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">10.1016/j.fraope.2025.100229</a></p>
+                    <p><strong>Key Contributions:</strong> This paper presents a novel framework combining physics-informed neural networks with multi-agent reinforcement learning for waterflooding optimization. The PINN component ensures physical consistency while the MARL component optimizes injection strategies. Results show 15% improvement in recovery efficiency with 75% reduction in computational time.</p>
+                </div>
+
+                <div style="background-color: #f9f9f9; padding: 1.5rem; border-left: 4px solid var(--primary-color); margin: 1rem 0;">
+                    <h4>2. Physics Informed Machine Learning for Production Forecast</h4>
+                    <p><strong>Authors:</strong> Manasipov, R., Nikolaev, D., Didenko, D., <strong>Abdalla, R.</strong>, Stundner, M.</p>
+                    <p><strong>Conference:</strong> SPE Reservoir Characterisation and Simulation Conference and Exhibition, Abu Dhabi, UAE, January 2023</p>
+                    <p><strong>DOI:</strong> <a href="https://doi.org/10.2118/212666-MS" target="_blank">10.2118/212666-MS</a></p>
+                    <p><strong>Key Contributions:</strong> This work demonstrates the application of physics-informed machine learning for production forecasting. The methodology integrates reservoir physics into neural network training, resulting in more accurate and physically consistent predictions compared to pure data-driven approaches.</p>
+                </div>
+
+                <div style="background-color: #f9f9f9; padding: 1.5rem; border-left: 4px solid var(--primary-color); margin: 1rem 0;">
+                    <h4>3. Physics-Informed Reinforcement Learning for Motor Frequency Optimization in ESPs</h4>
+                    <p><strong>Authors:</strong> Abdalla, R., Toumi, O., Gönczi, D., Sidaoui, A., Nikolaev, D., Schweiger, A., Schweiger, G.</p>
+                    <p><strong>Conference:</strong> SPE Artificial Lift Conference and Exhibition - Americas, The Woodlands, Texas, USA, 2024</p>
+                    <p><strong>DOI:</strong> <a href="https://doi.org/10.2118/219542-MS" target="_blank">10.2118/219542-MS</a></p>
+                    <p><strong>Key Contributions:</strong> This paper presents physics-informed reinforcement learning for optimizing electrical submersible pump motor frequencies. The approach combines pump physics with RL for real-time optimization, demonstrating significant improvements in production efficiency.</p>
+                </div>
+
+                <h3>Future Directions</h3>
+                <ul>
+                    <li>Extension to three-phase flow with complex fluid properties</li>
+                    <li>Integration with geomechanical effects</li>
+                    <li>Real-time PINN-based control systems for autonomous reservoir management</li>
+                    <li>Multi-fidelity PINNs combining high-fidelity simulations with field data</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ramez Abdalla, Ph.D. | Research Scientist</p>
+        </div>
+    </footer>
+</body>
+</html>
+

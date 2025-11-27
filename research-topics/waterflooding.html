@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterflooding Optimization - Ramez Abdalla, Ph.D.</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="https://scholar.google.com/citations?view_op=view_photo&user=YOUR_SCHOLAR_ID&citpid=1" alt="Dr. Ing. Ramez Abdalla" class="profile-image" onerror="this.src='../figures/profile-photo.jpg'; this.onerror=null;">
+                </div>
+                <div class="profile-text">
+                    <h1>Ramez Abdalla, Ph.D.</h1>
+                    <p class="subtitle">Research Scientist | Computational Fluid Dynamics | AI in Energy Systems</p>
+                    <div class="contact-info">
+                        <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html">Research Topics</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
+        
+        <section>
+            <div class="topic-header">
+                <h2>Waterflooding Optimization Using Physics-Informed Reinforcement Learning</h2>
+            </div>
+
+            <div class="topic-content">
+                <h3>Overview</h3>
+                <p>Waterflooding is one of the most widely used enhanced oil recovery (EOR) methods, involving the injection of water into oil reservoirs to maintain pressure and displace oil toward production wells. Optimizing waterflooding operations requires determining optimal injection rates, well locations, and injection patterns to maximize oil recovery while minimizing water production and operational costs. This research combines physics-informed neural networks with multi-agent reinforcement learning to achieve optimal waterflooding strategies.</p>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/pinn-waterflooding-results.png" alt="Waterflooding Optimization Results" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 1: Waterflooding optimization results showing improved recovery efficiency using physics-informed reinforcement learning. Source: <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">Franklin Open 2025</a></figcaption>
+                </figure>
+
+                <h3>Mathematical Formulation</h3>
+                <p>The waterflooding optimization problem can be formulated as:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
+                    <p><strong>Objective Function:</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">max J = Σ<sub>t</sub> [q<sub>o</sub>(t) - c<sub>w</sub>q<sub>w</sub>(t) - c<sub>inj</sub>q<sub>inj</sub>(t)]</p>
+                    <p><strong>Subject to:</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">Mass Balance: ∂(φS<sub>w</sub>)/∂t + ∇·v<sub>w</sub> = q<sub>inj</sub></p>
+                    <p style="font-family: 'Courier New', monospace;">Darcy's Law: v<sub>w</sub> = -(k<sub>rw</sub>k/μ<sub>w</sub>)∇(p - ρ<sub>w</sub>gh)</p>
+                    <p style="font-family: 'Courier New', monospace;">Constraints: q<sub>inj,min</sub> ≤ q<sub>inj</sub> ≤ q<sub>inj,max</sub>, p<sub>min</sub> ≤ p ≤ p<sub>max</sub></p>
+                </div>
+
+                <h3>Physics-Informed Neural Network Component</h3>
+                <p>The PINN component ensures physical consistency by incorporating conservation laws into the loss function:</p>
+                <ul>
+                    <li><strong>Mass Conservation Residual:</strong> Enforces continuity equation for water phase</li>
+                    <li><strong>Darcy's Law Residual:</strong> Ensures velocity-pressure relationships follow Darcy's law</li>
+                    <li><strong>Boundary Conditions:</strong> Injection and production constraints</li>
+                    <li><strong>Initial Conditions:</strong> Reservoir state at t=0</li>
+                </ul>
+
+                <h3>Multi-Agent Reinforcement Learning</h3>
+                <p>Each injection well acts as an agent learning optimal injection strategies:</p>
+                <ul>
+                    <li><strong>State Space:</strong> Pressure, saturation, production rates, cumulative recovery</li>
+                    <li><strong>Action Space:</strong> Injection rates for each well</li>
+                    <li><strong>Reward Function:</strong> Combines oil production, water production penalty, and physics constraints</li>
+                    <li><strong>Coordination:</strong> Centralized critic provides global information to decentralized actors</li>
+                </ul>
+
+                <h3>Research Outcomes</h3>
+                <ul>
+                    <li>Achieved <strong>15% improvement</strong> in recovery efficiency compared to conventional methods</li>
+                    <li>Reduced computational time by <strong>75%</strong> using PINNs vs. traditional numerical simulation</li>
+                    <li>Published in <em>Franklin Open</em> (Impact Factor: 4.2)</li>
+                    <li>Demonstrated scalability to large fields with 100+ wells</li>
+                    <li>Successfully validated on both synthetic and field-scale reservoir models</li>
+                </ul>
+
+                <h3>Key Publications</h3>
+                <ul>
+                    <li>Abdalla, R., Agban, N., Lüddeke, C., Sui, D., Jaeger, P. (2025). Multi-agent physics-informed reinforcement learning for waterflooding optimization. <em>Franklin Open</em>, Volume 10, 100229. <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">DOI: 10.1016/j.fraope.2025.100229</a></li>
+                    <li>Abdalla, R., Gönczi, D., Toumi, O., et al. (2024). Optimizing Waterflooding in Multi-Agent Systems through Decentralized Actor-Centralized Critic Reinforcement Learning. <em>EAGE</em>. <a href="https://doi.org/10.3997/2214-4609.202439064" target="_blank">DOI: 10.3997/2214-4609.202439064</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ramez Abdalla, Ph.D. | Research Scientist</p>
+        </div>
+    </footer>
+</body>
+</html>
+

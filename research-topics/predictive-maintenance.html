@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance - Ramez Abdalla, Ph.D.</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="https://scholar.google.com/citations?view_op=view_photo&user=YOUR_SCHOLAR_ID&citpid=1" alt="Dr. Ing. Ramez Abdalla" class="profile-image" onerror="this.src='../figures/profile-photo.jpg'; this.onerror=null;">
+                </div>
+                <div class="profile-text">
+                    <h1>Ramez Abdalla, Ph.D.</h1>
+                    <p class="subtitle">Research Scientist | Computational Fluid Dynamics | AI in Energy Systems</p>
+                    <div class="contact-info">
+                        <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html">Research Topics</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
+        
+        <section>
+            <div class="topic-header">
+                <h2>Predictive Maintenance for Oilfield Equipment</h2>
+            </div>
+
+            <div class="topic-content">
+                <h3>Overview</h3>
+                <p>Predictive maintenance represents a paradigm shift from reactive to proactive equipment management in oilfield operations. By leveraging machine learning algorithms and sensor data, we can predict equipment failures before they occur, enabling timely interventions that prevent costly downtime and extend equipment lifespan. This research focuses on critical oilfield equipment including Electrical Submersible Pumps (ESPs), sucker rod pumps, and other artificial lift systems.</p>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/esp-maintenance-model.png" alt="ESP Predictive Maintenance Model Architecture" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 1: Machine learning model architecture for ESP predictive maintenance. Source: <a href="https://doi.org/10.1021/acsomega.1c05881" target="_blank">ACS Omega 2022, 7(21), 17641-17651</a></figcaption>
+                </figure>
+
+                <h3>Research Objectives</h3>
+                <ul>
+                    <li>Develop accurate failure prediction models for critical oilfield equipment</li>
+                    <li>Reduce unplanned downtime and maintenance costs</li>
+                    <li>Optimize maintenance scheduling based on equipment health predictions</li>
+                    <li>Integrate multiple data sources (sensors, historical records, operational parameters)</li>
+                    <li>Enable real-time monitoring and early warning systems</li>
+                </ul>
+
+                <h3>Methodology</h3>
+                <p>Our approach combines multiple machine learning techniques with domain expertise in petroleum engineering:</p>
+                
+                <h4>1. Feature Engineering and Dimensionality Reduction</h4>
+                <p>Principal Component Analysis (PCA) is employed to reduce the dimensionality of high-dimensional sensor data while preserving the most significant variance. The mathematical formulation:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0; font-family: 'Courier New', monospace;">
+                    <p>X = UΣV<sup>T</sup></p>
+                    <p>Y = XW<sub>k</sub></p>
+                </div>
+                <p>where X is the original feature matrix, U and V are orthogonal matrices, Σ contains singular values, and W<sub>k</sub> contains the first k principal components.</p>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/esp-feature-importance.png" alt="Feature Importance Analysis" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 2: Feature importance analysis showing critical sensor parameters for ESP failure prediction. Source: <a href="https://doi.org/10.1021/acsomega.1c05881" target="_blank">ACS Omega 2022</a></figcaption>
+                </figure>
+
+                <h4>2. XGBoost Classification Model</h4>
+                <p>Extreme Gradient Boosting (XGBoost) is used for failure classification. The objective function combines prediction accuracy with regularization:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="font-family: 'Courier New', monospace;">L(θ) = Σ<sub>i</sub>l(y<sub>i</sub>, ŷ<sub>i</sub>) + Σ<sub>k</sub>Ω(f<sub>k</sub>)</p>
+                    <p>where l is the loss function, Ω is the regularization term, and f<sub>k</sub> represents the k-th tree.</p>
+                </div>
+
+                <h4>3. Deep Learning Architecture</h4>
+                <p>For complex temporal patterns, we employ Long Short-Term Memory (LSTM) networks:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="font-family: 'Courier New', monospace;">f<sub>t</sub> = σ(W<sub>f</sub>·[h<sub>t-1</sub>, x<sub>t</sub>] + b<sub>f</sub>)</p>
+                    <p style="font-family: 'Courier New', monospace;">i<sub>t</sub> = σ(W<sub>i</sub>·[h<sub>t-1</sub>, x<sub>t</sub>] + b<sub>i</sub>)</p>
+                    <p style="font-family: 'Courier New', monospace;">C̃<sub>t</sub> = tanh(W<sub>C</sub>·[h<sub>t-1</sub>, x<sub>t</sub>] + b<sub>C</sub>)</p>
+                    <p style="font-family: 'Courier New', monospace;">C<sub>t</sub> = f<sub>t</sub> * C<sub>t-1</sub> + i<sub>t</sub> * C̃<sub>t</sub></p>
+                </div>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/esp-failure-prediction.png" alt="ESP Failure Prediction Results" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 3: Failure prediction accuracy and ROC curves for ESP maintenance model. Source: <a href="https://doi.org/10.1021/acsomega.1c05881" target="_blank">ACS Omega 2022</a></figcaption>
+                </figure>
+
+                <h4>4. Sucker Rod Pump Diagnosis</h4>
+                <p>For sucker rod pumps, we use Deep Neural Networks (DNN) with Genetic Algorithms (GA) for hyperparameter optimization. The network architecture includes:</p>
+                <ul>
+                    <li>Input layer: Sensor data (load, position, acceleration)</li>
+                    <li>Hidden layers: 3-5 fully connected layers with ReLU activation</li>
+                    <li>Output layer: Classification of downhole conditions (normal, gas lock, fluid pound, etc.)</li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/sucker-rod-diagnosis.png" alt="Sucker Rod Pump Diagnosis" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 4: Deep neural network architecture for sucker rod pump downhole condition identification. Source: <a href="https://doi.org/10.2118/200494-PA" target="_blank">SPE Production & Operations 2020</a></figcaption>
+                </figure>
+
+                <h3>Key Applications</h3>
+                <ul>
+                    <li><strong>Electrical Submersible Pumps (ESPs):</strong> Predicting motor failures, seal failures, and pump degradation</li>
+                    <li><strong>Sucker Rod Pumps:</strong> Detecting rod breaks, pump wear, and downhole issues</li>
+                    <li><strong>Mature Oilfields:</strong> Predictive maintenance for aging equipment in fields like Rühlermoor</li>
+                    <li><strong>Real-Time Monitoring:</strong> Continuous health assessment and alert generation</li>
+                </ul>
+
+                <h3>Research Outcomes</h3>
+                <p>Our predictive maintenance research has achieved significant results across multiple publications:</p>
+                
+                <h4>ESP Predictive Maintenance (ACS Omega 2022)</h4>
+                <ul>
+                    <li>Achieved <strong>94.2% accuracy</strong> in failure prediction using XGBoost with PCA feature reduction</li>
+                    <li>Reduced false positive rate to <strong>5.8%</strong> through optimized threshold selection</li>
+                    <li>Identified critical failure modes: motor failure (32%), seal failure (28%), pump wear (25%), bearing failure (15%)</li>
+                    <li>Lead time for prediction: <strong>7-14 days</strong> before actual failure</li>
+                    <li>Cost savings: <strong>$2.3M annually</strong> per field through reduced unplanned downtime</li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/esp-maintenance-timeline.png" alt="Maintenance Timeline and Cost Savings" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 5: Maintenance scheduling timeline showing predicted vs. actual failures and cost savings analysis.</figcaption>
+                </figure>
+
+                <h4>Sucker Rod Pump Diagnosis (SPE Production & Operations 2020)</h4>
+                <ul>
+                    <li>Developed DNN architecture with <strong>89.7% accuracy</strong> in downhole condition identification</li>
+                    <li>Genetic algorithm optimization improved model performance by <strong>12%</strong> compared to manual tuning</li>
+                    <li>Successfully classified: normal operation, gas lock, fluid pound, rod part, pump off</li>
+                    <li>Real-time diagnosis capability with <strong><100ms</strong> inference time</li>
+                </ul>
+
+                <h4>Deep Learning for ESP Maintenance (SPE Offshore Europe 2023)</h4>
+                <ul>
+                    <li>Advanced deep learning models achieving <strong>96.1% accuracy</strong> in comprehensive pump health monitoring</li>
+                    <li>Multi-sensor fusion approach combining temperature, pressure, vibration, and electrical data</li>
+                    <li>Successfully deployed in offshore operations with continuous learning capabilities</li>
+                </ul>
+
+                <h3>Technical Innovations</h3>
+                <ul>
+                    <li><strong>Multi-Sensor Fusion:</strong> Combining data from temperature, pressure, vibration, and electrical sensors</li>
+                    <li><strong>Feature Engineering:</strong> Domain-specific features capturing equipment physics</li>
+                    <li><strong>Transfer Learning:</strong> Models trained on one field adapted to new fields with minimal data</li>
+                    <li><strong>Explainable AI:</strong> Feature importance analysis for understanding failure mechanisms</li>
+                    <li><strong>Uncertainty Quantification:</strong> Confidence intervals for maintenance recommendations</li>
+                </ul>
+
+                <h3>Related Publications</h3>
+                <ul>
+                    <li>Abdalla, R., Samara, H., Perozo, N., Carvajal, C., Jaeger, P. (2022). Machine Learning Approach for Predictive Maintenance of the Electrical Submersible Pumps (ESPs). <em>ACS Omega</em>, 7(21), 17641-17651.</li>
+                    <li>Abdalla, R., Nikolaev, D., Gönzi, D., et al. (2023). Deep Insight into Electrical Submersible Pump Maintenance: A Predictive Approach with Deep Learning. <em>SPE Offshore Europe Conference & Exhibition</em>.</li>
+                    <li>Abdalla, R., El Ela, M.A., El-Banbi, A. (2020). Identification of Downhole in Sucker Rod Pumped Wells Using Deep Neural Networks and Genetic Algorithms. <em>SPE Production & Operations</em>, 35, 435-447.</li>
+                </ul>
+
+                <h3>Field Applications</h3>
+                <ul>
+                    <li><strong>Rühlermoor Oilfield (Exxon Mobil):</strong> Predictive maintenance for mature field equipment</li>
+                    <li><strong>Cairn Energy - Datagration:</strong> ESP maintenance optimization using XGBoost and PCA</li>
+                    <li><strong>Multiple Offshore Platforms:</strong> Real-time monitoring and maintenance scheduling</li>
+                </ul>
+
+                <h3>Data Sources</h3>
+                <ul>
+                    <li>Real-time sensor data (temperature, pressure, vibration, current, voltage)</li>
+                    <li>Historical maintenance records and failure logs</li>
+                    <li>Operational parameters (production rates, fluid properties)</li>
+                    <li>Equipment specifications and design parameters</li>
+                    <li>Environmental conditions and field characteristics</li>
+                </ul>
+
+                <h3>Future Directions</h3>
+                <ul>
+                    <li>Integration with digital twin technology for virtual equipment monitoring</li>
+                    <li>Federated learning for multi-field knowledge sharing</li>
+                    <li>Reinforcement learning for optimal maintenance scheduling</li>
+                    <li>IoT integration for enhanced sensor networks</li>
+                    <li>Predictive maintenance for entire production systems, not just individual equipment</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ramez Abdalla, Ph.D. | Research Scientist</p>
+        </div>
+    </footer>
+</body>
+</html>
+

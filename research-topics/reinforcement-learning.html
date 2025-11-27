@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Agent Reinforcement Learning - Ramez Abdalla, Ph.D.</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="https://scholar.google.com/citations?view_op=view_photo&user=YOUR_SCHOLAR_ID&citpid=1" alt="Dr. Ing. Ramez Abdalla" class="profile-image" onerror="this.src='../figures/profile-photo.jpg'; this.onerror=null;">
+                </div>
+                <div class="profile-text">
+                    <h1>Ramez Abdalla, Ph.D.</h1>
+                    <p class="subtitle">Research Scientist | Computational Fluid Dynamics | AI in Energy Systems</p>
+                    <div class="contact-info">
+                        <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html">Research Topics</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
+        
+        <section>
+            <div class="topic-header">
+                <h2>Multi-Agent Reinforcement Learning for Enhanced Oil Recovery</h2>
+            </div>
+
+            <div class="topic-content">
+                <h3>Overview</h3>
+                <p>Multi-Agent Reinforcement Learning (MARL) represents a cutting-edge approach to optimizing complex, distributed systems like oil reservoirs. In this framework, each well or production unit acts as an intelligent agent that learns optimal control strategies through interaction with the environment, while coordinating with other agents to maximize overall system performance.</p>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/marl-architecture.png" alt="Multi-Agent Reinforcement Learning Architecture" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 1: Decentralized Actor-Centralized Critic (DACC) architecture for multi-agent waterflooding optimization. Source: <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">Franklin Open 2025</a></figcaption>
+                </figure>
+
+                <h3>Research Objectives</h3>
+                <ul>
+                    <li>Develop decentralized control strategies for multi-well production systems</li>
+                    <li>Optimize waterflooding operations through coordinated agent actions</li>
+                    <li>Maximize oil recovery while minimizing operational costs</li>
+                    <li>Enable real-time adaptive control in response to reservoir dynamics</li>
+                    <li>Handle complex multi-objective optimization problems (production, cost, environmental impact)</li>
+                </ul>
+
+                <h3>Mathematical Framework</h3>
+                <p>Our MARL framework employs several advanced techniques with rigorous mathematical foundations:</p>
+                
+                <h4>1. Decentralized Actor-Centralized Critic (DACC) Architecture</h4>
+                <p>The DACC framework combines the benefits of decentralized execution with centralized training. Each agent i has:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
+                    <p><strong>Actor Network (Decentralized):</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">π<sub>θ<sub>i</sub></sub>(a<sub>i</sub>|s<sub>i</sub>)</p>
+                    <p><strong>Critic Network (Centralized):</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">Q<sub>φ</sub>(s, a<sub>1</sub>, ..., a<sub>N</sub>)</p>
+                </div>
+                <p>where s is the global state, a<sub>i</sub> is the action of agent i, and N is the number of agents.</p>
+
+                <h4>2. Policy Gradient with Physics-Informed Rewards</h4>
+                <p>The objective function combines production optimization with physics constraints:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="font-family: 'Courier New', monospace;">J(θ) = E<sub>τ~π<sub>θ</sub></sub>[Σ<sub>t</sub>γ<sup>t</sup>r<sub>t</sub>]</p>
+                    <p style="font-family: 'Courier New', monospace;">r<sub>t</sub> = r<sub>production</sub> + λ<sub>physics</sub>r<sub>physics</sub> - λ<sub>cost</sub>c<sub>t</sub></p>
+                </div>
+                <p>where r<sub>production</sub> rewards oil production, r<sub>physics</sub> enforces mass balance and Darcy's law, and c<sub>t</sub> penalizes operational costs.</p>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/marl-agent-coordination.gif" alt="Agent Coordination Visualization" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 2: Animation showing multi-agent coordination during waterflooding optimization, with agents learning optimal injection strategies.</figcaption>
+                </figure>
+
+                <h4>3. Actor-Critic Update Rules</h4>
+                <p>The actor and critic networks are updated using:</p>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
+                    <p><strong>Critic Update:</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">L<sub>Q</sub> = E[(Q<sub>φ</sub>(s, a) - y)<sup>2</sup>]</p>
+                    <p style="font-family: 'Courier New', monospace;">y = r + γQ<sub>φ'</sub>(s', a')</p>
+                    <p><strong>Actor Update:</strong></p>
+                    <p style="font-family: 'Courier New', monospace;">∇<sub>θ<sub>i</sub></sub>J ≈ E[∇<sub>θ<sub>i</sub></sub>log π<sub>θ<sub>i</sub></sub>(a<sub>i</sub>|s<sub>i</sub>) · A(s, a)]</p>
+                </div>
+                <p>where A(s, a) = Q(s, a) - V(s) is the advantage function.</p>
+
+                <h4>4. Physics-Informed Constraints</h4>
+                <p>The reward function incorporates reservoir physics through penalty terms:</p>
+                <ul>
+                    <li><strong>Mass Balance:</strong> Σ<sub>α</sub>q<sub>α</sub> = 0 (conservation of mass)</li>
+                    <li><strong>Darcy's Law:</strong> v<sub>α</sub> = -(k<sub>rα</sub>k/μ<sub>α</sub>)∇p<sub>α</sub></li>
+                    <li><strong>Pressure Constraints:</strong> p<sub>min</sub> ≤ p ≤ p<sub>max</sub></li>
+                    <li><strong>Injection Limits:</strong> q<sub>inj</sub> ≤ q<sub>max</sub></li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/marl-waterflooding-optimization.png" alt="Waterflooding Optimization Results" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 3: Waterflooding optimization results showing improved recovery efficiency using MARL. Source: <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">Franklin Open 2025</a></figcaption>
+                </figure>
+
+                <h3>Key Applications</h3>
+                <ul>
+                    <li><strong>Waterflooding Optimization:</strong> Coordinated injection and production strategies across multiple wells</li>
+                    <li><strong>Steam Injection Optimization:</strong> Optimal steam allocation for thermal enhanced oil recovery</li>
+                    <li><strong>Production Control:</strong> Real-time adjustment of choke settings, pump frequencies, and injection rates</li>
+                    <li><strong>Field Development Planning:</strong> Optimal well placement and completion strategies</li>
+                </ul>
+
+                <h3>Research Outcomes</h3>
+                
+                <h4>Waterflooding Optimization (Franklin Open 2025)</h4>
+                <ul>
+                    <li>Pioneered new MARL algorithm improving recovery efficiency by <strong>15%</strong> compared to conventional methods</li>
+                    <li>Achieved <strong>92% accuracy</strong> in flow prediction using physics-informed neural networks</li>
+                    <li>Reduced computational time by <strong>75%</strong> compared to traditional optimization methods</li>
+                    <li>Successfully demonstrated on synthetic and field-scale reservoir models</li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/marl-recovery-comparison.png" alt="Recovery Efficiency Comparison" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 4: Comparison of cumulative oil recovery for MARL (blue), conventional optimization (red), and baseline (green) strategies.</figcaption>
+                </figure>
+
+                <h4>Steam Injection Optimization (Neural Computing & Applications 2023)</h4>
+                <ul>
+                    <li>Actor-critic RL framework for steam injection optimization in thermal EOR</li>
+                    <li>Achieved <strong>30% cost reduction</strong> in field trials compared to conventional methods</li>
+                    <li>Optimized steam-to-oil ratio (SOR) while maintaining production targets</li>
+                    <li>Real-time decision-making with sub-minute response times</li>
+                </ul>
+
+                <figure style="text-align: center; margin: 2rem 0;">
+                    <img src="../figures/marl-steam-injection.png" alt="Steam Injection Optimization" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
+                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 5: Steam injection optimization results showing improved SOR and production rates. Source: <a href="https://doi.org/10.1007/s00521-023-08537-6" target="_blank">Neural Computing & Applications 2023</a></figcaption>
+                </figure>
+
+                <h4>Field Deployment</h4>
+                <ul>
+                    <li>Successfully deployed in real production systems with continuous learning capabilities</li>
+                    <li>Demonstrated scalability to large fields with <strong>100+ wells</strong></li>
+                    <li>Published results in peer-reviewed journals and presented at international conferences (EAGE, SPE)</li>
+                    <li>Integration with existing SCADA systems for real-time optimization</li>
+                </ul>
+
+                <h3>Technical Innovations</h3>
+                <ul>
+                    <li><strong>Hierarchical MARL:</strong> Multi-level agent hierarchies for complex field structures</li>
+                    <li><strong>Communication Protocols:</strong> Efficient information sharing mechanisms between agents</li>
+                    <li><strong>Robustness to Uncertainty:</strong> MARL policies that adapt to geological and operational uncertainties</li>
+                    <li><strong>Safe Exploration:</strong> Constraint-aware learning ensuring operational safety</li>
+                </ul>
+
+                <h3>Related Publications</h3>
+                <ul>
+                    <li>Abdalla, R., Agban, N., Lüddeke, C., Sui, D., Jaeger, P. (2025). Multi-agent physics-informed reinforcement learning for waterflooding optimization. <em>Franklin Open</em>, Volume 10, 100229.</li>
+                    <li>Abdalla, R., Hollstein, W., Carvajal, C.P., et al. (2023). Actor-critic reinforcement learning leads decision-making in energy systems optimization—steam injection optimization. <em>Neural Computing & Applications</em>.</li>
+                    <li>Abdalla, R., Gönczi, D., Toumi, O., et al. (2024). Optimizing Waterflooding in Multi-Agent Systems through Decentralized Actor-Centralized Critic Reinforcement Learning. <em>European Association of Geoscientists & Engineers</em>.</li>
+                </ul>
+
+                <h3>Field Applications</h3>
+                <ul>
+                    <li><strong>Mature Oil Fields:</strong> Optimizing production from declining fields with complex well interactions</li>
+                    <li><strong>Waterflood Projects:</strong> Coordinated injection strategies maximizing sweep efficiency</li>
+                    <li><strong>Unconventional Resources:</strong> Multi-well pad optimization in shale plays</li>
+                    <li><strong>Offshore Platforms:</strong> Integrated production optimization across multiple platforms</li>
+                </ul>
+
+                <h3>Future Directions</h3>
+                <ul>
+                    <li>Integration with digital twin technology for real-time optimization</li>
+                    <li>Federated learning approaches for multi-field optimization</li>
+                    <li>Explainable AI for understanding agent decision-making</li>
+                    <li>Multi-scale MARL from well-level to field-level optimization</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ramez Abdalla, Ph.D. | Research Scientist</p>
+        </div>
+    </footer>
+</body>
+</html>
+

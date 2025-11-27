@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Drilling Control - Ramez Abdalla, Ph.D.</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="https://scholar.google.com/citations?view_op=view_photo&user=YOUR_SCHOLAR_ID&citpid=1" alt="Dr. Ing. Ramez Abdalla" class="profile-image" onerror="this.src='../figures/profile-photo.jpg'; this.onerror=null;">
+                </div>
+                <div class="profile-text">
+                    <h1>Ramez Abdalla, Ph.D.</h1>
+                    <p class="subtitle">Research Scientist | Computational Fluid Dynamics | AI in Energy Systems</p>
+                    <div class="contact-info">
+                        <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html">Research Topics</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
+        
+        <section>
+            <div class="topic-header">
+                <h2>Autonomous Control of Drilling Rigs (IoT)</h2>
+            </div>
+
+            <div class="topic-content">
+                <h3>Overview</h3>
+                <p>Autonomous drilling control represents a paradigm shift in drilling operations, leveraging Internet of Things (IoT) technologies, real-time data analytics, and machine learning to enable intelligent, self-optimizing drilling systems. This research project, conducted at the Digital Drilling Lab at Clausthal University of Technology, focuses on developing IoT-based systems for real-time monitoring, decision-making, and autonomous control of drilling rigs.</p>
+
+                <h3>System Architecture</h3>
+                <p>The autonomous drilling system integrates multiple components:</p>
+                <ul>
+                    <li><strong>IoT Sensors:</strong> Real-time monitoring of drilling parameters (WOB, RPM, torque, flow rate, pressure)</li>
+                    <li><strong>Data Acquisition:</strong> MQTT protocol for sensor data transmission</li>
+                    <li><strong>Data Processing:</strong> Django backend with Redis for caching and real-time processing</li>
+                    <li><strong>Communication:</strong> WebSocket and ZMQ for low-latency data streaming</li>
+                    <li><strong>Decision Engine:</strong> Machine learning models for autonomous decision-making</li>
+                    <li><strong>User Interface:</strong> Real-time dashboards using jQuery and modern web technologies</li>
+                </ul>
+
+                <h3>Key Technologies</h3>
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
+                    <p><strong>Backend:</strong> Django (Python web framework)</p>
+                    <p><strong>Caching:</strong> Redis (in-memory data store)</p>
+                    <p><strong>Messaging:</strong> MQTT (Message Queuing Telemetry Transport) for IoT communication</p>
+                    <p><strong>Real-time Communication:</strong> WebSocket, ZMQ (ZeroMQ)</p>
+                    <p><strong>Frontend:</strong> jQuery, modern JavaScript frameworks</p>
+                </div>
+
+                <h3>Research Objectives</h3>
+                <ul>
+                    <li>Develop real-time monitoring systems for drilling operations</li>
+                    <li>Implement autonomous control algorithms for drilling parameter optimization</li>
+                    <li>Enable predictive maintenance for drilling equipment</li>
+                    <li>Improve drilling efficiency and safety through intelligent automation</li>
+                    <li>Reduce non-productive time (NPT) through early problem detection</li>
+                </ul>
+
+                <h3>Applications</h3>
+                <ul>
+                    <li><strong>Real-Time Monitoring:</strong> Continuous monitoring of drilling parameters with sub-second updates</li>
+                    <li><strong>Autonomous Control:</strong> Automatic adjustment of drilling parameters based on formation characteristics</li>
+                    <li><strong>Anomaly Detection:</strong> Early detection of drilling problems (stuck pipe, lost circulation, etc.)</li>
+                    <li><strong>Optimization:</strong> Machine learning-driven optimization of rate of penetration (ROP)</li>
+                    <li><strong>Safety:</strong> Automated safety systems preventing hazardous conditions</li>
+                </ul>
+
+                <h3>Project Collaboration</h3>
+                <p>This project was conducted in collaboration with:</p>
+                <ul>
+                    <li><strong>Prof. Dr.-Ing. Philip Jäger:</strong> Head of the Petroleum Production Systems Department at TU Clausthal</li>
+                    <li><strong>Dr. Ing. Carlos Paz:</strong> Head of Digital Drilling Lab Technologies</li>
+                </ul>
+
+                <h3>Research Outcomes</h3>
+                <ul>
+                    <li>Developed comprehensive IoT-based monitoring system for drilling rigs</li>
+                    <li>Implemented real-time data processing with <100ms latency</li>
+                    <li>Created autonomous control algorithms for drilling parameter optimization</li>
+                    <li>Demonstrated improved drilling efficiency through intelligent automation</li>
+                    <li>Established foundation for future research in digital drilling technologies</li>
+                </ul>
+
+                <h3>Future Directions</h3>
+                <ul>
+                    <li>Integration with digital twin technology for virtual drilling operations</li>
+                    <li>Advanced machine learning for formation recognition and adaptive drilling</li>
+                    <li>Federated learning for multi-rig knowledge sharing</li>
+                    <li>Integration with cloud platforms for scalable data processing</li>
+                    <li>Enhanced safety systems using reinforcement learning</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ramez Abdalla, Ph.D. | Research Scientist</p>
+        </div>
+    </footer>
+</body>
+</html>
+

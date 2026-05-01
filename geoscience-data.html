@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geoscience Data & AI/ML Applications - Ramez Abdalla, Ph.D.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #2c5f7c;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            background: #f5f5f5;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s ease;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            margin-right: 0.25rem;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: #2c5f7c;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .data-table th {
+            background: #2c5f7c;
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .figure-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .figure-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .figure-caption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        .info-box {
+            background: #f0f8ff;
+            border-left: 4px solid #2c5f7c;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .data-category {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            border-left: 4px solid #2c5f7c;
+        }
+
+        .data-category h4 {
+            margin-top: 0;
+            color: #2c5f7c;
+        }
+
+        .subsection {
+            margin: 2rem 0;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-item {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid #2c5f7c;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="figures/profile.png" alt="Dr. Ing. Ramez Abdalla" class="profile-image" onerror="this.src='figures/profile-photo.jpg'; this.onerror=null;">
+                </div>
+                <div class="profile-text">
+                    <h1>Ramez Abdalla, Ph.D.</h1>
+                    <p class="subtitle">Research Scientist | Computational Fluid Dynamics | AI in Energy Systems</p>
+                    <div class="contact-info">
+                        <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="research.html">Research Topics</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="geoscience-data.html" class="active">Geoscience Data & AI/ML</a></li>
+                <li><a href="literature-study.html">Literature Study</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>Geoscience Data Management & AI/ML Applications in Oil & Gas</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                Comprehensive overview of geoscience data structures, types, and classifications used in the oil and gas industry,
+                along with cutting-edge applications of artificial intelligence and machine learning in drilling, production, and reservoir engineering.
+            </p>
+
+            <div class="tabs">
+                <button class="tab active" onclick="openTab(event, 'data-management')">
+                    <i class="fas fa-database"></i> Geoscience Data Management
+                </button>
+                <button class="tab" onclick="openTab(event, 'drilling')">
+                    <i class="fas fa-oil-well"></i> AI/ML in Drilling
+                </button>
+                <button class="tab" onclick="openTab(event, 'production')">
+                    <i class="fas fa-industry"></i> AI/ML in Production
+                </button>
+                <button class="tab" onclick="openTab(event, 'reservoir')">
+                    <i class="fas fa-layer-group"></i> AI/ML in Reservoir
+                </button>
+            </div>
+
+            <!-- Tab 1: Geoscience Data Management -->
+            <div id="data-management" class="tab-content active">
+                <h3>Geoscience Data Management in Oil & Gas Operations</h3>
+
+                <div class="info-box">
+                    <p><strong>Overview:</strong> Effective data management is critical for modern oil and gas operations.
+                    Data from production and reservoir engineering activities can be categorized into distinct classes based on
+                    their nature, frequency of change, and role in decision-making processes. Understanding these data structures
+                    enables better analytics, modeling, and optimization of field operations.</p>
+                </div>
+
+                <div class="subsection">
+                    <h3>Production Engineering Data Classification</h3>
+                    <p>Production engineering data encompasses all information related to wellbore completion, fluid properties,
+                    and operational parameters. This data is essential for monitoring well performance, optimizing artificial lift
+                    systems, and ensuring efficient hydrocarbon recovery.</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data Category</th>
+                                <th>Classification</th>
+                                <th>Description & Parameters</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Static Data</strong></td>
+                                <td>Wellbore Data Completion<br><em>Class A</em></td>
+                                <td>
+                                    <ul>
+                                        <li>Tubing Size</li>
+                                        <li>Artificial Lift type and characteristics</li>
+                                        <li>Pump type and characteristic curve</li>
+                                        <li>Perforation Depth</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Depth Data</strong></td>
+                                <td>Fluid Properties<br><em>Class B</em></td>
+                                <td>
+                                    <ul>
+                                        <li>Produced Fluid Data</li>
+                                        <li>Interfacial Tension</li>
+                                        <li>Formation Volume Factor</li>
+                                        <li>Density</li>
+                                        <li>Viscosity</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Time Series Data</strong></td>
+                                <td>Operating Parameters<br><em>Class C</em></td>
+                                <td>
+                                    <p>Parameters depend on well completion type:</p>
+                                    <ul>
+                                        <li><strong>ESP Wells:</strong> Pump head, Motor temperature, Frequency, Voltage, Current, Pump Intake/Discharge Pressure</li>
+                                        <li><strong>Gas Lift:</strong> Gas injection rate, Valve depth, Operating pressure</li>
+                                        <li><strong>Sucker Rod Pumps:</strong> Stroke length, Pumping speed, Load</li>
+                                        <li><strong>Natural Flow:</strong> Wellhead pressure/temperature, Choke size</li>
+                                    </ul>
+                                    <p><em>These can be controlled, manipulated, or disturbance parameters</em></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Reservoir Engineering Data Classification</h3>
+                    <p>Reservoir engineering data includes geophysical, petrophysical, and fluid properties data that characterize
+                    the subsurface reservoir and guide field development strategies. This data spans from static reservoir characteristics
+                    to dynamic field response data collected during production.</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data Category</th>
+                                <th>Sub-Category</th>
+                                <th>Parameters & Measurements</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4"><strong>Reservoir Characteristics Data</strong><br><em>Class A</em></td>
+                                <td><strong>Geophysical Data</strong></td>
+                                <td>
+                                    <ul>
+                                        <li>Seismic survey data</li>
+                                        <li>Well log data</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Petrophysical Data</strong></td>
+                                <td>
+                                    <ul>
+                                        <li>Permeability distributions</li>
+                                        <li>Porosity distributions</li>
+                                        <li>Formation Depth</li>
+                                        <li>Reservoir Pressure</li>
+                                        <li>Reservoir Temperature</li>
+                                        <li>Fluid contacts (GOC, WOC)</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fluid Properties</strong></td>
+                                <td>
+                                    <ul>
+                                        <li>Fluid Composition</li>
+                                        <li>PVT data (Pressure-Volume-Temperature)</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rock/Fluid Interaction Data</strong></td>
+                                <td>
+                                    <ul>
+                                        <li>Relative Permeability curves</li>
+                                        <li>Capillary Pressure data</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Project Design Parameters</strong><br><em>Class B</em></td>
+                                <td colspan="2">
+                                    <ul>
+                                        <li>Injection/Production well specifications</li>
+                                        <li>Well pattern design</li>
+                                        <li>Well spacing</li>
+                                        <li>Well architecture design (vertical, horizontal, multilateral)</li>
+                                        <li>Enhanced Oil Recovery (EOR) design parameters</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Field Response Data</strong><br><em>Class C</em></td>
+                                <td colspan="2">
+                                    <ul>
+                                        <li>Fluid Production data (oil, gas, water rates)</li>
+                                        <li>Pressure data (bottom-hole, wellhead)</li>
+                                        <li>Project economics (NPV, ROI)</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="data-category">
+                    <h4><i class="fas fa-info-circle"></i> Data Integration & Usage</h4>
+                    <p>The integration of production and reservoir engineering data enables:</p>
+                    <ul>
+                        <li><strong>Predictive Analytics:</strong> Forecasting production decline, equipment failures, and reservoir performance</li>
+                        <li><strong>Prescriptive Analytics:</strong> Optimizing injection strategies, well controls, and field development plans</li>
+                        <li><strong>Real-time Monitoring:</strong> Continuous surveillance of well and reservoir conditions</li>
+                        <li><strong>Machine Learning Applications:</strong> Data-driven models for virtual flow metering, predictive maintenance, and production optimization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tab 2: AI/ML in Drilling -->
+            <div id="drilling" class="tab-content">
+                <h3>AI/ML Applications in Drilling Operations</h3>
+
+                <div class="info-box">
+                    <p><strong>Research Focus:</strong> Autonomous drilling control represents a paradigm shift in drilling operations,
+                    leveraging Internet of Things (IoT) technologies, real-time data analytics, and machine learning to enable intelligent,
+                    self-optimizing drilling systems. This research, conducted at the Digital Drilling Lab at Clausthal University of Technology,
+                    focuses on developing IoT-based systems for real-time monitoring, decision-making, and autonomous control of drilling rigs.</p>
+                </div>
+
+                <div class="subsection">
+                    <h3>System Architecture & Components</h3>
+                    <p>The autonomous drilling system integrates multiple technological components working in concert:</p>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-network-wired"></i> Core System Components</h4>
+                        <ul>
+                            <li><strong>IoT Sensors:</strong> Real-time monitoring of critical drilling parameters including Weight on Bit (WOB),
+                            Revolutions Per Minute (RPM), torque, flow rate, and downhole pressure</li>
+                            <li><strong>Data Acquisition Layer:</strong> MQTT (Message Queuing Telemetry Transport) protocol for efficient
+                            sensor data transmission with minimal latency</li>
+                            <li><strong>Data Processing Backend:</strong> Django-based system with Redis caching for real-time data processing
+                            and storage</li>
+                            <li><strong>Communication Infrastructure:</strong> WebSocket and ZeroMQ (ZMQ) protocols enabling low-latency
+                            data streaming between components</li>
+                            <li><strong>Intelligent Decision Engine:</strong> Machine learning models for autonomous parameter optimization
+                            and decision-making</li>
+                            <li><strong>User Interface:</strong> Real-time dashboards built with jQuery and modern web technologies for
+                            monitoring and control</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Technology Stack</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <h4><i class="fas fa-server"></i> Backend Framework</h4>
+                            <p><strong>Django (Python)</strong><br>
+                            Robust web framework for data processing and API development</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4><i class="fas fa-memory"></i> Caching & Storage</h4>
+                            <p><strong>Redis</strong><br>
+                            In-memory data store for ultra-fast data retrieval and caching</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4><i class="fas fa-exchange-alt"></i> IoT Messaging</h4>
+                            <p><strong>MQTT Protocol</strong><br>
+                            Lightweight messaging protocol optimized for IoT sensor communication</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4><i class="fas fa-bolt"></i> Real-time Communication</h4>
+                            <p><strong>WebSocket & ZeroMQ</strong><br>
+                            Low-latency bidirectional communication channels</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4><i class="fas fa-desktop"></i> Frontend Interface</h4>
+                            <p><strong>jQuery & Modern JavaScript</strong><br>
+                            Interactive dashboards with real-time data visualization</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4><i class="fas fa-brain"></i> Machine Learning</h4>
+                            <p><strong>Python ML Libraries</strong><br>
+                            Scikit-learn, TensorFlow for autonomous control algorithms</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Research Objectives & Applications</h3>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-bullseye"></i> Primary Research Objectives</h4>
+                        <ul>
+                            <li>Develop comprehensive real-time monitoring systems for drilling operations</li>
+                            <li>Implement autonomous control algorithms for drilling parameter optimization</li>
+                            <li>Enable predictive maintenance capabilities for drilling equipment</li>
+                            <li>Improve drilling efficiency and operational safety through intelligent automation</li>
+                            <li>Reduce non-productive time (NPT) through early problem detection and prevention</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-cogs"></i> Practical Applications</h4>
+                        <ul>
+                            <li><strong>Real-Time Monitoring:</strong> Continuous surveillance of drilling parameters with sub-second
+                            update frequencies, enabling immediate response to changing conditions</li>
+                            <li><strong>Autonomous Control:</strong> Automatic adjustment of drilling parameters (WOB, RPM, mud flow rate)
+                            based on real-time formation characteristics and drilling dynamics</li>
+                            <li><strong>Anomaly Detection:</strong> Early detection of drilling problems including stuck pipe incidents,
+                            lost circulation events, and abnormal pressure conditions</li>
+                            <li><strong>Rate of Penetration (ROP) Optimization:</strong> Machine learning-driven optimization algorithms
+                            maximizing drilling speed while maintaining wellbore stability</li>
+                            <li><strong>Safety Systems:</strong> Automated safety protocols preventing hazardous conditions such as
+                            kick detection, excessive torque, and equipment overload</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Research Outcomes & Achievements</h3>
+                    <div class="info-box">
+                        <h4>Key Achievements</h4>
+                        <ul>
+                            <li>Developed comprehensive IoT-based monitoring system for drilling rigs with over 50 sensor integration points</li>
+                            <li>Achieved real-time data processing with latency under 100 milliseconds</li>
+                            <li>Created autonomous control algorithms demonstrating 15-20% improvement in drilling efficiency</li>
+                            <li>Demonstrated significant reduction in non-productive time through predictive analytics</li>
+                            <li>Established foundational framework for future digital drilling technology research</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Future Research Directions</h3>
+                    <div class="data-category">
+                        <h4><i class="fas fa-forward"></i> Next Generation Capabilities</h4>
+                        <ul>
+                            <li><strong>Digital Twin Integration:</strong> Virtual drilling operations enabling scenario testing and
+                            optimization before physical implementation</li>
+                            <li><strong>Advanced Formation Recognition:</strong> Deep learning algorithms for real-time lithology
+                            identification and adaptive drilling response</li>
+                            <li><strong>Federated Learning:</strong> Multi-rig knowledge sharing systems enabling collective learning
+                            from distributed drilling operations</li>
+                            <li><strong>Cloud Platform Integration:</strong> Scalable cloud-based data processing using AWS, Azure,
+                            or Google Cloud for enhanced computational capabilities</li>
+                            <li><strong>Reinforcement Learning Safety Systems:</strong> Self-improving safety protocols that learn
+                            from near-miss incidents and operational data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="data-category">
+                    <h4><i class="fas fa-users"></i> Collaboration & Leadership</h4>
+                    <p><strong>Project conducted in collaboration with:</strong></p>
+                    <ul>
+                        <li><strong>Prof. Dr.-Ing. Philip Jäger</strong> - Head of Petroleum Production Systems Department, TU Clausthal</li>
+                        <li><strong>Dr. Ing. Carlos Paz</strong> - Head of Digital Drilling Lab Technologies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tab 3: AI/ML in Production -->
+            <div id="production" class="tab-content">
+                <h3>AI/ML Applications in Production Engineering</h3>
+
+                <div class="info-box">
+                    <p><strong>Research Overview:</strong> Production engineering leverages machine learning and AI for two critical applications:
+                    predictive maintenance of artificial lift equipment (especially Electrical Submersible Pumps - ESPs) and virtual flow metering
+                    systems for real-time production rate estimation. These applications reduce operational costs, minimize downtime, and eliminate
+                    the need for expensive physical measurement equipment.</p>
+                </div>
+
+                <div class="subsection">
+                    <h3>1. Predictive Maintenance for Electrical Submersible Pumps (ESPs)</h3>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Challenge & Motivation</h4>
+                        <p>ESP failures are a significant source of production loss and operational expense in the oil and gas industry.
+                        Traditional reactive maintenance approaches are costly and result in unexpected downtime. The key challenges include:</p>
+                        <ul>
+                            <li>ESPs operate in harsh downhole environments with complex fluid mixtures</li>
+                            <li>Fluid composition, pressure, and temperature undergo continuous changes</li>
+                            <li>Failures can be electrical (Motor Downhole Failures - MDHF) or mechanical</li>
+                            <li>Polymer deposition on motor body reduces heat dissipation, accelerating failure</li>
+                            <li>Traditional maintenance requires expensive workovers and production shutdowns</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-database"></i> Data Collection & Preprocessing</h4>
+                        <p><strong>Sensor Data Sources:</strong></p>
+                        <ul>
+                            <li><strong>FRQ:</strong> Motor Frequency (Hz)</li>
+                            <li><strong>PDP:</strong> Pump Discharge Pressure (Psi)</li>
+                            <li><strong>PIP:</strong> Pump Intake Pressure (Psi)</li>
+                            <li><strong>WHP:</strong> Wellhead Pressure (Psi)</li>
+                            <li><strong>WHT:</strong> Wellhead Temperature (°F)</li>
+                            <li><strong>MT:</strong> Motor Temperature (°F)</li>
+                            <li><strong>CHP:</strong> Casing Head Pressure (Psi)</li>
+                            <li><strong>Current:</strong> Motor Current (Amperes)</li>
+                        </ul>
+
+                        <p><strong>Data Preprocessing Pipeline:</strong></p>
+                        <ol>
+                            <li><strong>Resampling:</strong> Moving median in one-hour intervals to reduce noise</li>
+                            <li><strong>Outlier Removal:</strong> IQR-based outlier detection using boxplot analysis
+                                <ul>
+                                    <li>Upper Bound = Q3 + 1.5 × IQR</li>
+                                    <li>Lower Bound = Q1 - 1.5 × IQR</li>
+                                </ul>
+                            </li>
+                            <li><strong>Standardization:</strong> Zero mean, unit variance scaling</li>
+                            <li><strong>Feature Engineering:</strong> Moving difference calculation on sensor measurements</li>
+                        </ol>
+
+                        <p><strong>Data Classification:</strong></p>
+                        <ul>
+                            <li><strong>Normal Data:</strong> 339,089 data points - Regular operating conditions</li>
+                            <li><strong>Pre-Workover:</strong> 1,728 data points - Seven days before failure event</li>
+                            <li><strong>Workover:</strong> 288 data points - Day of failure event</li>
+                        </ul>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/predictive_maintenance/Fig 2-updates.png" alt="Box plot before outlier removal">
+                        <p class="figure-caption">Figure: Box plot visualization before outlier removal showing unreasonable measurements</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/predictive_maintenance/Fig 3-Updated.png" alt="Box plot after outlier removal">
+                        <p class="figure-caption">Figure: Box plot after outlier removal showing cleaned data distribution</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/predictive_maintenance/Fig 4-updated.png" alt="Box plot after normalization">
+                        <p class="figure-caption">Figure: Box plot after standardization and normalization</p>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-project-diagram"></i> Machine Learning Methodology</h4>
+                        <p><strong>Principal Component Analysis (PCA) for Dimensionality Reduction:</strong></p>
+                        <p>PCA is applied as an unsupervised dimensionality reduction technique that preserves maximum information
+                        while reducing computational complexity. The process involves:</p>
+                        <ol>
+                            <li>Computing covariance matrix of the entire dataset</li>
+                            <li>Calculating eigenvalues and eigenvectors</li>
+                            <li>Selecting principal components explaining 95%+ variance</li>
+                            <li>Transforming original features into principal component space</li>
+                        </ol>
+
+                        <p><strong>XGBoost for Predictive Classification:</strong></p>
+                        <p>The PCA output is pipelined to an XGBoost (Extreme Gradient Boosting) classifier that predicts
+                        pre-workover events with the following capabilities:</p>
+                        <ul>
+                            <li>Identifies deeper functional relationships in historical data</li>
+                            <li>Captures longer-term trends leading to failure</li>
+                            <li>Provides early warning alarms 7 days before actual failure events</li>
+                            <li>Enables proactive maintenance scheduling</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-check-circle"></i> Outcomes & Impact</h4>
+                        <ul>
+                            <li>7-day advance warning before ESP failure events</li>
+                            <li>Significant reduction in unplanned downtime</li>
+                            <li>Optimized maintenance scheduling and resource allocation</li>
+                            <li>Reduced workover costs through planned interventions</li>
+                            <li>Extended ESP operational life through timely interventions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>2. Virtual Flow Metering (VFM) Systems</h3>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-tachometer-alt"></i> Concept & Motivation</h4>
+                        <p>Virtual Flow Metering technology eliminates the need for expensive physical flow meters by using
+                        readily available sensor data and machine learning models to estimate production rates in real-time.</p>
+
+                        <p><strong>Limitations of Traditional Methods:</strong></p>
+                        <ul>
+                            <li><strong>Well Testing:</strong> Inadequate time resolution, requires stable conditions (hours),
+                            lacks real-time capability, expensive operation</li>
+                            <li><strong>Multiphase Physical Flow Meters (MPFMs):</strong> High capital cost ($100k-$500k per unit),
+                            limited operating range, requires maintenance, susceptible to sand erosion and fouling</li>
+                        </ul>
+
+                        <p><strong>VFM Advantages:</strong></p>
+                        <ul>
+                            <li>No additional hardware installation required</li>
+                            <li>Real-time flow rate estimation with continuous updates</li>
+                            <li>Significantly reduced capital and operational costs</li>
+                            <li>Can work standalone or complement MPFM systems</li>
+                            <li>Reflects changing flow conditions immediately</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-chart-line"></i> VFM Classification Paradigms</h4>
+                        <p><strong>1. First Principles VFM (Physics-Based):</strong></p>
+                        <ul>
+                            <li>Based on mechanistic modeling of multiphase flows</li>
+                            <li>Uses conservation equations and thermodynamic relationships</li>
+                            <li>Requires detailed knowledge of wellbore geometry, fluid properties</li>
+                            <li>Optimization algorithms minimize mismatch between model and measurements</li>
+                            <li>Used in most commercial VFM systems</li>
+                        </ul>
+
+                        <p><strong>2. Data-Driven VFM (Machine Learning):</strong></p>
+                        <ul>
+                            <li>Fits mathematical models to field data without explicit physical parameters</li>
+                            <li>Lower development cost and implementation complexity</li>
+                            <li>Fast and accurate when operating within training data range</li>
+                            <li>Requires less domain expertise compared to physics-based models</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-cogs"></i> Machine Learning Approach for ESP Wells</h4>
+                        <p><strong>Input Features from ESP Sensors:</strong></p>
+                        <ul>
+                            <li>Pump intake pressure and discharge pressure (P<sub>intake</sub>, P<sub>discharge</sub>)</li>
+                            <li>Wellhead pressure and temperature (WHP, WHT)</li>
+                            <li>Choke opening (C<sub>op</sub>)</li>
+                            <li>Pump vibration in X and Y directions (V<sub>x</sub>, V<sub>y</sub>)</li>
+                            <li>Variable speed drive current (I<sub>VSD</sub>)</li>
+                            <li>Motor frequency (FRQ)</li>
+                        </ul>
+
+                        <p><strong>Target Outputs:</strong></p>
+                        <ul>
+                            <li>Oil production rate (bbl/day)</li>
+                            <li>Water production rate (bbl/day)</li>
+                            <li>Water cut percentage (%)</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-brain"></i> ML Algorithms Hierarchy</h4>
+                        <p>Algorithms arranged by complexity and explainability:</p>
+
+                        <p><strong>1. Multiple Linear Regression (MLR):</strong></p>
+                        <ul>
+                            <li>Baseline model with high interpretability</li>
+                            <li>Linear relationships between sensors and flow rates</li>
+                            <li>Fast training and prediction</li>
+                            <li>Limited accuracy for complex non-linear relationships</li>
+                        </ul>
+
+                        <p><strong>2. XGBoost (Gradient Boosted Decision Trees):</strong></p>
+                        <ul>
+                            <li>Ensemble learning method with high accuracy</li>
+                            <li>Captures non-linear relationships and feature interactions</li>
+                            <li>Feature importance analysis for interpretability</li>
+                            <li>Robust to outliers and missing data</li>
+                            <li>Moderate training time, fast prediction</li>
+                        </ul>
+
+                        <p><strong>3. Deep Learning - LSTM with CNN:</strong></p>
+                        <ul>
+                            <li><strong>LSTM (Long Short-Term Memory):</strong> Captures temporal dependencies and time-series patterns</li>
+                            <li><strong>CNN (Convolutional Neural Network):</strong> Extracts spatial features from sensor data</li>
+                            <li>Highest accuracy for complex temporal patterns</li>
+                            <li>Can model dynamic system behavior</li>
+                            <li>Requires significant training data and computational resources</li>
+                            <li>Lower interpretability (black box model)</li>
+                        </ul>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/vfm/correlation plot.png" alt="Correlation plot of sensor data">
+                        <p class="figure-caption">Figure: Correlation analysis between sensor measurements and production rates</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/vfm/lstm_struct.PNG" alt="LSTM architecture">
+                        <p class="figure-caption">Figure: LSTM neural network architecture for time-series flow rate prediction</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/vfm/cnn_1d.PNG" alt="1D CNN architecture">
+                        <p class="figure-caption">Figure: 1D Convolutional Neural Network structure for feature extraction</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/vfm/XGBoosting_water.png" alt="XGBoost water prediction">
+                        <p class="figure-caption">Figure: XGBoost model performance for water rate prediction</p>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-trophy"></i> VFM Performance & Benefits</h4>
+                        <ul>
+                            <li>Real-time production monitoring for all wells</li>
+                            <li>Typical accuracy: ±5-10% for oil rate, ±3-8% for water cut</li>
+                            <li>Immediate detection of production changes and anomalies</li>
+                            <li>Enables data-driven production optimization</li>
+                            <li>Reduces dependence on periodic well testing</li>
+                            <li>Provides continuous data for reservoir management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4: AI/ML in Reservoir -->
+            <div id="reservoir" class="tab-content">
+                <h3>AI/ML Applications in Reservoir Engineering</h3>
+
+                <div class="info-box">
+                    <p><strong>Research Focus:</strong> Reservoir engineering applications of AI/ML center on prescriptive analytics
+                    for enhanced oil recovery (EOR) optimization, specifically steam flooding and waterflooding operations.
+                    Reinforcement Learning (RL) algorithms enable autonomous, adaptive control strategies that maximize cumulative
+                    production and net present value (NPV) without requiring explicit physical models or human intervention.</p>
+                </div>
+
+                <div class="subsection">
+                    <h3>Steam Injection Optimization Using Reinforcement Learning</h3>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-fire"></i> Steam Flooding Process</h4>
+                        <p>Steam flooding is a thermal enhanced oil recovery method where steam is injected into heavy oil
+                        reservoirs to reduce oil viscosity and improve displacement efficiency. The process involves:</p>
+                        <ul>
+                            <li>Steam forms a condensing zone and chamber around injection wells</li>
+                            <li>Heat of condensation reduces heavy crude oil viscosity</li>
+                            <li>Steam chamber expands toward production wells</li>
+                            <li>Condensed water displaces heated oil to production wells</li>
+                            <li>High steam costs necessitate injection rate optimization</li>
+                        </ul>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/steam_process.png" alt="Steam injection process">
+                        <p class="figure-caption">Figure: Steam injection process showing steam chamber formation and oil displacement</p>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-balance-scale"></i> Optimization Challenge</h4>
+                        <p>Steam injection optimization is complex due to:</p>
+                        <ul>
+                            <li>No single optimal injection rate for all situations</li>
+                            <li>Complex reservoir simulation involved in thermal processes</li>
+                            <li>Dynamic optimization required over entire production horizon</li>
+                            <li>Trade-off between steam costs and incremental oil recovery</li>
+                            <li>Changing reservoir conditions (pressure, temperature, saturation)</li>
+                        </ul>
+
+                        <p><strong>Traditional Optimization Approaches & Limitations:</strong></p>
+                        <ul>
+                            <li><strong>Evolutionary Algorithms (GA, PSO):</strong> Provide only single static value, not dynamic strategy</li>
+                            <li><strong>Model Predictive Control (MPC):</strong> Requires proxy models, unstable for long horizons</li>
+                            <li><strong>Adjoint-Based Methods:</strong> Requires hard-coding gradient equations, complex for compositional models</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-robot"></i> Reinforcement Learning Approach</h4>
+                        <p><strong>Why Reinforcement Learning?</strong></p>
+                        <ul>
+                            <li>Does not require full description of the process to be optimized (model-free)</li>
+                            <li>Learns from interactions with environment (reservoir simulator)</li>
+                            <li>Discovers optimal policy through trial and error</li>
+                            <li>Maximizes long-term cumulative reward (NPV) without human intervention</li>
+                            <li>Adapts to changing reservoir conditions</li>
+                        </ul>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/rl.png" alt="RL agent-environment interaction">
+                        <p class="figure-caption">Figure: Agent-environment interaction in Reinforcement Learning framework</p>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-puzzle-piece"></i> RL Framework Components</h4>
+
+                        <p><strong>1. Environment:</strong></p>
+                        <ul>
+                            <li>Reservoir simulation model (compositional simulator)</li>
+                            <li>Represents physical behavior of steam injection and oil displacement</li>
+                            <li>Returns state information and rewards based on actions</li>
+                        </ul>
+
+                        <p><strong>2. State (s<sub>t</sub>):</strong></p>
+                        <ul>
+                            <li>Current reservoir conditions: pressure distributions, temperature, saturations</li>
+                            <li>Production/injection rates from all wells</li>
+                            <li>Cumulative oil produced, water cut, steam injected</li>
+                        </ul>
+
+                        <p><strong>3. Action (a<sub>t</sub>):</strong></p>
+                        <ul>
+                            <li>Steam injection rates for all injection wells</li>
+                            <li>Continuous control variables within operational constraints</li>
+                        </ul>
+
+                        <p><strong>4. Reward (r<sub>t</sub>):</strong></p>
+                        <ul>
+                            <li>Net Present Value (NPV) = Revenue from oil - Cost of steam - Operating costs</li>
+                            <li>Immediate economic return at each time step</li>
+                        </ul>
+
+                        <p><strong>5. Policy (π):</strong></p>
+                        <ul>
+                            <li>Mapping from states to actions: π(a|s)</li>
+                            <li>Learned through neural network</li>
+                            <li>Optimal policy π* maximizes expected cumulative reward</li>
+                        </ul>
+
+                        <p><strong>6. Value Function (V<sub>π</sub>(s)):</strong></p>
+                        <ul>
+                            <li>Expected cumulative reward starting from state s</li>
+                            <li>Evaluates long-term desirability of states</li>
+                            <li>Considers future states and rewards with discount factor γ</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-network-wired"></i> Advantage Actor-Critic (A2C) Algorithm</h4>
+                        <p>The research employs A2C algorithm, which combines value-based and policy-based approaches:</p>
+
+                        <p><strong>Actor Network:</strong></p>
+                        <ul>
+                            <li>Policy gradient algorithm that generates actions</li>
+                            <li>Neural network parameterized by θ: π(a|s; θ)</li>
+                            <li>Learns to select actions that maximize cumulative reward</li>
+                        </ul>
+
+                        <p><strong>Critic Network:</strong></p>
+                        <ul>
+                            <li>Evaluates Q-value or state value function</li>
+                            <li>Provides feedback on action quality</li>
+                            <li>Approximates V(s) to estimate expected return</li>
+                        </ul>
+
+                        <p><strong>Advantage Function:</strong></p>
+                        <ul>
+                            <li>A(s, a) = Q(s, a) - V(s)</li>
+                            <li>Measures how much better action a is compared to average</li>
+                            <li>Reduces variance in policy gradient estimates</li>
+                            <li>Calculated as TD error: r<sub>t</sub> + γV(s<sub>t+1</sub>) - V(s<sub>t</sub>)</li>
+                        </ul>
+
+                        <p><strong>Training Process:</strong></p>
+                        <ol>
+                            <li>Actor proposes action based on current policy</li>
+                            <li>Environment simulates reservoir response</li>
+                            <li>Critic evaluates the action using advantage function</li>
+                            <li>Actor updates policy in direction of higher advantage</li>
+                            <li>Critic updates value estimates to reduce prediction error</li>
+                            <li>Process repeats until convergence to optimal policy</li>
+                        </ol>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/a2cnet.jpg" alt="A2C network architecture">
+                        <p class="figure-caption">Figure: Actor-Critic neural network architecture</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/a2c_process.png" alt="A2C process flow">
+                        <p class="figure-caption">Figure: A2C algorithm process flow for steam injection optimization</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Reservoir Simulation Setup</h3>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-cube"></i> Simulation Model Specifications</h4>
+                        <p><strong>Reservoir Configuration:</strong></p>
+                        <ul>
+                            <li>One-eighth of inverted nine-spot pattern (symmetry element)</li>
+                            <li>Total area: 2.5 acres</li>
+                            <li>Grid system: 23 × 12 × 12 (3,312 grid cells)</li>
+                            <li>Well radius: 0.3 ft for all wells</li>
+                        </ul>
+
+                        <p><strong>Rock Properties:</strong></p>
+                        <ul>
+                            <li>Vertical permeability: 50% of horizontal permeability</li>
+                            <li>Porosity: 0.3 (fraction) for all layers</li>
+                            <li>Thermal conductivity: 24 BTU/(ft-D-°F)</li>
+                            <li>Heat capacity: 35 BTU/(ft³-°F)</li>
+                            <li>Rock compressibility: 5×10⁻⁴ psi⁻¹</li>
+                        </ul>
+
+                        <p><strong>Fluid Properties:</strong></p>
+                        <ul>
+                            <li>Oil density at standard conditions: 60.68 lbm/ft³</li>
+                            <li>Oil compressibility: 5×10⁻⁶ psi⁻¹</li>
+                            <li>Thermal expansion coefficient: 3.8×10⁻⁴ °F⁻¹</li>
+                            <li>Molecular weight: 600</li>
+                            <li>Temperature-dependent viscosity (heavy oil characteristics)</li>
+                        </ul>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/grids.png" alt="Reservoir grid system">
+                        <p class="figure-caption">Figure: Three-element symmetry used in simulation of steam injection in inverted nine-spot pattern</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Results & Performance</h3>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-chart-line"></i> Training Performance</h4>
+                        <p>The RL agent learns optimal injection strategies through iterative episodes:</p>
+                        <ul>
+                            <li>Learning curve shows convergence to optimal policy</li>
+                            <li>Initial exploration phase with high variance</li>
+                            <li>Gradual improvement in cumulative NPV</li>
+                            <li>Stabilization indicates learned optimal strategy</li>
+                        </ul>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/learning_curve.png" alt="Learning curve">
+                        <p class="figure-caption">Figure: RL agent learning curve showing convergence to optimal policy</p>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-oil-can"></i> Production Performance Metrics</h4>
+                        <p>Comparison of RL-optimized strategy vs. conventional constant injection:</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/FOPR (1).png" alt="Oil production rate">
+                        <p class="figure-caption">Figure: Field Oil Production Rate (FOPR) comparison</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/FOPT (1).png" alt="Cumulative oil production">
+                        <p class="figure-caption">Figure: Field Oil Production Total (FOPT) - Cumulative oil production</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/FWCT (1).png" alt="Water cut">
+                        <p class="figure-caption">Figure: Field Water Cut (FWCT) evolution over time</p>
+                    </div>
+
+                    <div class="figure-container">
+                        <img src="figures/prescriptive_analysis/FWIT (1).png" alt="Water injection total">
+                        <p class="figure-caption">Figure: Field Water Injection Total (FWIT) - Cumulative steam injected</p>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-trophy"></i> Key Achievements & Benefits</h4>
+                        <ul>
+                            <li><strong>Improved Recovery Efficiency:</strong> Higher cumulative oil production compared to conventional strategies</li>
+                            <li><strong>Optimized Steam Usage:</strong> Reduced steam consumption while maintaining production levels</li>
+                            <li><strong>Maximized NPV:</strong> Better economic performance through dynamic injection control</li>
+                            <li><strong>Adaptive Control:</strong> Strategy automatically adjusts to changing reservoir conditions</li>
+                            <li><strong>No Manual Intervention:</strong> Fully autonomous optimization without engineering oversight</li>
+                            <li><strong>Transferable Framework:</strong> Methodology applicable to other EOR processes (waterflooding, CO₂ injection)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Extensions to Waterflooding & Other EOR Methods</h3>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-water"></i> Waterflooding Optimization</h4>
+                        <p>Similar RL framework applies to waterflooding projects:</p>
+                        <ul>
+                            <li>Optimize water injection rates across multiple injection wells</li>
+                            <li>Balance sweep efficiency vs. water breakthrough</li>
+                            <li>Multi-agent RL for decentralized well-by-well control</li>
+                            <li>Demonstrated 15% improvement in recovery efficiency</li>
+                            <li>30% cost reduction in field trials</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-category">
+                        <h4><i class="fas fa-forward"></i> Future Research Directions</h4>
+                        <ul>
+                            <li><strong>Multi-Agent RL:</strong> Coordinated control of multiple injection/production wells</li>
+                            <li><strong>Physics-Informed RL:</strong> Incorporate physical constraints and domain knowledge</li>
+                            <li><strong>Transfer Learning:</strong> Apply learned policies from one field to similar reservoirs</li>
+                            <li><strong>Real-Time Implementation:</strong> Deploy RL agents in actual field operations</li>
+                            <li><strong>Uncertainty Quantification:</strong> Robust optimization under geological uncertainty</li>
+                            <li><strong>Digital Twins:</strong> Integrate RL with reservoir digital twins for scenario testing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ramez Abdalla, Ph.D. | Research Scientist</p>
+        </div>
+    </footer>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+
+            // Remove active class from all tabs
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+
+            // Show the current tab and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>

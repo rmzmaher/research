@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Dr.-Ing. Ramez Abdalla</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="figures/profile.png" alt="Dr.-Ing. Ramez Abdalla" class="profile-image" onerror="this.src='figures/profile-photo.jpg'; this.onerror=null;">
+                </div>
+                <div class="profile-text">
+                    <h1>Dr.-Ing. Ramez Abdalla</h1>
+                    <p class="subtitle">Research Scientist | Petroleum Engineering Technologies | AI in Energy Systems</p>
+                    <div class="contact-info">
+                        <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="geoscience-data.html">Geoscience Data</a></li>
+                <li><a href="research.html">Research Topics</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="publications.html">Publications</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>Courses &amp; Teaching</h2>
+            <p style="font-size: 1.05rem; margin-bottom: 1rem;">
+                Graduate and continuing-education courses in data-driven petroleum engineering, scientific machine learning, and
+                subsurface flow systems. Materials draw on active research programmes documented under
+                <a href="research.html">Research Topics</a>.
+            </p>
+
+            <h3>1. Graduate &amp; University Teaching</h3>
+            <table class="research-table">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Level</th>
+                        <th>Institution</th>
+                        <th>Role</th>
+                        <th>Core topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data Analytics for Subsurface Energy Systems</td>
+                        <td>M.Sc. / Ph.D.</td>
+                        <td>TU Clausthal</td>
+                        <td>Instructor / Co-supervisor</td>
+                        <td>Data taxonomy, preprocessing, supervised/unsupervised learning, reservoir case studies</td>
+                    </tr>
+                    <tr>
+                        <td>Machine Learning for Petroleum Engineering</td>
+                        <td>M.Sc.</td>
+                        <td>TU Clausthal</td>
+                        <td>Lecturer</td>
+                        <td>Feature engineering, tree ensembles, neural networks, production forecasting</td>
+                    </tr>
+                    <tr>
+                        <td>Production &amp; Artificial Lift Systems</td>
+                        <td>B.Sc. / M.Sc.</td>
+                        <td>Cairo University (TA)</td>
+                        <td>Teaching Assistant</td>
+                        <td>ESP, gas lift, sucker-rod pumps, nodal analysis, IPR/VLP coupling</td>
+                    </tr>
+                    <tr>
+                        <td>Reservoir Simulation Fundamentals</td>
+                        <td>M.Sc.</td>
+                        <td>Guest lectures</td>
+                        <td>Guest Lecturer</td>
+                        <td>Finite-volume discretisation, black-oil and compositional models, history matching</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="table-caption">Table&nbsp;1. Formal university courses contributed to.</p>
+
+            <h3>2. Short Courses &amp; Professional Workshops</h3>
+            <table class="research-table">
+                <thead>
+                    <tr>
+                        <th>Workshop</th>
+                        <th>Duration</th>
+                        <th>Audience</th>
+                        <th>Learning outcomes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Physics-Informed Neural Networks for Reservoir Engineers</td>
+                        <td>2 days</td>
+                        <td>Industry R&amp;D, graduate students</td>
+                        <td>Formulate composite PDE losses; diagnose gradient pathologies; apply to Buckley&ndash;Leverett and radial drawdown</td>
+                    </tr>
+                    <tr>
+                        <td>Virtual Flow Metering: Data-Driven Rate Estimation</td>
+                        <td>1 day</td>
+                        <td>Production / surveillance engineers</td>
+                        <td>Build MLR, XGBoost, and LSTM VFM models; validate against well tests; deploy in a surveillance workflow</td>
+                    </tr>
+                    <tr>
+                        <td>Predictive Maintenance for ESPs</td>
+                        <td>1 day</td>
+                        <td>Artificial-lift teams</td>
+                        <td>Label engineering from workover events; IQR / isolation-forest anomaly detection; XGBoost early-warning pipeline</td>
+                    </tr>
+                    <tr>
+                        <td>Reinforcement Learning for Field Development Optimisation</td>
+                        <td>1.5 days</td>
+                        <td>Reservoir engineers, optimisation specialists</td>
+                        <td>MDP formulation of injection control; A2C / PPO; coupling to commercial simulators</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud &amp; MLOps for Upstream Analytics</td>
+                        <td>1 day</td>
+                        <td>Digital / IT teams</td>
+                        <td>Feature stores, model registries, CI/CD on AWS SageMaker / Azure ML</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="table-caption">Table&nbsp;2. Continuing-education workshops delivered to industry and academia.</p>
+
+            <h3>3. Supervised Theses &amp; Student Projects</h3>
+            <ul>
+                <li>M.Sc. theses on multiphase flow regime classification, VFM benchmarking, and ESP fault detection.</li>
+                <li>Undergraduate projects on seismic-facies classification and reservoir-property prediction.</li>
+                <li>Ph.D. advisory collaboration on physics-informed machine learning for subsurface applications.</li>
+            </ul>
+
+            <h3>4. Teaching Philosophy</h3>
+            <p>Courses are designed around a three-layer approach: (i) establish the <em>domain physics</em> so that model choices are motivated by the engineering problem; (ii) introduce <em>methodology</em> with explicit discussion of assumptions, identifiability, and validity threats; and (iii) close with <em>practice</em> on reproducible Python notebooks using open datasets (Volve, SPE-10, Teapot Dome). Assessment is project-based: students deliver a short methodological report with falsifiable success criteria, mirroring how research papers are reviewed.</p>
+
+            <h3>5. Course Materials &amp; Availability</h3>
+            <p>Selected slide decks, notebooks, and reading lists can be shared on request for academic use. Please <a href="mailto:ramez.maher.abdalla@gmail.com">contact me</a> to discuss guest lectures, short courses, or collaborative curriculum development.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dr.-Ing. Ramez Abdalla | Research Scientist</p>
+        </div>
+    </footer>
+</body>
+</html>

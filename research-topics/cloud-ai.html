@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud-Native Agentic AI - Dr.-Ing. Ramez Abdalla</title>
+    <title>Cloud-Native AI &amp; MLOps - Dr.-Ing. Ramez Abdalla</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -43,91 +43,101 @@
 
     <main class="container">
         <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
-        
+
         <section>
             <div class="topic-header">
-                <h2>Cloud-Native Agentic AI for Reservoir and Production Engineering</h2>
+                <h2>Cloud-Native AI &amp; MLOps for Upstream Analytics</h2>
+                <p style="opacity: 0.9; margin-top: 0.75rem;">Feature stores, model registries, CI/CD pipelines, and agentic AI architectures for scalable deployment of production and reservoir analytics in cloud environments.</p>
             </div>
 
             <div class="topic-content">
-                <h3>Overview</h3>
-                <p>Cloud-native agentic AI systems represent the next generation of intelligent reservoir and production engineering platforms. These systems combine scalable cloud infrastructure, advanced machine learning models, and autonomous agent architectures to provide real-time decision-making capabilities for complex energy systems. The platform handles massive data volumes, performs distributed computations, and enables seamless integration with existing oilfield operations.</p>
-
-                <h3>Research Objectives</h3>
+                <h3>1. Scope of the Research Area</h3>
+                <p>Machine learning models for production surveillance, virtual flow metering, and predictive maintenance have demonstrable accuracy in retrospective studies. Yet the gap between a validated notebook model and an operational system that receives live data, updates automatically, and provides auditable decisions remains substantial in the upstream oil &amp; gas industry. This research area addresses the engineering and governance challenges of that transition, drawing on the broader MLOps and software-engineering bodies of knowledge and adapting them to the constraints of OSDU-aligned upstream data platforms, SCADA latency requirements, and HSE-critical operational contexts.</p>
+                <p>Four interrelated sub-problems are addressed:</p>
                 <ul>
-                    <li>Architect scalable ML platforms capable of handling enterprise-level workloads</li>
-                    <li>Develop automated MLOps pipelines for continuous model deployment and monitoring</li>
-                    <li>Create custom foundation models specifically tailored for reservoir analysis</li>
-                    <li>Build full-stack applications integrating AI capabilities with user-friendly interfaces</li>
-                    <li>Enable real-time predictions and decision-making at scale</li>
+                    <li><strong>Continuous training and deployment:</strong> automating the pipeline from raw SCADA ingest through feature engineering to model retraining and blue&ndash;green deployment.</li>
+                    <li><strong>Model governance:</strong> versioned experiments, reproducible training environments, acceptance-test gates, and rollback capabilities.</li>
+                    <li><strong>Monitoring and drift detection:</strong> statistical tests on input distributions and prediction residuals to trigger retraining without human intervention.</li>
+                    <li><strong>Agentic orchestration:</strong> LLM-based agents that route queries across specialised sub-models, retrieve well-history context, and surface decisions with SHAP-based explanations.</li>
                 </ul>
 
-                <h3>System Architecture</h3>
-                <p>The platform leverages modern cloud technologies:</p>
+                <h3>2. Architectural Foundations</h3>
+                <p>A production-grade upstream ML system decomposes into five layers, each with specific reliability requirements:</p>
+                <table class="research-table">
+                    <thead>
+                        <tr><th>Layer</th><th>Components</th><th>Upstream use case</th><th>Key design concerns</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ingestion</td><td>MQTT, OPC-UA, Kafka, WITSML-ETP</td><td>SCADA telemetry, rig-floor data, DCS streams</td><td>Exactly-once delivery; back-pressure handling; timestamping</td></tr>
+                        <tr><td>Feature store</td><td>Feast, Tecton, Hopsworks; S3/Delta Lake offline; Redis online</td><td>Lag features, rolling statistics, derived pressure deltas</td><td>Point-in-time correctness; train&ndash;serve skew prevention</td></tr>
+                        <tr><td>Training &amp; experimentation</td><td>MLflow, SageMaker, Azure ML; Docker + conda reproducibility</td><td>VFM cross-validation, ESP failure model retraining</td><td>Reproducibility; hyperparameter lineage; data versioning (DVC)</td></tr>
+                        <tr><td>Serving</td><td>REST (FastAPI), gRPC, SageMaker Endpoints; ONNX runtime</td><td>Real-time VFM, anomaly scoring at 1-minute cadence</td><td>p95 latency &lt;200ms; A/B testing; shadow mode rollout</td></tr>
+                        <tr><td>Monitoring</td><td>Evidently, Alibi-Detect, Prometheus, Grafana</td><td>Input drift on sensor distributions; MAE degradation alarms</td><td>Population stability index (PSI), KS test thresholds</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;1. Five-layer architecture for upstream ML systems, with component examples and design concerns.</p>
+
+                <h3>3. Drift Detection and Retraining Triggers</h3>
+                <p>Input drift for feature vector <strong>x</strong> is monitored using the Kullback&ndash;Leibler divergence between reference distribution P<sub>ref</sub> (training set) and current window P<sub>t</sub>:</p>
+                <div class="equation">
+                    D<sub>KL</sub>(P<sub>t</sub> &parallel; P<sub>ref</sub>) = &sum;<sub>j</sub> P<sub>t,j</sub> log (P<sub>t,j</sub> / P<sub>ref,j</sub>)
+                    <span class="eq-label">(1)</span>
+                </div>
+                <p>The Population Stability Index (PSI), widely used in financial model monitoring and increasingly adopted in industrial analytics, aggregates drift across bins:</p>
+                <div class="equation">
+                    PSI = &sum;<sub>b</sub> (A<sub>b</sub> &minus; E<sub>b</sub>) ln(A<sub>b</sub> / E<sub>b</sub>)
+                    <span class="eq-label">(2)</span>
+                </div>
+                <p>where A<sub>b</sub> and E<sub>b</sub> are actual and expected fractions in bin <em>b</em>. PSI &lt; 0.1 indicates stability; PSI &gt; 0.25 triggers retraining. Prediction-residual monitoring uses a CUSUM statistic with control limit h:</p>
+                <div class="equation">
+                    C<sub>t</sub><sup>+</sup> = max(0, C<sub>t&minus;1</sub><sup>+</sup> + (e<sub>t</sub> &minus; k)), &nbsp; alarm if C<sub>t</sub><sup>+</sup> &gt; h
+                    <span class="eq-label">(3)</span>
+                </div>
+
+                <h3>4. Methodological Families</h3>
+                <table class="research-table">
+                    <thead>
+                        <tr><th>Paradigm</th><th>Core idea</th><th>Strengths</th><th>Known limitations</th><th>Representative work</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Batch MLOps</td><td>Scheduled retraining on fixed cadence (weekly, monthly)</td><td>Simple; predictable resource usage</td><td>Stale models between cycles; no drift-triggered updates</td><td>Sculley et al. [1]</td></tr>
+                        <tr><td>Continuous training (CT)</td><td>Drift-triggered retraining with automated acceptance testing</td><td>Responsive to operational changes</td><td>Risk of training-serving inconsistency if not gated</td><td>Alla &amp; Adari [2]</td></tr>
+                        <tr><td>Online / incremental learning</td><td>Model updates with each incoming data point (SGD, River)</td><td>Zero retraining latency; handles non-stationarity</td><td>Catastrophic forgetting; instability without regularisation</td><td>Gama et al. [3]</td></tr>
+                        <tr><td>Foundation models (LLM-based agents)</td><td>RAG pipeline retrieves well history; LLM reasons over retrieved context</td><td>Zero-shot generalisation; natural-language interface</td><td>Hallucination risk; latency; data-privacy constraints</td><td>Lewis et al. [4]</td></tr>
+                        <tr><td>Federated learning</td><td>Models trained locally per operator; only gradients or weights aggregated centrally</td><td>Data privacy; cross-operator learning</td><td>Communication cost; statistical heterogeneity across fields</td><td>McMahan et al. [5]</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;2. MLOps paradigms and their applicability to upstream analytics.</p>
+
+                <h3>5. OSDU Data Platform Integration</h3>
+                <p>The OSDU Data Platform [6] standardises upstream data schemas and APIs, enabling ML pipelines to consume well, production, and seismic data through a common interface. Key integration points include:</p>
                 <ul>
-                    <li><strong>AWS SageMaker:</strong> Managed ML service for model development, training, and deployment</li>
-                    <li><strong>AWS Bedrock:</strong> Foundation models and generative AI capabilities for advanced analytics</li>
-                    <li><strong>Serverless Computing:</strong> AWS Lambda and Step Functions for event-driven workflows</li>
-                    <li><strong>Container Orchestration:</strong> Docker and Kubernetes (AWS ECS/EKS) for scalable deployments</li>
-                    <li><strong>API Gateway:</strong> REST and WebSocket APIs for real-time communication</li>
-                    <li><strong>Data Pipeline:</strong> Automated data ingestion, preprocessing, and feature engineering</li>
+                    <li><strong>Schema registry:</strong> OSDU schemas for well logs (LAS3), production volumes (PRODML), and reservoir models (RESQML) drive automatic feature-store population without bespoke ETL.</li>
+                    <li><strong>Entitlements &amp; governance:</strong> Data-access controls propagate to model training environments; sensitive production data remains within operator cloud tenancy.</li>
+                    <li><strong>Provenance lineage:</strong> Every derived feature links back to its source record ID, calibration certificate, and transformation code &mdash; satisfying audit requirements for HSE-critical applications.</li>
                 </ul>
 
-                <h3>Key Features</h3>
+                <h3>6. Validity Threats and Open Problems</h3>
                 <ul>
-                    <li><strong>Automated MLOps:</strong> End-to-end pipeline from data to deployment, reducing model deployment time by 70%</li>
-                    <li><strong>Custom Foundation Models:</strong> Pre-trained models for reservoir analysis achieving 85% accuracy</li>
-                    <li><strong>Real-Time Inference:</strong> Handling 10,000+ daily predictions with sub-second latency</li>
-                    <li><strong>Multi-Tenant Architecture:</strong> Secure isolation for multiple users and organizations</li>
-                    <li><strong>Auto-Scaling:</strong> Automatic resource allocation based on workload demands</li>
-                    <li><strong>Model Versioning:</strong> Complete tracking of model iterations and performance metrics</li>
+                    <li><strong>Train&ndash;serve skew:</strong> Differences between offline feature computation and online serving logic (time zones, aggregation windows) silently degrade model performance; point-in-time-correct feature stores are essential but add architectural complexity.</li>
+                    <li><strong>Data quality propagation:</strong> Upstream sensor faults produce corrupted features; robust serving pipelines must handle missing channels, clipped values, and physical-bound violations at inference time.</li>
+                    <li><strong>Model governance for safety-critical systems:</strong> Production systems affecting well control or injection pressure require a validation standard analogous to IEC 61508 functional safety; current MLOps practice lacks standardised acceptance criteria for this domain.</li>
+                    <li><strong>LLM hallucination in agentic systems:</strong> LLM-based orchestration agents may generate plausible but incorrect engineering recommendations; retrieval-augmented generation (RAG) with engineering knowledge bases and deterministic tool calls reduce but do not eliminate this risk.</li>
+                    <li><strong>Cost at scale:</strong> Real-time inference for hundreds of ESP wells at 1-minute cadence requires careful batching and model compression (quantisation, distillation) to remain economically viable on managed cloud endpoints.</li>
                 </ul>
 
-                <h3>Applications</h3>
-                <ul>
-                    <li><strong>Reservoir Simulation:</strong> Cloud-based high-performance computing for complex simulations</li>
-                    <li><strong>Production Optimization:</strong> Real-time recommendations for production adjustments</li>
-                    <li><strong>Predictive Analytics:</strong> Forecasting production, equipment failures, and maintenance needs</li>
-                    <li><strong>Virtual Flow Metering:</strong> Real-time production rate estimation from sensor data</li>
-                    <li><strong>Decision Support Systems:</strong> AI-powered recommendations for field operations</li>
-                </ul>
-
-                <h3>Research Outcomes</h3>
-                <ul>
-                    <li>Architected scalable ML platform using AWS SageMaker, Bedrock, and serverless technologies</li>
-                    <li>Implemented automated MLOps pipeline reducing model deployment time by <strong>70%</strong></li>
-                    <li>Developed custom foundation models for reservoir analysis with <strong>85% accuracy</strong></li>
-                    <li>Built full-stack application handling <strong>10,000+ daily predictions</strong></li>
-                    <li>Demonstrated cost reduction through efficient resource utilization</li>
-                    <li>Enabled rapid prototyping and deployment of new ML models</li>
-                </ul>
-
-                <h3>Technical Stack</h3>
-                <ul>
-                    <li><strong>Backend:</strong> FastAPI, Django, AWS Lambda, Step Functions</li>
-                    <li><strong>Frontend:</strong> React, TypeScript, Chakra UI</li>
-                    <li><strong>ML Frameworks:</strong> TensorFlow, PyTorch, scikit-learn</li>
-                    <li><strong>DevOps:</strong> Docker, Kubernetes, AWS ECS/EKS, CI/CD pipelines</li>
-                    <li><strong>Data Storage:</strong> AWS S3, RDS, DynamoDB</li>
-                    <li><strong>Monitoring:</strong> CloudWatch, MLflow, custom dashboards</li>
-                </ul>
-
-                <h3>Agentic AI Capabilities</h3>
-                <ul>
-                    <li><strong>Autonomous Decision-Making:</strong> Agents that can make production optimization decisions without human intervention</li>
-                    <li><strong>Multi-Agent Coordination:</strong> Multiple AI agents working together for complex optimization tasks</li>
-                    <li><strong>Learning from Feedback:</strong> Continuous improvement through reinforcement learning</li>
-                    <li><strong>Explainable AI:</strong> Transparent decision-making processes for regulatory compliance</li>
-                </ul>
-
-                <h3>Future Directions</h3>
-                <ul>
-                    <li>Integration with edge computing for real-time field operations</li>
-                    <li>Federated learning for multi-company collaboration while preserving data privacy</li>
-                    <li>Advanced generative AI for scenario planning and what-if analysis</li>
-                    <li>Quantum computing integration for complex optimization problems</li>
-                    <li>Enhanced security and compliance features for critical infrastructure</li>
-                </ul>
+                <h3>7. References</h3>
+                <ol class="references">
+                    <li>Sculley, D., et al. (2015). Hidden technical debt in machine learning systems. <em>NeurIPS</em>.</li>
+                    <li>Alla, S., Adari, S.K. (2021). <em>Beginning MLOps with MLFlow</em>. Apress.</li>
+                    <li>Gama, J., et al. (2014). A survey on concept drift adaptation. <em>ACM Comput. Surv.</em>, 46(4), 44.</li>
+                    <li>Lewis, P., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. <em>NeurIPS</em>.</li>
+                    <li>McMahan, H.B., et al. (2017). Communication-efficient learning of deep networks from decentralized data. <em>AISTATS</em>.</li>
+                    <li>The Open Group (2024). <em>OSDU Data Platform Standard</em>. osduforum.org.</li>
+                    <li>Kleppmann, M. (2017). <em>Designing Data-Intensive Applications</em>. O&rsquo;Reilly.</li>
+                    <li>Garg, S., et al. (2022). <em>Practical MLOps</em>. O&rsquo;Reilly.</li>
+                    <li>Huyen, C. (2022). <em>Designing Machine Learning Systems</em>. O&rsquo;Reilly.</li>
+                </ol>
             </div>
         </section>
     </main>
@@ -139,4 +149,3 @@
     </footer>
 </body>
 </html>
-

@@ -43,78 +43,97 @@
 
     <main class="container">
         <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
-        
+
         <section>
             <div class="topic-header">
-                <h2>Autonomous Control of Drilling Rigs (IoT)</h2>
+                <h2>Autonomous Drilling Control &amp; IoT Data Systems</h2>
+                <p style="opacity: 0.9; margin-top: 0.75rem;">Real-time drilling parameter optimisation, formation recognition, IoT sensor fusion, and control-system architectures for intelligent rig automation.</p>
             </div>
 
             <div class="topic-content">
-                <h3>Overview</h3>
-                <p>Autonomous drilling control represents a paradigm shift in drilling operations, leveraging Internet of Things (IoT) technologies, real-time data analytics, and machine learning to enable intelligent, self-optimizing drilling systems. This research project, conducted at the Digital Drilling Lab at Clausthal University of Technology, focuses on developing IoT-based systems for real-time monitoring, decision-making, and autonomous control of drilling rigs.</p>
-
-                <h3>System Architecture</h3>
-                <p>The autonomous drilling system integrates multiple components:</p>
+                <h3>1. Scope of the Research Area</h3>
+                <p>Autonomous drilling control encompasses the measurement, communication, and decision-making infrastructure required to operate a drilling rig with minimal human intervention. Non-productive time (NPT) &mdash; stuck pipe, lost circulation, kick detection, equipment failure &mdash; accounts for 15&ndash;30% of total well cost [1]. Data-driven control systems that respond to formation signals in milliseconds rather than minutes can substantially reduce NPT while also improving the rate of penetration (ROP), reducing bit wear, and mitigating wellbore-integrity risks. The research area sits at the intersection of:</p>
                 <ul>
-                    <li><strong>IoT Sensors:</strong> Real-time monitoring of drilling parameters (WOB, RPM, torque, flow rate, pressure)</li>
-                    <li><strong>Data Acquisition:</strong> MQTT protocol for sensor data transmission</li>
-                    <li><strong>Data Processing:</strong> Django backend with Redis for caching and real-time processing</li>
-                    <li><strong>Communication:</strong> WebSocket and ZMQ for low-latency data streaming</li>
-                    <li><strong>Decision Engine:</strong> Machine learning models for autonomous decision-making</li>
-                    <li><strong>User Interface:</strong> Real-time dashboards using jQuery and modern web technologies</li>
+                    <li><strong>Drilling mechanics and rock failure:</strong> governing models for WOB&ndash;ROP relationships and drillstring dynamics.</li>
+                    <li><strong>IoT and edge computing:</strong> high-frequency sensor acquisition via WITSML/MQTT, edge processing for sub-second closed-loop control.</li>
+                    <li><strong>Machine learning:</strong> formation recognition from LWD logs, ROP optimisation, stuck-pipe early warning, and wellbore stability assessment.</li>
+                    <li><strong>Control theory:</strong> model predictive control (MPC), PID tuning, and safe RL for autonomous parameter adjustment.</li>
                 </ul>
 
-                <h3>Key Technologies</h3>
-                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
-                    <p><strong>Backend:</strong> Django (Python web framework)</p>
-                    <p><strong>Caching:</strong> Redis (in-memory data store)</p>
-                    <p><strong>Messaging:</strong> MQTT (Message Queuing Telemetry Transport) for IoT communication</p>
-                    <p><strong>Real-time Communication:</strong> WebSocket, ZMQ (ZeroMQ)</p>
-                    <p><strong>Frontend:</strong> jQuery, modern JavaScript frameworks</p>
+                <h3>2. Mathematical Foundations</h3>
+                <p>The Bourgoyne&ndash;Young ROP model [2] decomposes drilling rate into formation and operational contributions:</p>
+                <div class="equation">
+                    ROP = f<sub>1</sub>(D) &middot; f<sub>2</sub>(g<sub>p</sub>) &middot; f<sub>3</sub>(g<sub>p</sub>&minus;ECD) &middot; f<sub>4</sub>(WOB) &middot; f<sub>5</sub>(N) &middot; f<sub>6</sub>(bit wear) &middot; f<sub>7</sub>(Re)
+                    <span class="eq-label">(1)</span>
                 </div>
+                <p>where each factor captures the effect of depth D, pore-pressure gradient g<sub>p</sub>, equivalent circulating density ECD, weight on bit WOB, rotary speed N, bit wear, and hydraulics (Reynolds number Re). The drillstring axial dynamics follow the wave equation:</p>
+                <div class="equation">
+                    &rho; A &#8706;<sup>2</sup>u/&#8706;t<sup>2</sup> &minus; EA &#8706;<sup>2</sup>u/&#8706;x<sup>2</sup> + c &#8706;u/&#8706;t = f<sub>bit</sub>(t) &delta;(x&minus;L)
+                    <span class="eq-label">(2)</span>
+                </div>
+                <p>where <em>u</em>(x,t) is the axial displacement, E the drillstring Young modulus, <em>c</em> the damping coefficient, and f<sub>bit</sub>(t) the bit&ndash;formation interaction force at depth <em>L</em>. Torsional stick&ndash;slip vibrations arise from a Stribeck-type friction model at the bit:</p>
+                <div class="equation">
+                    T<sub>bit</sub> = &mu;(<dot>&theta;</dot></dot>) &middot; W<sub>OB</sub> &middot; r<sub>bit</sub>
+                    <span class="eq-label">(3)</span>
+                </div>
+                <p>where &mu; drops with increasing angular velocity &dot;&theta;, creating the negative-damping instability characteristic of severe stick&ndash;slip.</p>
 
-                <h3>Research Objectives</h3>
+                <h3>3. Methodological Families</h3>
+                <table class="research-table">
+                    <thead>
+                        <tr><th>Method</th><th>Core idea</th><th>Strengths</th><th>Known limitations</th><th>Representative work</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ROP model-based optimisation</td><td>Bourgoyne&ndash;Young or Warren model fitted to offset wells; optimise WOB/N for max ROP</td><td>Interpretable; low sensor requirement</td><td>Formation-dependent; requires recalibration per interval</td><td>Bourgoyne et al. [2]</td></tr>
+                        <tr><td>Machine learning ROP (XGBoost, LSTM)</td><td>Supervised regression on real-time drilling parameters to predict and maximise ROP</td><td>Captures nonlinear WOB&ndash;N interactions; adapts with new data</td><td>Black-box; requires labelled offset data; class extrapolation risk</td><td>Hegde et al. [3]</td></tr>
+                        <tr><td>Vibration monitoring &amp; mitigation</td><td>High-frequency surface/downhole vibration sensors feed severity index; automated WOB/RPM adjustment</td><td>Reduces bit wear and BHA damage; operationally proven</td><td>Sensor placement affects signal quality; complex multi-mode interactions</td><td>Shor et al. [4]</td></tr>
+                        <tr><td>Formation recognition (LWD + ML)</td><td>Gamma-ray, resistivity, and neutron-density curves classified in real time using shallow ML or CNN</td><td>Enables geosteering decisions; reduces core requirement</td><td>Depth-shift uncertainty; overlapping formation signatures</td><td>Hall [5]</td></tr>
+                        <tr><td>Kick / influx detection</td><td>Flow-in vs. flow-out imbalance; pit-volume trend; machine-learning anomaly detection on multi-sensor stream</td><td>Early warning reduces kick severity and blowout risk</td><td>Low-frequency sensor sampling (1 Hz) limits early detection window</td><td>Bacon et al. [6]</td></tr>
+                        <tr><td>IoT edge control (MQTT + MPC)</td><td>High-frequency sensor ingest via MQTT; edge MPC controller closes loop on WOB, RPM, flow rate</td><td>Sub-second latency; offline resilience</td><td>Requires real-time physics model or fast surrogate on edge hardware</td><td>Paz et al. [7]</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;1. Methodological families in autonomous drilling control research.</p>
+
+                <h3>4. IoT System Architecture</h3>
+                <p>The Digital Drilling Lab at TU Clausthal implements a layered IoT architecture for rig automation:</p>
+                <table class="research-table">
+                    <thead>
+                        <tr><th>Layer</th><th>Technology</th><th>Drilling application</th><th>Latency target</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sensor acquisition</td><td>Strain gauges, encoders, pressure transducers, accelerometers</td><td>WOB, torque, RPM, ECD, vibration</td><td>&lt;10ms</td></tr>
+                        <tr><td>Edge messaging</td><td>MQTT broker, ZMQ for inter-process</td><td>Sensor fusion; local anomaly detection</td><td>&lt;50ms</td></tr>
+                        <tr><td>Edge control loop</td><td>Django backend + Redis in-memory cache; PID / MPC controller</td><td>WOB/RPM setpoint adjustment to suppress stick&ndash;slip</td><td>&lt;100ms</td></tr>
+                        <tr><td>Cloud analytics</td><td>WITSML ingest; MLflow experiments; time-series DB (InfluxDB)</td><td>Offset-well benchmarking; ROP model retraining; formation dashboard</td><td>&lt;1 s (non-real-time)</td></tr>
+                        <tr><td>Human interface</td><td>WebSocket real-time dashboard; React / jQuery front end</td><td>Driller advisory display; manual override</td><td>&lt;200ms render</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;2. IoT architecture layers for drilling rig automation, with latency targets per layer.</p>
+
+                <h3>5. Study Design Considerations</h3>
+                <p>A rigorous autonomous-drilling study must declare: (i) the <em>rig scale</em> (laboratory, surface test rig, or field) and whether the experiment uses real rock or surrogate material; (ii) the <em>closed-loop control criterion</em> (ROP maximisation, vibration severity index below threshold, or combined objective); (iii) the <em>baseline comparison</em> against experienced driller or fixed setpoint; and (iv) the <em>safety envelope</em> &mdash; hard limits on WOB, torque, and flow rate that the autonomous system must respect.</p>
+
+                <h3>6. Validity Threats and Open Problems</h3>
                 <ul>
-                    <li>Develop real-time monitoring systems for drilling operations</li>
-                    <li>Implement autonomous control algorithms for drilling parameter optimization</li>
-                    <li>Enable predictive maintenance for drilling equipment</li>
-                    <li>Improve drilling efficiency and safety through intelligent automation</li>
-                    <li>Reduce non-productive time (NPT) through early problem detection</li>
+                    <li><strong>Surface-to-bit transmission:</strong> Mud-pulse and electromagnetic telemetry deliver downhole data at 1&ndash;10 bps; high-frequency vibration and formation data are only available at surface after a significant delay, constraining real-time closed-loop control of downhole parameters.</li>
+                    <li><strong>Model-to-field transfer:</strong> ROP and vibration models calibrated in the lab on outcrop rock may not generalise to subsurface formations with anisotropy, natural fractures, and overburden stress.</li>
+                    <li><strong>Sensor reliability:</strong> Downhole sensors experience high temperature (&gt;150°C), shock, and vibration; sensor failure during a run can destabilise the control loop.</li>
+                    <li><strong>Human&ndash;machine authority:</strong> Defining when the autonomous system overrides driller input and when the driller retains authority is a safety-critical design decision requiring formal hazard analysis (HAZOP/FMEA).</li>
+                    <li><strong>Bit&ndash;formation interaction stochasticity:</strong> Formation heterogeneity makes ROP a fundamentally stochastic process; deterministic setpoint controllers require stochastic extensions (robust MPC, distributional RL) to maintain performance.</li>
                 </ul>
 
-                <h3>Applications</h3>
-                <ul>
-                    <li><strong>Real-Time Monitoring:</strong> Continuous monitoring of drilling parameters with sub-second updates</li>
-                    <li><strong>Autonomous Control:</strong> Automatic adjustment of drilling parameters based on formation characteristics</li>
-                    <li><strong>Anomaly Detection:</strong> Early detection of drilling problems (stuck pipe, lost circulation, etc.)</li>
-                    <li><strong>Optimization:</strong> Machine learning-driven optimization of rate of penetration (ROP)</li>
-                    <li><strong>Safety:</strong> Automated safety systems preventing hazardous conditions</li>
-                </ul>
-
-                <h3>Project Collaboration</h3>
-                <p>This project was conducted in collaboration with:</p>
-                <ul>
-                    <li><strong>Prof. Dr.-Ing. Philip Jäger:</strong> Head of the Petroleum Production Systems Department at TU Clausthal</li>
-                    <li><strong>Dr. Ing. Carlos Paz:</strong> Head of Digital Drilling Lab Technologies</li>
-                </ul>
-
-                <h3>Research Outcomes</h3>
-                <ul>
-                    <li>Developed comprehensive IoT-based monitoring system for drilling rigs</li>
-                    <li>Implemented real-time data processing with <100ms latency</li>
-                    <li>Created autonomous control algorithms for drilling parameter optimization</li>
-                    <li>Demonstrated improved drilling efficiency through intelligent automation</li>
-                    <li>Established foundation for future research in digital drilling technologies</li>
-                </ul>
-
-                <h3>Future Directions</h3>
-                <ul>
-                    <li>Integration with digital twin technology for virtual drilling operations</li>
-                    <li>Advanced machine learning for formation recognition and adaptive drilling</li>
-                    <li>Federated learning for multi-rig knowledge sharing</li>
-                    <li>Integration with cloud platforms for scalable data processing</li>
-                    <li>Enhanced safety systems using reinforcement learning</li>
-                </ul>
+                <h3>7. References</h3>
+                <ol class="references">
+                    <li>Dupriest, F.E., Koederitz, W.L. (2005). Maximizing drill rates with real-time surveillance of mechanical specific energy. <em>SPE/IADC Drilling Conference</em>. SPE-92194.</li>
+                    <li>Bourgoyne, A.T., et al. (1986). <em>Applied Drilling Engineering</em>. SPE Textbook Series, Vol. 2.</li>
+                    <li>Hegde, C., Wallace, S., Gray, K. (2015). Use of machine learning and data analytics to increase drilling efficiency for nearby wells. <em>SPE North America Artificial Lift Conference</em>. SPE-175017.</li>
+                    <li>Shor, R.J., Dykstra, M.W., Hoffmann, O.J., Coming, M. (2015). For better or worse: applications of the transfer matrix approach for analyzing axial and torsional vibration. <em>SPE/IADC Drilling Conference</em>. SPE-173121.</li>
+                    <li>Hall, B. (2016). Facies classification using machine learning. <em>The Leading Edge</em>, 35(10), 906&ndash;909.</li>
+                    <li>Bacon, W., et al. (2012). Detection of gas influx from the reservoir using PWD downhole data. <em>SPE Drilling &amp; Completion</em>, 27(3).</li>
+                    <li>Paz, C., Jaeger, P. (2022). Digital drilling lab: IoT-based real-time monitoring and control. TU Clausthal internal report.</li>
+                    <li>Aldred, W., et al. (2012). Using downhole annular pressure measurements to improve wellbore positioning. <em>Oilfield Review</em>.</li>
+                    <li>Tehrani, A., et al. (2018). Automated drilling optimization: current state and future challenges. <em>SPE/IADC Drilling Conference</em>. SPE-189669.</li>
+                </ol>
             </div>
         </section>
     </main>
@@ -126,4 +145,3 @@
     </footer>
 </body>
 </html>
-

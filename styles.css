@@ -524,6 +524,239 @@ footer {
     background-color: #00b8a3;
 }
 
+/* ===== Shared research-page components (harmonized across all pages) ===== */
+
+/* Tabs (used on geoscience-data page) */
+.tabs {
+    display: flex;
+    border-bottom: 2px solid var(--primary-color);
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.tab {
+    padding: 0.85rem 1.4rem;
+    cursor: pointer;
+    background: var(--bg-color);
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: all 0.25s ease;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin-right: 0.25rem;
+    font-family: inherit;
+}
+
+.tab:hover {
+    background: #e6e9ec;
+}
+
+.tab.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Professional data / research tables */
+.data-table,
+.research-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td,
+.research-table th,
+.research-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.data-table th,
+.research-table th {
+    background: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.data-table tr:nth-child(even),
+.research-table tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.table-caption {
+    text-align: center;
+    font-size: 0.92rem;
+    color: #555;
+    font-style: italic;
+    margin-top: -0.6rem;
+    margin-bottom: 1.8rem;
+}
+
+/* Figure container */
+.figure-container {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.figure-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+}
+
+.figure-caption {
+    margin-top: 0.6rem;
+    font-style: italic;
+    color: #666;
+    font-size: 0.92rem;
+}
+
+/* Callouts */
+.info-box,
+.methodology-box {
+    background: #f4fbfa;
+    border-left: 4px solid var(--primary-color);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+}
+
+.info-box h4,
+.methodology-box h4 {
+    color: var(--secondary-color);
+    margin-bottom: 0.6rem;
+}
+
+.data-category {
+    background: var(--bg-color);
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.data-category h4 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+.subsection {
+    margin: 2rem 0;
+}
+
+.tech-stack {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.tech-item {
+    background: var(--bg-color);
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--primary-color);
+}
+
+/* Equation block */
+.equation {
+    background: #fafbfc;
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem 1.4rem;
+    margin: 1.2rem 0;
+    border-radius: 4px;
+    font-family: 'Cambria Math', 'Latin Modern Math', 'STIX Two Math', 'Segoe UI', serif;
+    font-size: 1.05rem;
+    overflow-x: auto;
+}
+
+.equation .eq-label {
+    float: right;
+    color: #666;
+    font-style: italic;
+}
+
+/* Reference list (academic) */
+.references {
+    counter-reset: ref;
+    list-style: none;
+    margin-left: 0 !important;
+    padding-left: 0;
+    font-size: 0.93rem;
+}
+
+.references li {
+    counter-increment: ref;
+    padding-left: 2.4rem;
+    position: relative;
+    margin-bottom: 0.85rem;
+    line-height: 1.55;
+}
+
+.references li::before {
+    content: "[" counter(ref) "]";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Method card grid */
+.algorithm-grid,
+.method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.algorithm-card,
+.method-card {
+    background: var(--card-bg);
+    padding: 1.25rem 1.4rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--primary-color);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.algorithm-card:hover,
+.method-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.algorithm-card h4,
+.method-card h4 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .profile-header {

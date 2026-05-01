@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waterflooding Optimization - Dr.-Ing. Ramez Abdalla</title>
+    <title>Waterflooding Optimisation - Dr.-Ing. Ramez Abdalla</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -43,64 +43,110 @@
 
     <main class="container">
         <a href="../research.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Research Topics</a>
-        
+
         <section>
             <div class="topic-header">
-                <h2>Waterflooding Optimization Using Physics-Informed Reinforcement Learning</h2>
+                <h2>Waterflooding Optimisation Using Physics-Informed Reinforcement Learning</h2>
+                <p style="opacity: 0.9; margin-top: 0.75rem;">MDP formulation of injection-rate control, MARL with centralised critic, and physics-consistent reward design for NPV maximisation in secondary recovery.</p>
             </div>
 
             <div class="topic-content">
-                <h3>Overview</h3>
-                <p>Waterflooding is one of the most widely used enhanced oil recovery (EOR) methods, involving the injection of water into oil reservoirs to maintain pressure and displace oil toward production wells. Optimizing waterflooding operations requires determining optimal injection rates, well locations, and injection patterns to maximize oil recovery while minimizing water production and operational costs. This research combines physics-informed neural networks with multi-agent reinforcement learning to achieve optimal waterflooding strategies.</p>
+                <h3>1. Scope of the Research Area</h3>
+                <p>Waterflooding is the dominant secondary recovery technique: water is injected through dedicated injector wells to maintain reservoir pressure and displace oil toward producers. Optimising injection rates across multiple wells is a high-dimensional, time-coupled, nonlinear control problem. Classical approaches &mdash; voidage replacement, streamline-based allocation, and adjoint optimisation &mdash; either ignore economic dynamics or require hard-coded simulator gradients that become intractable for compositional or thermal models.</p>
+                <p>Physics-Informed Reinforcement Learning (PI-RL) addresses this by embedding conservation-law residuals into the learning objective, reducing the number of simulator queries needed to converge, and producing policies that remain physically feasible. Key research questions include:</p>
+                <ul>
+                    <li>How should the multi-injector control problem be cast as a cooperative MARL problem with partial observability?</li>
+                    <li>What state representation captures the reservoir's current recovery state without requiring full pressure&ndash;saturation field access?</li>
+                    <li>How can physics residuals be incorporated into the reward signal without destabilising policy-gradient training?</li>
+                    <li>How robust are learned policies under geological uncertainty (permeability realisations)?</li>
+                </ul>
 
-                <figure style="text-align: center; margin: 2rem 0;">
-                    <img src="../figures/pinn-waterflooding-results.png" alt="Waterflooding Optimization Results" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none';">
-                    <figcaption style="margin-top: 0.5rem; color: #666; font-style: italic;">Figure 1: Waterflooding optimization results showing improved recovery efficiency using physics-informed reinforcement learning. Source: <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">Franklin Open 2025</a></figcaption>
-                </figure>
+                <h3>2. Mathematical Foundations</h3>
+                <p>Mass conservation for the water phase in porous media (neglecting capillary pressure and gravity for the fractional-flow formulation) gives the Buckley&ndash;Leverett equation [1]:</p>
+                <div class="equation">
+                    &#8706;S<sub>w</sub>/&#8706;t + (q<sub>T</sub>/A&phi;) df<sub>w</sub>/dS<sub>w</sub> &middot; &#8706;S<sub>w</sub>/&#8706;x = 0
+                    <span class="eq-label">(1)</span>
+                </div>
+                <p>where f<sub>w</sub>(S<sub>w</sub>) = k<sub>rw</sub>/&mu;<sub>w</sub> / (k<sub>rw</sub>/&mu;<sub>w</sub> + k<sub>ro</sub>/&mu;<sub>o</sub>) is the fractional flow of water. In the full 3D multi-well setting, the governing pressure equation is:</p>
+                <div class="equation">
+                    &nabla;&middot;(&lambda;<sub>T</sub> <strong>k</strong> &nabla;p) = &sum;<sub>w</sub> q<sub>w</sub> &delta;(<strong>x</strong> &minus; <strong>x</strong><sub>w</sub>)
+                    <span class="eq-label">(2)</span>
+                </div>
+                <p>with total mobility &lambda;<sub>T</sub> = k<sub>rw</sub>/&mu;<sub>w</sub> + k<sub>ro</sub>/&mu;<sub>o</sub>. The NPV optimisation objective over discrete timesteps &Delta;t<sub>k</sub> is:</p>
+                <div class="equation">
+                    max &nbsp; J = &sum;<sub>k=1</sub><sup>N<sub>T</sub></sup> (p<sub>o</sub> Q<sub>o,k</sub> &minus; c<sub>w</sub> Q<sub>w,k</sub> &minus; c<sub>inj</sub> Q<sub>inj,k</sub>) &Delta;t<sub>k</sub> / (1 + i)<sup>t<sub>k</sub>/365</sup>
+                    <span class="eq-label">(3)</span>
+                </div>
+                <p>subject to well constraints q<sub>inj,min</sub> &le; q<sub>inj,w</sub> &le; q<sub>inj,max</sub> and p<sub>BHP,min</sub> &le; p<sub>BHP,w</sub> &le; p<sub>BHP,max</sub>.</p>
 
-                <h3>Mathematical Formulation</h3>
-                <p>The waterflooding optimization problem can be formulated as:</p>
-                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; margin: 1rem 0;">
-                    <p><strong>Objective Function:</strong></p>
-                    <p style="font-family: 'Courier New', monospace;">max J = Σ<sub>t</sub> [q<sub>o</sub>(t) - c<sub>w</sub>q<sub>w</sub>(t) - c<sub>inj</sub>q<sub>inj</sub>(t)]</p>
-                    <p><strong>Subject to:</strong></p>
-                    <p style="font-family: 'Courier New', monospace;">Mass Balance: ∂(φS<sub>w</sub>)/∂t + ∇·v<sub>w</sub> = q<sub>inj</sub></p>
-                    <p style="font-family: 'Courier New', monospace;">Darcy's Law: v<sub>w</sub> = -(k<sub>rw</sub>k/μ<sub>w</sub>)∇(p - ρ<sub>w</sub>gh)</p>
-                    <p style="font-family: 'Courier New', monospace;">Constraints: q<sub>inj,min</sub> ≤ q<sub>inj</sub> ≤ q<sub>inj,max</sub>, p<sub>min</sub> ≤ p ≤ p<sub>max</sub></p>
+                <h4>2.1 MARL CTDE formulation</h4>
+                <p>Each injector <em>i</em> is an agent with local observation o<sub>i,t</sub> (cumulative injection, wellhead pressure, neighbouring producer WOR). A centralised critic receives the joint state&ndash;action tuple:</p>
+                <div class="equation">
+                    Q<sub>i</sub>(s<sub>t</sub>, a<sub>1,t</sub>, &hellip;, a<sub>N,t</sub>; &phi;<sub>i</sub>) &rarr; V<sub>i</sub>(s<sub>t</sub>; &phi;<sub>i</sub>)
+                    <span class="eq-label">(4)</span>
+                </div>
+                <p>Decentralised actors &pi;<sub>&theta;<sub>i</sub></sub>(a<sub>i,t</sub>|o<sub>i,t</sub>) are updated via the policy gradient with advantage A<sub>i</sub> = Q<sub>i</sub> &minus; V<sub>i</sub> [2].</p>
+
+                <h3>3. Methodological Families</h3>
+                <table class="research-table">
+                    <thead>
+                        <tr><th>Method</th><th>Core idea</th><th>Strengths</th><th>Known limitations</th><th>Representative work</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Reactive / voidage replacement</td><td>Injection tracks produced volume to maintain pressure</td><td>Simple; no model required</td><td>No NPV optimisation; no multi-well coordination</td><td>Industry practice</td></tr>
+                        <tr><td>Streamline-based optimisation</td><td>Allocate injection proportional to streamline flux to producers</td><td>Computationally cheap; physically motivated</td><td>Assumes fixed pressure field; ignores transient effects</td><td>Thiele &amp; Batycky [3]</td></tr>
+                        <tr><td>Adjoint gradient optimisation</td><td>Reverse-mode AD through simulator for gradient of NPV</td><td>Exact gradient; converges in few iterations</td><td>Requires differentiable simulator; hard to implement for compositional models</td><td>Brouwer &amp; Jansen [4]</td></tr>
+                        <tr><td>Ensemble-based optimisation (EnOpt)</td><td>Stochastic gradient estimated from ensemble of perturbations</td><td>Simulator-agnostic; uncertainty-aware</td><td>Many simulator evaluations; slow convergence</td><td>Chen et al. [5]</td></tr>
+                        <tr><td>Single-agent RL (DQN, PPO)</td><td>Central agent controls all injection rates</td><td>Learns dynamic policy without model</td><td>Action-space dimensionality grows with well count</td><td>Nasir et al. [6]</td></tr>
+                        <tr><td>Multi-agent RL (MADDPG, MAPPO + PI)</td><td>Per-well agents; CTDE with physics penalty in reward</td><td>Scalable; cooperative strategies; physics-consistent</td><td>Training instability; credit assignment across wells</td><td>Abdalla et al. [2]</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;1. Optimisation methods for waterflooding injection control.</p>
+
+                <h3>4. Study Design Considerations</h3>
+                <p>A valid waterflooding optimisation study should: (i) fix the reservoir model (synthetic or history-matched) and the geological uncertainty ensemble used for robustness testing; (ii) define the MDP explicitly &mdash; state, action granularity, episode length, and reward scaling; (iii) compare against at least one conventional baseline (reactive control or adjoint) using the same simulator and NPV parameters; and (iv) report wall-clock training time and number of simulator calls to allow reproducibility.</p>
+                <table class="research-table">
+                    <thead><tr><th>Benchmark</th><th>Reservoir type</th><th>Wells</th><th>Why used</th></tr></thead>
+                    <tbody>
+                        <tr><td>Five-spot (homogeneous)</td><td>2D synthetic</td><td>1 injector, 4 producers</td><td>Analytical reference displacement efficiency for validation</td></tr>
+                        <tr><td>SPE-10 model 2</td><td>3D heterogeneous (Tarbert/Upper Ness)</td><td>Varies</td><td>Stress-tests multi-scale permeability contrast</td></tr>
+                        <tr><td>Egg model</td><td>3D channelised, 8&times;4 pattern</td><td>8 injectors, 4 producers</td><td>Standard MARL benchmark; open-source (GitHub)</td></tr>
+                        <tr><td>History-matched field model</td><td>Real field</td><td>Field-scale</td><td>Tests policy transferability to realistic geology</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;2. Benchmark reservoir models for waterflooding optimisation research.</p>
+
+                <h3>5. Validity Threats and Open Problems</h3>
+                <ul>
+                    <li><strong>Geological uncertainty:</strong> A policy optimised on the mean model may perform poorly across the uncertainty ensemble; robust RL (minimax or expected-NPV over realisations) remains computationally expensive.</li>
+                    <li><strong>Simulator fidelity:</strong> Coarse-grid training environments accelerate training but policies may not transfer to refined grids due to upscaling artefacts.</li>
+                    <li><strong>Non-stationarity:</strong> Well workover, drilling new wells, or changing surface constraints mid-episode invalidate the trained policy; online adaptation is required.</li>
+                    <li><strong>Physics constraint satisfaction:</strong> RL exploration may violate injection-pressure limits; safe RL with Lagrangian penalty or action masking is needed for field deployment.</li>
+                    <li><strong>Reward design:</strong> Sparse terminal NPV rewards cause slow convergence; shaped intermediate rewards must be carefully designed to avoid reward hacking.</li>
+                </ul>
+
+                <h3>6. Contributions from This Research Programme</h3>
+                <div class="data-category">
+                    <h4>Multi-agent physics-informed reinforcement learning for waterflooding optimisation</h4>
+                    <p>Abdalla, R., Agban, N., L&uuml;ddeke, C., Sui, D., Jaeger, P. (2025). <em>Franklin Open</em>, 10, 100229. <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">DOI</a></p>
+                </div>
+                <div class="data-category">
+                    <h4>Optimising Waterflooding in Multi-Agent Systems through Decentralised Actor&ndash;Centralised Critic RL</h4>
+                    <p>Abdalla, R., G&ouml;nczi, D., Toumi, O., et al. (2024). <em>EAGE Annual Conference &amp; Exhibition</em>. <a href="https://doi.org/10.3997/2214-4609.202439064" target="_blank">DOI</a></p>
                 </div>
 
-                <h3>Physics-Informed Neural Network Component</h3>
-                <p>The PINN component ensures physical consistency by incorporating conservation laws into the loss function:</p>
-                <ul>
-                    <li><strong>Mass Conservation Residual:</strong> Enforces continuity equation for water phase</li>
-                    <li><strong>Darcy's Law Residual:</strong> Ensures velocity-pressure relationships follow Darcy's law</li>
-                    <li><strong>Boundary Conditions:</strong> Injection and production constraints</li>
-                    <li><strong>Initial Conditions:</strong> Reservoir state at t=0</li>
-                </ul>
-
-                <h3>Multi-Agent Reinforcement Learning</h3>
-                <p>Each injection well acts as an agent learning optimal injection strategies:</p>
-                <ul>
-                    <li><strong>State Space:</strong> Pressure, saturation, production rates, cumulative recovery</li>
-                    <li><strong>Action Space:</strong> Injection rates for each well</li>
-                    <li><strong>Reward Function:</strong> Combines oil production, water production penalty, and physics constraints</li>
-                    <li><strong>Coordination:</strong> Centralized critic provides global information to decentralized actors</li>
-                </ul>
-
-                <h3>Research Outcomes</h3>
-                <ul>
-                    <li>Achieved <strong>15% improvement</strong> in recovery efficiency compared to conventional methods</li>
-                    <li>Reduced computational time by <strong>75%</strong> using PINNs vs. traditional numerical simulation</li>
-                    <li>Published in <em>Franklin Open</em> (Impact Factor: 4.2)</li>
-                    <li>Demonstrated scalability to large fields with 100+ wells</li>
-                    <li>Successfully validated on both synthetic and field-scale reservoir models</li>
-                </ul>
-
-                <h3>Key Publications</h3>
-                <ul>
-                    <li>Abdalla, R., Agban, N., Lüddeke, C., Sui, D., Jaeger, P. (2025). Multi-agent physics-informed reinforcement learning for waterflooding optimization. <em>Franklin Open</em>, Volume 10, 100229. <a href="https://doi.org/10.1016/j.fraope.2025.100229" target="_blank">DOI: 10.1016/j.fraope.2025.100229</a></li>
-                    <li>Abdalla, R., Gönczi, D., Toumi, O., et al. (2024). Optimizing Waterflooding in Multi-Agent Systems through Decentralized Actor-Centralized Critic Reinforcement Learning. <em>EAGE</em>. <a href="https://doi.org/10.3997/2214-4609.202439064" target="_blank">DOI: 10.3997/2214-4609.202439064</a></li>
-                </ul>
+                <h3>7. References</h3>
+                <ol class="references">
+                    <li>Buckley, S.E., Leverett, M.C. (1942). Mechanism of fluid displacement in sands. <em>Trans. AIME</em>, 146, 107&ndash;116.</li>
+                    <li>Abdalla, R., et al. (2025). Multi-agent physics-informed RL for waterflooding. <em>Franklin Open</em>, 10, 100229.</li>
+                    <li>Thiele, M.R., Batycky, R.P. (2006). Using streamline-derived injection efficiencies for improved waterflood management. <em>SPE Reserv. Eval. Eng.</em>, 9(2).</li>
+                    <li>Brouwer, D.R., Jansen, J.D. (2004). Dynamic optimal waterflood management with smart wells using optimal control theory. <em>SPE J.</em>, 9(4), 391&ndash;402.</li>
+                    <li>Chen, Y., Oliver, D.S., Zhang, D. (2009). Efficient ensemble-based closed-loop production optimisation. <em>SPE J.</em>, 14(4), 634&ndash;645.</li>
+                    <li>Nasir, Y., et al. (2021). Deep reinforcement learning for coupled well-placement and injection optimisation. <em>Comput. Geosci.</em>, 25, 1961&ndash;1977.</li>
+                    <li>van Doren, J.F.M., Markovinovic, R., Jansen, J.D. (2006). Reduced-complexity waterflooding optimisation. <em>J. Pet. Sci. Eng.</em>, 50(3&ndash;4), 179&ndash;197.</li>
+                    <li>Lowe, R., et al. (2017). Multi-agent actor-critic for mixed cooperative-competitive environments. <em>NeurIPS</em>.</li>
+                    <li>Jansen, J.D. (2011). Adjoint-based optimisation of multi-phase flow through porous media. <em>Comput. Fluids</em>, 46, 40&ndash;51.</li>
+                </ol>
             </div>
         </section>
     </main>
@@ -112,4 +158,3 @@
     </footer>
 </body>
 </html>
-

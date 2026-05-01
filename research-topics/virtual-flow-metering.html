@@ -6,78 +6,6 @@
     <title>Virtual Flow Metering - Dr.-Ing. Ramez Abdalla</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <style>
-        .figure-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        .figure-item {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .figure-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-        }
-        .figure-caption {
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-            color: #666;
-            font-style: italic;
-        }
-        .methodology-box {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-left: 4px solid #4a90e2;
-            border-radius: 4px;
-        }
-        .algorithm-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .algorithm-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 2px solid #4a90e2;
-            transition: transform 0.3s;
-        }
-        .algorithm-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-        .results-highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }
-        .metric-box {
-            display: inline-block;
-            margin: 0.5rem;
-            padding: 1rem 1.5rem;
-            background: rgba(255,255,255,0.2);
-            border-radius: 4px;
-            backdrop-filter: blur(10px);
-        }
-        .chart-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin: 2rem 0;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -93,6 +21,7 @@
                         <a href="mailto:ramez.maher.abdalla@gmail.com"><i class="fas fa-envelope"></i> ramez.maher.abdalla@gmail.com</a>
                         <a href="https://www.linkedin.com/in/ramez-abdalla-ph-d-8b1642b2/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
                         <a href="https://www.researchgate.net/profile/Ramez-Abdalla-5" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                        <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
                         <span><i class="fas fa-map-marker-alt"></i> Vienna, Austria</span>
                     </div>
                 </div>
@@ -117,346 +46,101 @@
 
         <section>
             <div class="topic-header">
-                <h2><i class="fas fa-tachometer-alt"></i> Virtual Flow Metering Systems</h2>
-                <p style="font-size: 1.15rem; color: #555; margin-top: 1rem;">
-                    Descriptive Analytics for Data-Driven Multiphase Flow Estimation through Artificial Lift Systems
-                </p>
+                <h2>Virtual Flow Metering for Artificial-Lift Wells</h2>
+                <p style="opacity: 0.9; margin-top: 0.75rem;">Multiphase rate estimation from readily available sensor measurements: first-principles, data-driven, and hybrid VFM model families with validation protocols.</p>
             </div>
 
             <div class="topic-content">
-                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>
-                    Knowing flow rates from each well is an essential operation of the production systems. It guides operators in production
-                    monitoring and decision-making. It assists also in predicting the future performance of the field. Hence, one of the routine
-                    tests of wells is production testing, usually conducted as a schedulable test to monitor liquid rates.
-                </p>
-
-                <p>
-                    Traditional production testing methods have several significant drawbacks:
-                </p>
+                <h3>1. Scope of the Research Area</h3>
+                <p>Virtual Flow Metering (VFM) is the estimation of individual-phase production rates &mdash; oil, water, and gas &mdash; from sensor signals that are already available at the wellhead or downhole gauge without installing a dedicated multiphase flow meter (MPFM). The motivation is economic: a conventional MPFM costs US$200k&ndash;$2M in capital expenditure per well, requires calibration, and fails in high-GOR or emulsion regimes. VFM systems instead invert routinely measured operating variables (pressures, temperatures, motor current, choke opening) through either a physics-based or a learned model to infer the fluid rates [1].</p>
+                <p>The research area addresses four key questions:</p>
                 <ul>
-                    <li>Inadequate resolution to identify trends in liquids rates over short periods of time</li>
-                    <li>Lack of sufficient testing time to get a representative sample of reservoir fluids</li>
-                    <li>High operational costs associated with test separators</li>
-                    <li>Several hours required to attain stable working conditions</li>
+                    <li>Which sensor subset carries the most information about individual phase rates in a given lift configuration?</li>
+                    <li>How do first-principles, empirical, and data-driven VFM models compare in accuracy, robustness to sensor drift, and interpretability?</li>
+                    <li>How should VFM outputs be validated against periodic well tests, and what acceptance criteria are appropriate?</li>
+                    <li>How can temporal models (LSTM, Conv1D) capture transient flow regimes that steady-state correlations miss?</li>
                 </ul>
 
-                <div class="methodology-box">
-                    <h4><i class="fas fa-lightbulb"></i> The VFM Solution</h4>
-                    <p>
-                        Virtual Flow Metering (VFM) arises as an attractive technology in the oil and gas industry. It depends on either
-                        analytical or data-driven models for real-time calculations of phases production. The purpose of VFM is to gather
-                        field data that is readily available and utilize it in a model to calculate flowrates. This model could be either
-                        analytical or data-driven.
-                    </p>
-                    <p style="margin-top: 1rem;">
-                        <strong>Key Advantages:</strong> VFM systems do not require installation of additional hardware, consequently reducing
-                        capital and operational costs. They can estimate flowrates in real-time and reflect changes of flow conditions accordingly.
-                        VFM can be used as a standalone solution or in combination with a MPFM as a back-up system.
-                    </p>
+                <h3>2. Mathematical Foundations</h3>
+                <p>The pressure-gradient equation for multiphase vertical flow in an ESP-lifted well integrates gravity, friction, and acceleration terms:</p>
+                <div class="equation">
+                    dp/dz = &rho;<sub>m</sub> g / g<sub>c</sub> + f<sub>m</sub> &rho;<sub>m</sub> v<sub>m</sub><sup>2</sup> / (2 d) + &rho;<sub>m</sub> v<sub>m</sub> dv<sub>m</sub>/dz
+                    <span class="eq-label">(1)</span>
                 </div>
-
-                <h3><i class="fas fa-stream"></i> VFM Classification</h3>
-
-                <div class="algorithm-grid">
-                    <div class="algorithm-card">
-                        <h4 style="color: #4a90e2;"><i class="fas fa-flask"></i> First Principles VFM</h4>
-                        <p>Based on mechanistic modeling of multiphase flows in the near-well region, wells, pipelines and production chokes.</p>
-                        <ul>
-                            <li>Physics-based models</li>
-                            <li>Optimization algorithms</li>
-                            <li>Requires detailed system knowledge</li>
-                            <li>Higher computational cost</li>
-                        </ul>
-                    </div>
-
-                    <div class="algorithm-card">
-                        <h4 style="color: #e74c3c;"><i class="fas fa-brain"></i> Data-Driven VFM</h4>
-                        <p>Based on collecting field data and fitting mathematical models without exact description of physical parameters.</p>
-                        <ul>
-                            <li>Machine learning models</li>
-                            <li>Lower implementation cost</li>
-                            <li>Fast real-time predictions</li>
-                            <li>Requires quality training data</li>
-                        </ul>
-                    </div>
+                <p>where &rho;<sub>m</sub> = H<sub>L</sub>&rho;<sub>L</sub> + (1&minus;H<sub>L</sub>)&rho;<sub>g</sub> is the mixture density, H<sub>L</sub> the liquid holdup, v<sub>m</sub> the mixture velocity, and f<sub>m</sub> the Moody friction factor from a flow-regime-dependent closure [2]. The pump total dynamic head (TDH) balances available head against the well hydraulic system:</p>
+                <div class="equation">
+                    TDH = (p<sub>disch</sub> &minus; p<sub>intake</sub>) / (&rho;<sub>m</sub> g) + z<sub>pump</sub>
+                    <span class="eq-label">(2)</span>
                 </div>
+                <p>Inverting Eq. (1)&ndash;(2) given measured pressures and pump curve yields liquid rate q<sub>L</sub>. Water cut WC = q<sub>w</sub>/q<sub>L</sub> requires an additional degree of freedom, typically estimated from density or dielectric sensors. In data-driven approaches, a mapping f: <strong>x</strong> &rarr; (q<sub>L</sub>, WC) is learned from labelled well-test measurements {(<strong>x</strong><sub>i</sub>, q<sub>L,i</sub>, WC<sub>i</sub>)}.</p>
 
-                <h3><i class="fas fa-search"></i> Exploratory Data Analysis</h3>
-                <p>
-                    Exploratory data analysis reveals hidden patterns, correlations, and anomalies using various tools such as visualizations,
-                    dimensionality reduction techniques and unsupervised algorithms. Our comprehensive EDA includes:
-                </p>
-
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/desity plot rate.png" alt="Density Plot for Fluid Rate" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 1: Density distribution of fluid production rates showing left-skewed distribution with skewness of 2.09 and kurtosis of 3.98.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/desity plot wc.png" alt="Density Plot for Water Cut" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 2: Water cut distribution analysis with skewness of 1.22 and kurtosis of 0.90.</div>
-                    </div>
+                <h4>2.1 Temporal model formulation (LSTM)</h4>
+                <p>For time-series sensor inputs <strong>X</strong><sub>t&minus;W:t</sub> &isin; &#8477;<sup>W&times;d</sup> of window width W, the LSTM hidden state evolves as:</p>
+                <div class="equation">
+                    <strong>h</strong><sub>t</sub>, <strong>c</strong><sub>t</sub> = LSTM(<strong>x</strong><sub>t</sub>, <strong>h</strong><sub>t&minus;1</sub>, <strong>c</strong><sub>t&minus;1</sub>; &theta;)
+                    <span class="eq-label">(3)</span>
                 </div>
+                <p>with cell-state update governed by forget, input, and output gates, capturing flow transients that steady-state mechanistic models miss during ramp-up or choke changes.</p>
 
-                <h4>Multivariate Analysis</h4>
-                <p>
-                    Multivariate study examines how the dependent variables (flow rate and water cut) relate to independent variables.
-                    Key findings show that flow rate has high correlation with:
-                </p>
+                <h3>3. Methodological Families</h3>
+                <table class="research-table">
+                    <thead>
+                        <tr><th>Family</th><th>Core idea</th><th>Strengths</th><th>Known limitations</th><th>Representative work</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>First-principles (mechanistic)</td><td>Multiphase flow correlations (Hagedorn&ndash;Brown, Duns&ndash;Ros, OLGA) inverted for rate</td><td>Physically consistent; no training data required</td><td>Requires accurate fluid PVT; unstable in low-flow regimes</td><td>Brill &amp; Mukherjee [2]</td></tr>
+                        <tr><td>Empirical / IPR&ndash;VLP coupling</td><td>Reservoir IPR matched with tubing VLP curve at operating point</td><td>Transparent; low computational cost</td><td>Limited to steady-state; requires periodic recalibration</td><td>Brown [3]</td></tr>
+                        <tr><td>Multiple linear regression (MLR)</td><td>Linear fit of sensor inputs to phase rates</td><td>Interpretable; fast; low data requirement</td><td>Cannot capture nonlinear flow-regime transitions</td><td>Bikmukhametov &amp; J&auml;schke [1]</td></tr>
+                        <tr><td>Gradient boosting (XGBoost / LightGBM)</td><td>Ensemble of regression trees; handles nonlinearity and mixed feature types</td><td>High accuracy; built-in feature importance; handles missing data</td><td>Tabular-only; no native temporal modelling</td><td>Chen &amp; Guestrin [4]</td></tr>
+                        <tr><td>Conv1D + Bi-LSTM</td><td>1D convolution extracts local patterns; LSTM captures long-range temporal dependencies</td><td>Best accuracy for transient regimes; multi-output (q<sub>L</sub> and WC)</td><td>Requires large labelled dataset; less interpretable</td><td>Abdalla et al. [5]</td></tr>
+                        <tr><td>Hybrid (physics + data)</td><td>Mechanistic model provides physics-consistent features; ML corrects residual errors</td><td>Combines interpretability and accuracy; extrapolates better</td><td>Requires simultaneous physics and ML tuning</td><td>Lunde et al. [6]</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;1. VFM model families, with strengths and limitations for ESP-lifted wells.</p>
+
+                <h3>4. Study Design Considerations</h3>
+                <p>A valid VFM study must declare: (i) the <em>well-test reference</em> protocol (frequency, duration, separator accuracy) against which VFM predictions are validated; (ii) the <em>feature set</em> and sensor availability under realistic field conditions including dropout; (iii) the <em>temporal split</em> for model evaluation — time-based hold-out prevents data leakage; and (iv) the <em>acceptance criterion</em> on mean absolute percentage error (MAPE) consistent with the operator's surveillance tolerance (typically &lt;5% for liquid rate, &lt;3&nbsp;pp for WC).</p>
+                <table class="research-table">
+                    <thead><tr><th>Benchmark / dataset</th><th>Lift type</th><th>Notes</th></tr></thead>
+                    <tbody>
+                        <tr><td>Volve field (Equinor open data)</td><td>ESP / natural flow</td><td>Contains well-test data, downhole gauges, and surface SCADA</td></tr>
+                        <tr><td>Kongsberg Digital WellX dataset</td><td>Gas lift</td><td>Industry benchmark for first-principles VFM</td></tr>
+                        <tr><td>Proprietary ESP telemetry (multi-well)</td><td>ESP (centrifugal pump)</td><td>Used in Abdalla et al. [5]; &gt;300k hourly records from 8 wells</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;2. Representative datasets and their accessibility for VFM benchmarking.</p>
+
+                <h3>5. Validity Threats and Open Problems</h3>
                 <ul>
-                    <li>Variable Speed Drive (VSD) output current</li>
-                    <li>Choke opening percentage</li>
-                    <li>Pump vibrations (X, Y directions)</li>
-                    <li>Discharge and intake pressures</li>
+                    <li><strong>Sensor drift and calibration bias:</strong> Systematic offset in pressure or temperature sensors propagates directly into VFM predictions; periodic sensor health checks are a prerequisite.</li>
+                    <li><strong>Model extrapolation:</strong> Data-driven models trained at specific operating conditions (frequency range, WC range) degrade outside the training envelope without explicit bounds monitoring.</li>
+                    <li><strong>Well-test frequency:</strong> Sparse well-test labels (monthly or quarterly) limit the volume of labelled data available for supervised training.</li>
+                    <li><strong>Emulsion and gas interference:</strong> ESP performance curves are calibrated for clean single-phase liquid; high GOR or emulsion viscosity violates pump-curve assumptions in mechanistic models.</li>
+                    <li><strong>Deployment integration:</strong> Real-time VFM systems must handle missing data, out-of-order timestamps, and SCADA communication failures without producing spurious alarms.</li>
                 </ul>
 
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/correlation plot.png" alt="Correlation Matrix" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 3: Correlation matrix showing relationships between sensor measurements. Flow rate shows strong positive correlation with VSD current and choke opening.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/pairplot.png" alt="Pairplot of Signals" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 4: Pairwise relationships histogram showing distribution patterns across all sensor measurements.</div>
-                    </div>
+                <h3>6. Contributions from This Research Programme</h3>
+                <div class="data-category">
+                    <h4>Real-Time Liquid Rate and Water Cut Prediction from ESP Sensor Data Using Machine-Learning Algorithms</h4>
+                    <p>Abdalla, R., Al-Hakimi, W., Perozo, N., Jaeger, P. (2023). <em>ACS Omega</em>, 8(3), 3341&ndash;3356. <a href="https://doi.org/10.1021/acsomega.2c07609" target="_blank">DOI</a></p>
+                </div>
+                <div class="data-category">
+                    <h4>Data-Driven Virtual Flow Metering Systems (Book Chapter)</h4>
+                    <p>Abdalla, R., Jaeger, P. (2024). In: <em>Data Science and Machine Learning Applications in Subsurface Engineering</em>, CRC Press.</p>
                 </div>
 
-                <h4>Time Series Analysis</h4>
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/trend oil rate.png" alt="Oil Rate Trends" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 5: Time plot of oil production rate for each well showing production decline patterns and operational events.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/trend bsw.png" alt="Water Cut Trends" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 6: Time plot for basic sediments and water (BS&W) showing water breakthrough patterns across different wells.</div>
-                    </div>
-                </div>
-
-                <h4>Dimensionality Reduction & Clustering</h4>
-                <p>
-                    Principal Component Analysis (PCA) and K-means clustering were applied to investigate grouping patterns in input data.
-                    Results showed slight clustering per well and grading with pump frequency.
-                </p>
-
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/pca_well.png" alt="PCA by Well" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 7: PCA projection of input signals colored by well name, showing slight clustering patterns.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/pca_freq.png" alt="PCA by Frequency" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 8: PCA projection colored by pump frequency, revealing operational mode groupings.</div>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-robot"></i> Machine Learning Algorithms</h3>
-                <p>
-                    Multiple algorithms were evaluated based on their complexity and explainability, ranging from interpretable models to
-                    high-performance deep learning approaches.
-                </p>
-
-                <div class="algorithm-grid">
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-square-root-alt"></i> Symbolic Regression</h4>
-                        <p>Discovers hidden relationships by turning data into explicit mathematical formulas.</p>
-                        <ul>
-                            <li>High interpretability</li>
-                            <li>Automatic formula discovery</li>
-                            <li>Nonlinear correlations</li>
-                            <li>Risk of overfitting</li>
-                        </ul>
-                    </div>
-
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-chart-line"></i> XGBoost</h4>
-                        <p>Extreme Gradient Boosting for robust ensemble predictions.</p>
-                        <ul>
-                            <li>Tree-based ensemble</li>
-                            <li>High accuracy</li>
-                            <li>Feature importance</li>
-                            <li>Regularization built-in</li>
-                        </ul>
-                    </div>
-
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-network-wired"></i> Conv1D + LSTM</h4>
-                        <p>Deep learning combining convolutional and recurrent architectures.</p>
-                        <ul>
-                            <li>Temporal pattern recognition</li>
-                            <li>Multi-input sensor fusion</li>
-                            <li>High accuracy (R² = 0.94)</li>
-                            <li>Real-time capable</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="methodology-box">
-                    <h4><i class="fas fa-project-diagram"></i> Model Architecture: Conv1D + LSTM</h4>
-                    <p>
-                        The model consists of two main parts combining the advantages of time series processing and signal analysis:
-                    </p>
-                    <ul>
-                        <li><strong>CNN Layer:</strong> Extracts lateral features of multidimensional sensor data, performing inner products
-                        for different window data with filter matrices</li>
-                        <li><strong>Bi-LSTM Layer:</strong> Learns temporal relationships of features obtained by CNN, processing data in
-                        both forward and backward directions for enhanced accuracy</li>
-                        <li><strong>MaxPooling:</strong> Reduces eigenvectors to simplify computational complexity while extracting main features</li>
-                    </ul>
-                </div>
-
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/cnn_1d.PNG" alt="CNN 1D Architecture" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 9: One-dimensional convolutional neural network architecture for sensor signal processing.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/lstm_struct.PNG" alt="LSTM Structure" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 10: LSTM cell structure showing forget, input, and output gates for temporal sequence learning.</div>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-chart-bar"></i> Results and Performance</h3>
-
-                <div class="results-highlight">
-                    <h3 style="margin-top: 0;"><i class="fas fa-trophy"></i> Key Performance Metrics</h3>
-                    <div style="text-align: center; margin-top: 1.5rem;">
-                        <div class="metric-box">
-                            <div style="font-size: 2rem; font-weight: bold;">R² = 0.94</div>
-                            <div>Liquid Rate Prediction</div>
-                        </div>
-                        <div class="metric-box">
-                            <div style="font-size: 2rem; font-weight: bold;">MAE < 2%</div>
-                            <div>Water Cut Accuracy</div>
-                        </div>
-                        <div class="metric-box">
-                            <div style="font-size: 2rem; font-weight: bold;"><100ms</div>
-                            <div>Prediction Latency</div>
-                        </div>
-                        <div class="metric-box">
-                            <div style="font-size: 2rem; font-weight: bold;">$500K-$2M</div>
-                            <div>Cost Savings per Well</div>
-                        </div>
-                    </div>
-                </div>
-
-                <h4>Model Predictions vs. Measurements</h4>
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/conv1d_oil.png" alt="Conv1D Oil Prediction" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 11: Conv1D model predictions for oil production rate showing excellent agreement with measured values.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/conv1d_water.png" alt="Conv1D Water Prediction" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 12: Water production rate predictions demonstrating high accuracy across varying conditions.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/lstm_oil.png" alt="LSTM Oil Prediction" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 13: LSTM network oil rate predictions capturing temporal patterns and transients.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/lstm_water.png" alt="LSTM Water Prediction" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 14: Water rate predictions from LSTM showing robustness to production variations.</div>
-                    </div>
-                </div>
-
-                <h4>XGBoost Performance</h4>
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/XGBoosting Diagonal Plot.png" alt="XGBoost Diagonal Plot" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 15: XGBoost diagonal plot showing prediction accuracy for oil production rates.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/vfm/XGBoosting_water.png" alt="XGBoost Water" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 16: XGBoost water cut predictions demonstrating ensemble learning effectiveness.</div>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <h4><i class="fas fa-chart-line"></i> Model Performance Comparison</h4>
-                    <canvas id="performanceChart" style="max-height: 400px;"></canvas>
-                </div>
-
-                <h3><i class="fas fa-database"></i> Data Sources & Sensor Measurements</h3>
-                <p>ESP sensor data includes the following measurements:</p>
-
-                <div class="algorithm-grid">
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-water"></i> Wellhead Data</h4>
-                        <ul>
-                            <li>Choke opening (%)</li>
-                            <li>Wellhead pressure (psig)</li>
-                            <li>Flow line pressure (psig)</li>
-                            <li>Casing pressure (psig)</li>
-                            <li>Wellhead temperature (°F)</li>
-                        </ul>
-                    </div>
-
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-bolt"></i> Electrical Data</h4>
-                        <ul>
-                            <li>Frequency (Hz)</li>
-                            <li>Input voltage (3-phase)</li>
-                            <li>VSD output current (Amps)</li>
-                            <li>Motor current (Amps)</li>
-                            <li>Power consumption</li>
-                        </ul>
-                    </div>
-
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-tools"></i> Downhole Data</h4>
-                        <ul>
-                            <li>Pump intake pressure (psia)</li>
-                            <li>Pump discharge pressure (psia)</li>
-                            <li>Intake temperature (°C)</li>
-                            <li>Motor temperature (°C)</li>
-                            <li>Vibration X, Y (G)</li>
-                            <li>Differential pressure (psia)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-check-circle"></i> Summary and Conclusions</h3>
-                <p>
-                    This research introduced a novel data-driven VFM model for calculating multiphase flow rates using ESP sensor measurements.
-                    A comprehensive framework was developed for exploratory data analysis and model calibration to account for production conditions.
-                </p>
-
-                <h4>Key Achievements:</h4>
-                <ul>
-                    <li><strong>High Accuracy:</strong> Achieved R² = 0.94 for liquid rate prediction with MAE < 2% for water cut</li>
-                    <li><strong>Real-Time Capability:</strong> Sub-100ms prediction latency enables operational decision-making</li>
-                    <li><strong>Cost Reduction:</strong> Eliminates need for physical meters, saving $500K-$2M per well in CAPEX</li>
-                    <li><strong>Robustness:</strong> Models handle sensor noise, missing data, and varying operating conditions</li>
-                    <li><strong>Scalability:</strong> Successfully deployed across multiple wells and fields</li>
-                </ul>
-
-                <h3><i class="fas fa-road"></i> Future Directions</h3>
-                <ul>
-                    <li><strong>Hybrid Models:</strong> Integration with physics-based models for enhanced accuracy and interpretability</li>
-                    <li><strong>Multi-Phase Metering:</strong> Extension to complex fluid systems with high GOR</li>
-                    <li><strong>Edge Computing:</strong> Deployment on field devices for reduced latency and offline capability</li>
-                    <li><strong>Transfer Learning:</strong> Applying models trained on one field to others with minimal retraining</li>
-                    <li><strong>Uncertainty Quantification:</strong> Confidence intervals and prediction uncertainty estimation</li>
-                    <li><strong>Production Optimization:</strong> Integration with real-time optimization systems</li>
-                </ul>
-
-                <h3><i class="fas fa-book"></i> Related Publications</h3>
-                <ul>
-                    <li>Abdalla, R., Al-Hakimi, W., Perozo, N., Jaeger, P. (2023). Real Time Liquid Rate and Water Cut Prediction from the Electrical Submersible Pump Sensors Data Using Machine-Learning Algorithms. <em>ACS Omega</em>, 8(3), 3341-3356. DOI: 10.1021/acsomega.2c07609</li>
-                    <li>Abdalla, R., Jaeger, P. (2024). Data-Driven Virtual Flow Metering Systems. In: <em>Data Science and Machine Learning Applications in Subsurface Engineering</em>, CRC Press.</li>
-                    <li>Bikmukhametov, T., Jäschke, J. (2019). First Principles and Machine Learning Virtual Flow Metering: A Literature Review. <em>Journal of Petroleum Science and Engineering</em>, 184, 106487.</li>
-                </ul>
+                <h3>7. References</h3>
+                <ol class="references">
+                    <li>Bikmukhametov, T., J&auml;schke, J. (2019). First principles and machine learning virtual flow metering: A literature review. <em>J. Pet. Sci. Eng.</em>, 184, 106487.</li>
+                    <li>Brill, J.P., Mukherjee, H. (1999). <em>Multiphase Flow in Wells</em>. SPE Monograph Series, Vol. 17.</li>
+                    <li>Brown, K.E. (1984). <em>The Technology of Artificial Lift Methods</em>, Vol. 4. PennWell Books.</li>
+                    <li>Chen, T., Guestrin, C. (2016). XGBoost: A scalable tree boosting system. <em>KDD</em>, 785&ndash;794.</li>
+                    <li>Abdalla, R., Al-Hakimi, W., Perozo, N., Jaeger, P. (2023). Real-time liquid rate and water cut prediction from ESP sensor data. <em>ACS Omega</em>, 8(3), 3341&ndash;3356.</li>
+                    <li>Lunde, &Oslash;., et al. (2021). Hybrid first-principle and data-driven virtual flow metering. <em>SPE Prod. &amp; Oper.</em></li>
+                    <li>Hochreiter, S., Schmidhuber, J. (1997). Long short-term memory. <em>Neural Comput.</em>, 9(8), 1735&ndash;1780.</li>
+                    <li>Hagedorn, A.R., Brown, K.E. (1965). Experimental study of pressure gradients in flow strings. <em>JPT</em>, 17(4), 475&ndash;484.</li>
+                    <li>Dempsey, J.R. (2021). Virtual flow metering: State of the art. In: <em>SPE Metering Workshop</em>.</li>
+                </ol>
             </div>
         </section>
     </main>
@@ -466,54 +150,5 @@
             <p>&copy; 2025 Dr.-Ing. Ramez Abdalla | Research Scientist</p>
         </div>
     </footer>
-
-    <script>
-        // Model Performance Comparison Chart
-        const ctx = document.getElementById('performanceChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Symbolic Regression', 'XGBoost', 'Conv1D', 'LSTM', 'Conv1D+LSTM'],
-                datasets: [{
-                    label: 'R² Score',
-                    data: [0.82, 0.88, 0.91, 0.90, 0.94],
-                    backgroundColor: 'rgba(74, 144, 226, 0.7)',
-                    borderColor: 'rgba(74, 144, 226, 1)',
-                    borderWidth: 2
-                }, {
-                    label: 'Interpretability (1-10)',
-                    data: [8, 7, 3, 3, 2],
-                    backgroundColor: 'rgba(231, 76, 60, 0.7)',
-                    borderColor: 'rgba(231, 76, 60, 1)',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 10,
-                        title: {
-                            display: true,
-                            text: 'Score'
-                        }
-                    }
-                },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Model Performance: Accuracy vs. Interpretability',
-                        font: { size: 16 }
-                    },
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
-                }
-            }
-        });
-    </script>
 </body>
 </html>

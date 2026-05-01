@@ -6,91 +6,6 @@
     <title>Predictive Maintenance - Dr.-Ing. Ramez Abdalla</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <style>
-        .figure-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        .figure-item {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .figure-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-        }
-        .figure-caption {
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-            color: #666;
-            font-style: italic;
-        }
-        .methodology-box {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-left: 4px solid #e74c3c;
-            border-radius: 4px;
-        }
-        .algorithm-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .algorithm-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 2px solid #e74c3c;
-            transition: transform 0.3s;
-        }
-        .algorithm-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-        .results-highlight {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }
-        .metric-box {
-            display: inline-block;
-            margin: 0.5rem;
-            padding: 1rem 1.5rem;
-            background: rgba(255,255,255,0.2);
-            border-radius: 4px;
-            backdrop-filter: blur(10px);
-        }
-        .chart-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin: 2rem 0;
-        }
-        .failure-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .failure-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -131,332 +46,110 @@
 
         <section>
             <div class="topic-header">
-                <h2><i class="fas fa-tools"></i> Predictive Maintenance for Electrical Submersible Pumps</h2>
-                <p style="font-size: 1.15rem; color: #555; margin-top: 1rem;">
-                    Predictive Analytics Using Machine Learning for Equipment Failure Forecasting
-                </p>
+                <h2>Predictive Maintenance for Artificial-Lift Systems</h2>
+                <p style="opacity: 0.9; margin-top: 0.75rem;">Condition monitoring, anomaly detection, failure-mode classification, and remaining-useful-life estimation for ESPs and other downhole equipment.</p>
             </div>
 
             <div class="topic-content">
-                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>
-                    Electrical Submersible Pumps (ESPs) are critical artificial lift systems that require significant maintenance resources
-                    and manpower. Maintenance is usually triggered by reactive process monitoring of multivariate sensor data. Understanding
-                    equipment status through machine learning enables predictive maintenance, avoiding operation downtime and extending
-                    equipment life.
-                </p>
-
-                <p>
-                    ESPs are installed in many producing wells subject to harsh environments, pumping complex fluid mixtures that undergo
-                    changes in composition, pressure, and temperature over time. For assuring reliable fluid delivery, timely interventions
-                    are required in case of upcoming problems. This research focuses on deploying machine learning and data-driven models
-                    in the area of predictive pump maintenance.
-                </p>
-
-                <div class="methodology-box">
-                    <h4><i class="fas fa-lightbulb"></i> Research Objective</h4>
-                    <p>
-                        Increase efficiency by reducing the time required to dismantle systems, inspect them, and perform failure analysis.
-                        The objective is achieved by applying Principal Component Analysis (PCA) as a dimensionality reduction technique,
-                        then pipelining its output with a model trained using Extreme Gradient Boosting (XGBoost) algorithm for future
-                        prediction of pre-workover events.
-                    </p>
-                    <p style="margin-top: 1rem;">
-                        <strong>Key Innovation:</strong> The model can identify deeper functional relationships and longer-term trends
-                        inferred from historical data, providing alarms within seven days before actual failure events.
-                    </p>
-                </div>
-
-                <h3><i class="fas fa-database"></i> Data Gathering and Pre-Processing</h3>
-                <p>Time series data collected from ESP sensors include:</p>
-
-                <div class="algorithm-grid">
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-wave-square"></i> Frequency Data</h4>
-                        <p>Pump frequency (Hz) indicating operational speed</p>
-                    </div>
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-compress-arrows-alt"></i> Pressure Data</h4>
-                        <p>Pump discharge pressure (PDP), pump intake pressure (PIP), wellhead pressure (WHP)</p>
-                    </div>
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-thermometer-half"></i> Temperature Data</h4>
-                        <p>Wellhead temperature (WHT), motor temperature (MT)</p>
-                    </div>
-                    <div class="algorithm-card">
-                        <h4><i class="fas fa-bolt"></i> Electrical Data</h4>
-                        <p>Motor current, casing head pressure (CHP)</p>
-                    </div>
-                </div>
-
-                <h4>ESP Failure Categories</h4>
-                <p>Based on workover status sheets, pumps exhibit two main categories of electrical failures:</p>
-
-                <div class="failure-types">
-                    <div class="failure-card">
-                        <h4>Motor Downhole Failures (MDHF)</h4>
-                        <p>Stator failure due to overheating, polymer deposition reducing heat dissipation</p>
-                    </div>
-                    <div class="failure-card">
-                        <h4>Electrical Downhole Failures (EDHF)</h4>
-                        <p>Cable insulation due to corrosion, material failure, overload conditions</p>
-                    </div>
-                </div>
-
-                <h4>Data Cleaning Pipeline</h4>
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/predictive_maintenance/Fig 2-updates.png" alt="Before Outlier Removal" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 1: Box-plot of sensor data before outlier removal showing unreasonable measurements requiring cleaning.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/predictive_maintenance/Fig 3-Updated.png" alt="After Outlier Removal" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 2: Box-plot after outlier removal using IQR method (Q3 + 1.5×IQR upper bound, Q1 - 1.5×IQR lower bound).</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/predictive_maintenance/Fig 4-updated.png" alt="After Normalization" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 3: Box-plot after standard scaler normalization (zero mean, unit variance) for all sensor measurements.</div>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-project-diagram"></i> Principal Component Analysis (PCA)</h3>
-                <p>
-                    PCA is applied as an unsupervised dimensionality reduction technique. It reduces large dimensionality datasets into
-                    lower dimensions called principal components while preserving as much information as possible. This results in reducing
-                    the dimension of production parameters by making the most of the linear combinations.
-                </p>
-
-                <div class="methodology-box">
-                    <h4>PCA Calculation Steps</h4>
-                    <ol>
-                        <li><strong>Compute Covariance Matrix:</strong> Calculate relationships between contributing features</li>
-                        <li><strong>Calculate Eigenvectors & Eigenvalues:</strong> Determine principal components of the data</li>
-                        <li><strong>Select Principal Components:</strong> Choose components based on maximum variance criterion</li>
-                        <li><strong>Transform Data:</strong> Project samples into new lower-dimensional subspace</li>
-                    </ol>
-                </div>
-
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/predictive_maintenance/Fig 5.png" alt="PCA Geometric Meaning" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 4: Geometric interpretation of Principal Component Analysis showing variance maximization along principal axes.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/predictive_maintenance/Fig 6.png" alt="PCA ESP Application" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 5: Projection of ESP sensor data on principal components. Pre-workover and failure days show specific patterns aligned with MDHF and EDHF.</div>
-                    </div>
-                </div>
-
-                <h4>PCA Loading Factors</h4>
-                <p>
-                    The loading matrix represents correlations between original variables and principal components. Large loadings (positive
-                    or negative) indicate strong relationships. Most correlated parameters with the first principal component are:
-                </p>
+                <h3>1. Scope of the Research Area</h3>
+                <p>Predictive maintenance (PdM) in artificial-lift systems is the discipline of extracting health indicators from multivariate sensor streams to anticipate equipment failure before it occurs, enabling planned rather than reactive intervention. For Electrical Submersible Pumps (ESPs), which operate in harsh downhole environments and generate high-value production, unplanned failure incurs workover costs of US$50k&ndash;$500k per event plus deferred production. The research area spans four interconnected challenges:</p>
                 <ul>
-                    <li><strong>Pump Frequency:</strong> -0.90 loading</li>
-                    <li><strong>Casing Head Pressure:</strong> -0.85 loading</li>
-                    <li><strong>Current:</strong> -0.84 loading</li>
-                    <li><strong>Motor Temperature:</strong> -0.79 loading</li>
-                    <li><strong>Wellhead Temperature:</strong> -0.63 loading</li>
+                    <li>Reliable <em>label engineering</em>: deriving ground-truth failure events from workover records and operations logs.</li>
+                    <li><em>Class imbalance</em>: normal operation constitutes &gt;99% of records; minority failure windows require oversampling or cost-sensitive learning.</li>
+                    <li><em>Concept drift</em>: operating conditions, fluid composition, and pump degradation alter the multivariate distribution over time.</li>
+                    <li>Quantifying <em>Remaining Useful Life</em> (RUL): converting binary failure classification to a continuous time-to-event estimate.</li>
                 </ul>
 
-                <h3><i class="fas fa-chart-line"></i> XGBoost Application</h3>
-                <p>
-                    Extreme Gradient Boosting (XGBoost) is a tree-based ensemble model that combines the predictive abilities of multiple
-                    models. The final prediction is performed through the combination of these predictors. XGBoost builds trees sequentially,
-                    where each tree reduces the error of its predecessor while updating residual errors.
-                </p>
+                <h3>2. Mathematical Foundations</h3>
+                <p>Let <strong>x</strong><sub>t</sub> &isin; &#8477;<sup>d</sup> be the multivariate sensor vector at time <em>t</em>. Anomaly scoring under the IQR rule flags observation <em>x</em><sub>t,j</sub> as an outlier if it falls outside:</p>
+                <div class="equation">
+                    [Q<sub>1,j</sub> &minus; 1.5&nbsp;IQR<sub>j</sub>,&nbsp; Q<sub>3,j</sub> + 1.5&nbsp;IQR<sub>j</sub>], &nbsp; IQR<sub>j</sub> = Q<sub>3,j</sub> &minus; Q<sub>1,j</sub>
+                    <span class="eq-label">(1)</span>
+                </div>
+                <p>Principal Component Analysis (PCA) decomposes the standardised sensor matrix <strong>X</strong> = <strong>U&Sigma;V</strong><sup>T</sup>. The squared prediction error (SPE) in the residual subspace detects multivariate anomalies:</p>
+                <div class="equation">
+                    SPE<sub>t</sub> = &sum;<sub>j=k+1</sub><sup>d</sup> (&#234;<sub>t,j</sub>)<sup>2</sup>, &nbsp; &#234;<sub>t</sub> = <strong>x</strong><sub>t</sub> &minus; <strong>V</strong><sub>k</sub><strong>V</strong><sub>k</sub><sup>T</sup><strong>x</strong><sub>t</sub>
+                    <span class="eq-label">(2)</span>
+                </div>
+                <p>where <strong>V</strong><sub>k</sub> retains the top-<em>k</em> eigenvectors. XGBoost minimises a regularised objective at boosting iteration <em>m</em>:</p>
+                <div class="equation">
+                    &#8466;<sup>(m)</sup> = &sum;<sub>i</sub> l(y<sub>i</sub>, &ycirc;<sub>i</sub><sup>(m&minus;1)</sup> + f<sub>m</sub>(<strong>x</strong><sub>i</sub>)) + &Omega;(f<sub>m</sub>)
+                    <span class="eq-label">(3)</span>
+                </div>
+                <p>where l is binary cross-entropy for failure classification and &Omega;(f<sub>m</sub>) = &gamma;T + &frac12;&lambda;&sum;<sub>j</sub>w<sub>j</sub><sup>2</sup> penalises tree complexity (T leaves, leaf weights w<sub>j</sub>) [1].</p>
 
-                <div class="methodology-box">
-                    <h4>XGBoost Objective Function</h4>
-                    <p>At each iteration, the objective function combines loss function and regularization:</p>
-                    <ul style="font-family: 'Courier New', monospace; background: white; padding: 1rem; border-radius: 4px; margin: 1rem 0;">
-                        <li>L(t) = Σ l(yi, pi + Ovalue) + (1/2)λ(Ovalue)²</li>
-                        <li>l(yi, pi) = -[yi log(pi) + (1-yi) log(1-pi)]</li>
-                    </ul>
-                    <p>Second-order Taylor approximation enables traditional optimization techniques in Euclidean space.</p>
+                <h4>2.1 Label Engineering Protocol</h4>
+                <p>Pre-workover windows of duration &Delta;<sub>alarm</sub> (typically 7&ndash;14 days) are annotated as class 1 from the workover event timestamp t<sub>wo</sub>:</p>
+                <div class="equation">
+                    y<sub>t</sub> = 1 &nbsp; if &nbsp; t<sub>wo</sub> &minus; &Delta;<sub>alarm</sub> &le; t &lt; t<sub>wo</sub>, &nbsp; else &nbsp; y<sub>t</sub> = 0
+                    <span class="eq-label">(4)</span>
                 </div>
 
-                <h4>Model Training & Validation</h4>
-                <p>
-                    The dataset is divided into training (70%), validation (15%), and testing (15%) sets. K-fold cross-validation
-                    (k=10) is applied to minimize the risk of selecting validation points with disproportionate difficulty.
-                </p>
-
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/predictive_maintenance/Fig 7-updated_2.png" alt="Explained Variance" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 6: Cumulative explained variance showing 8 principal components capture 90%+ of dataset variance.</div>
-                    </div>
-
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/predictive_maintenance/Fig 8-updated.png" alt="Model Architecture" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 7: PCA + XGBoost pipeline architecture for predictive maintenance showing data flow from sensors to predictions.</div>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-chart-bar"></i> Results and Performance</h3>
-
-                <div class="results-highlight">
-                    <h3 style="margin-top: 0;"><i class="fas fa-trophy"></i> Key Performance Metrics</h3>
-                    <div style="text-align: center; margin-top: 1.5rem;">
-                        <div class="metric-box">
-                            <div style="font-size: 2rem; font-weight: bold;">AUC = 0.95</div>
-                            <div>10-Fold Cross-Validation</div>
-                        </div>
-                        <div class="metric-box">
-                            <div style="font-size: 2rem; font-weight: bold;">Precision = 0.8</div>
-                            <div>True Alarm Rate</div>
-                        </div>
-                        <div class="metric-box">
-                            <div style="font-size: 2rem; font-weight: bold;">Recall = 0.6</div>
-                            <div>Pre-Workover Detection</div>
-                        </div>
-                        <div class="metric-box">
-                            <div style="font-size: 2rem; font-weight: bold;">7 Days</div>
-                            <div>Advance Warning</div>
-                        </div>
-                    </div>
-                </div>
-
-                <h4>Model Performance Analysis</h4>
-                <div class="figure-grid">
-                    <div class="figure-item">
-                        <img src="../dissertation researches/figures/predictive_maintenance/FIg 9-updated.PNG" alt="ROC Curve" onerror="this.style.display='none';">
-                        <div class="figure-caption">Figure 8: ROC curve and confusion matrix showing model performance on test set with excellent discrimination capability.</div>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <h4><i class="fas fa-chart-line"></i> Classification Performance Metrics</h4>
-                    <canvas id="performanceChart" style="max-height: 400px;"></canvas>
-                </div>
-
-                <h3><i class="fas fa-check-circle"></i> Research Findings</h3>
-
-                <h4>Validation Set Performance:</h4>
-                <ul>
-                    <li><strong>Mean AUC = 0.95:</strong> The model demonstrates adequate performance and generalization capability</li>
-                    <li><strong>Consistent across folds:</strong> Low variance in performance across different validation sets</li>
-                    <li><strong>Robust to data distribution:</strong> Handles varying operational conditions effectively</li>
-                </ul>
-
-                <h4>Testing Set Performance:</h4>
-                <ul>
-                    <li><strong>Precision = 0.8:</strong> High precision minimizes false alarms (only 20% false positive rate)</li>
-                    <li><strong>Recall = 0.6:</strong> Not all 7 days before event show warnings, which is acceptable</li>
-                    <li><strong>Rationale:</strong> High precision preferred over high recall to minimize disruptive false alarms</li>
-                    <li><strong>Practical Impact:</strong> Operators receive reliable warnings with sufficient lead time</li>
-                </ul>
-
-                <h4>Feature Importance Insights:</h4>
-                <p>Analysis of principal component loadings reveals critical failure indicators:</p>
-                <div class="algorithm-grid">
-                    <div class="algorithm-card">
-                        <h4>PC1 Dominant Features</h4>
-                        <ul>
-                            <li>Pump Frequency</li>
-                            <li>Casing Head Pressure</li>
-                            <li>Motor Current</li>
-                        </ul>
-                    </div>
-                    <div class="algorithm-card">
-                        <h4>PC2 Dominant Features</h4>
-                        <ul>
-                            <li>Motor Temp. Difference</li>
-                            <li>Frequency Difference</li>
-                            <li>Current Difference</li>
-                        </ul>
-                    </div>
-                    <div class="algorithm-card">
-                        <h4>Critical Indicators</h4>
-                        <ul>
-                            <li>Rate of change signals</li>
-                            <li>Temperature trends</li>
-                            <li>Pressure anomalies</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-cogs"></i> Hyperparameter Tuning</h3>
-                <p>XGBoost hyperparameters were optimized using grid search across the following ranges:</p>
-                <ul>
-                    <li><strong>max_depth:</strong> 2-10 (controls overfitting through tree depth)</li>
-                    <li><strong>min_child_weight:</strong> 1e-10 to 1e10 (minimum sum of weights in child node)</li>
-                    <li><strong>colsample_bytree:</strong> 0-1 (subsample ratio of columns per tree)</li>
-                    <li><strong>learning_rate:</strong> 0-0.1 (step size shrinkage for overfitting prevention)</li>
-                    <li><strong>gamma:</strong> 0-5 (minimum loss reduction for split)</li>
-                </ul>
-
-                <h3><i class="fas fa-exclamation-triangle"></i> Overfitting Prevention</h3>
-                <p>
-                    Overfitting techniques were rigorously applied to ensure model generalization. K-fold cross-validation (k=10)
-                    detects the optimal stopping point and prevents fitting noise instead of underlying concepts.
-                </p>
-
-                <div class="methodology-box">
-                    <h4>Validation Strategy</h4>
-                    <p>
-                        Each model is trained on all subsets except one, tested on the held-out subset, and performance is averaged
-                        over all folds. The model with lowest estimated generalization error is selected and retrained on entire
-                        training set including validation data.
-                    </p>
-                </div>
-
-                <h3><i class="fas fa-database"></i> Data Classification</h3>
-                <p>After cleaning and preprocessing, data points are classified into three categories based on workover sheets:</p>
-
-                <table style="width: 100%; border-collapse: collapse; margin: 2rem 0; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h3>3. Methodological Families</h3>
+                <table class="research-table">
                     <thead>
-                        <tr style="background: #e74c3c; color: white;">
-                            <th style="padding: 1rem; text-align: left;">Condition</th>
-                            <th style="padding: 1rem; text-align: right;">Data Points</th>
-                        </tr>
+                        <tr><th>Family</th><th>Core idea</th><th>Strengths</th><th>Known limitations</th><th>Representative work</th></tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 1rem;">Normal Operation</td>
-                            <td style="padding: 1rem; text-align: right; font-weight: bold;">339,089</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 1rem;">Pre-Workover (7 days before)</td>
-                            <td style="padding: 1rem; text-align: right; font-weight: bold;">1,728</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1rem;">Workover Day</td>
-                            <td style="padding: 1rem; text-align: right; font-weight: bold;">288</td>
-                        </tr>
+                        <tr><td>Threshold / rule-based</td><td>Fixed limits on individual sensor channels</td><td>Interpretable; no training data required</td><td>High false-alarm rate; single-channel; no pattern capture</td><td>ISO 13379 [2]</td></tr>
+                        <tr><td>Statistical process control (CUSUM, EWMA)</td><td>Cumulative-sum or exponentially weighted mean shift detection</td><td>Sensitive to small drifts</td><td>Univariate; distribution assumption</td><td>Montgomery [3]</td></tr>
+                        <tr><td>PCA &ndash; SPE / T&sup2;</td><td>Multivariate decomposition; residual-subspace monitoring</td><td>Captures correlated sensor behaviour</td><td>Linear; Gaussian assumption; static subspace</td><td>Wise et al. [4]</td></tr>
+                        <tr><td>Isolation Forest</td><td>Random partitioning; anomalies require fewer splits</td><td>Unsupervised; handles high-dimensional data</td><td>No probability calibration; binary output</td><td>Liu et al. [5]</td></tr>
+                        <tr><td>Supervised classification (XGBoost, RF)</td><td>Labelled pre-failure windows train a classifier</td><td>Interpretable feature importances; calibrated probability</td><td>Requires quality labels; class imbalance</td><td>Chen &amp; Guestrin [1]</td></tr>
+                        <tr><td>LSTM / autoencoder (deep learning)</td><td>Reconstruction error of temporal sequences flags anomalies</td><td>Temporal patterns; semi-supervised anomaly detection</td><td>Training cost; hyperparameter sensitivity; limited interpretability</td><td>Malhotra et al. [6]</td></tr>
+                        <tr><td>Remaining-useful-life regression</td><td>Continuous time-to-failure target from degradation curves</td><td>Actionable lead time estimate</td><td>Requires run-to-failure trajectories; censoring</td><td>Jardine et al. [7]</td></tr>
                     </tbody>
                 </table>
+                <p class="table-caption">Table&nbsp;1. Taxonomy of predictive-maintenance approaches applicable to downhole equipment.</p>
 
-                <h3><i class="fas fa-industry"></i> Practical Applications</h3>
+                <h3>4. Study Design Considerations</h3>
+                <p>A rigorous PdM study must declare: (i) the <em>labelling protocol</em> including alarm horizon &Delta;<sub>alarm</sub> and failure-mode taxonomy (motor downhole failure, electrical cable failure, gas-lock, scale); (ii) the <em>class imbalance strategy</em> (SMOTE, cost-sensitive weights, threshold shifting); (iii) the <em>temporal split</em> &mdash; random cross-validation inflates performance by leaking future patterns into training; chronological splits are mandatory; and (iv) the <em>evaluation metric</em> appropriate for imbalanced classes (AUC-ROC, precision-recall AUC, F<sub>&beta;</sub> with &beta; tuned to false-alarm cost).</p>
+                <table class="research-table">
+                    <thead><tr><th>Benchmark / dataset</th><th>Equipment</th><th>Relevance</th></tr></thead>
+                    <tbody>
+                        <tr><td>PRONOSTIA bearing dataset (IEEE PHM 2012)</td><td>Rolling-element bearings</td><td>Run-to-failure RUL benchmark with vibration signals</td></tr>
+                        <tr><td>C-MAPSS (NASA Turbofan)</td><td>Turbofan engine</td><td>Multi-condition RUL regression; degradation modelling</td></tr>
+                        <tr><td>Field ESP telemetry (proprietary)</td><td>ESP in producing wells</td><td>Realistic multi-well imbalance; label ambiguity from workover sheets</td></tr>
+                        <tr><td>Volve production data (Equinor)</td><td>Downhole gauges</td><td>Open-access field dataset for surveillance model benchmarking</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-caption">Table&nbsp;2. Benchmark datasets and their relevance to artificial-lift PdM research.</p>
+
+                <h3>5. Validity Threats and Open Problems</h3>
                 <ul>
-                    <li><strong>Maintenance Scheduling:</strong> 7-day advance warning enables planned interventions</li>
-                    <li><strong>Cost Reduction:</strong> Minimizes unplanned downtime and emergency repairs</li>
-                    <li><strong>Resource Optimization:</strong> Better allocation of maintenance crews and equipment</li>
-                    <li><strong>Production Continuity:</strong> Maintains stable production through proactive maintenance</li>
-                    <li><strong>Equipment Lifespan:</strong> Early intervention prevents cascading failures</li>
+                    <li><strong>Label ambiguity:</strong> Workover records document the intervention date, not the onset of degradation; the pre-failure window length &Delta;<sub>alarm</sub> is a modelling assumption that critically affects recall.</li>
+                    <li><strong>Concept drift:</strong> Pump degradation progressively shifts the sensor distribution; static models trained at installation require periodic retraining or online adaptation.</li>
+                    <li><strong>Sensor dropout and calibration drift:</strong> Missing channels and biased measurements introduce structured noise that correlation-based features amplify.</li>
+                    <li><strong>Generalisation across wells:</strong> Different completions, fluid properties, and operating strategies mean that cross-well transfer requires domain adaptation or well-specific fine-tuning.</li>
+                    <li><strong>Interpretability:</strong> Regulatory and operational acceptance often requires explanations (SHAP, LIME) justifying the alarm beyond a black-box probability.</li>
                 </ul>
 
-                <h3><i class="fas fa-road"></i> Future Directions</h3>
-                <ul>
-                    <li><strong>Multi-Equipment Integration:</strong> Extending to pumps, separators, and surface facilities</li>
-                    <li><strong>Real-Time Deployment:</strong> Edge computing for on-site predictions</li>
-                    <li><strong>Transfer Learning:</strong> Applying models across different fields with minimal retraining</li>
-                    <li><strong>Explainable AI:</strong> Enhanced interpretability for engineering insights</li>
-                    <li><strong>Remaining Useful Life:</strong> Predicting time-to-failure in addition to failure probability</li>
-                    <li><strong>Digital Twin Integration:</strong> Combining with physics-based simulations</li>
-                </ul>
+                <h3>6. Contributions from This Research Programme</h3>
+                <div class="data-category">
+                    <h4>Machine Learning Approach for Predictive Maintenance of ESPs (PCA + XGBoost)</h4>
+                    <p>Abdalla, R., Samara, H., Perozo, N., Carvajal, C., Jaeger, P. (2022). <em>ACS Omega</em>, 7(21), 17641&ndash;17651. <a href="https://doi.org/10.1021/acsomega.1c05881" target="_blank">DOI</a></p>
+                </div>
+                <div class="data-category">
+                    <h4>Deep Insight into ESP Maintenance: A Predictive Approach with Deep Learning</h4>
+                    <p>Abdalla, R., Nikolaev, D., G&ouml;nczi, D., et al. (2023). <em>SPE Offshore Europe Conference &amp; Exhibition</em>. <a href="https://doi.org/10.2118/214451-MS" target="_blank">DOI</a></p>
+                </div>
+                <div class="data-category">
+                    <h4>Identification of Downhole Conditions in Sucker-Rod Pumped Wells Using Deep Neural Networks</h4>
+                    <p>Abdalla, R., El Ela, M.A., El-Banbi, A. (2020). <em>SPE Production &amp; Operations</em>, 35, 435&ndash;447. <a href="https://doi.org/10.2118/200494-PA" target="_blank">DOI</a></p>
+                </div>
 
-                <h3><i class="fas fa-book"></i> Related Publications</h3>
-                <ul>
-                    <li>Abdalla, R., Samara, H., Perozo, N., Carvajal, C., Jaeger, P. (2022). Machine Learning Approach for Predictive Maintenance of Electrical Submersible Pumps. <em>ACS Omega</em>, 7(21), 17641-17651. DOI: 10.1021/acsomega.1c05881</li>
-                    <li>Abdalla, R., Nikolaev, D., Gönzi, D., et al. (2023). Deep Insight into Electrical Submersible Pump Maintenance: A Predictive Approach with Deep Learning. <em>SPE Offshore Europe Conference & Exhibition</em>. DOI: 10.2118/214451-MS</li>
-                    <li>Abdalla, R., El Ela, M.A., El-Banbi, A. (2020). Identification of Downhole Conditions in Sucker Rod Pumped Wells Using Deep Neural Networks and Genetic Algorithms. <em>SPE Production & Operations</em>, 35, 435-447.</li>
-                </ul>
+                <h3>7. References</h3>
+                <ol class="references">
+                    <li>Chen, T., Guestrin, C. (2016). XGBoost: A scalable tree boosting system. <em>KDD</em>, 785&ndash;794.</li>
+                    <li>ISO 13379-1 (2012). <em>Condition monitoring and diagnostics of machines — Data interpretation and diagnostics techniques</em>. ISO.</li>
+                    <li>Montgomery, D.C. (2020). <em>Introduction to Statistical Quality Control</em>, 8th ed. Wiley.</li>
+                    <li>Wise, B.M., Gallagher, N.B. (1996). The process chemometrics approach to process monitoring and fault detection. <em>J. Process Control</em>, 6(6), 329&ndash;348.</li>
+                    <li>Liu, F.T., Ting, K.M., Zhou, Z.H. (2008). Isolation forest. <em>ICDM</em>, 413&ndash;422.</li>
+                    <li>Malhotra, P., Vig, L., Shroff, G., Agarwal, P. (2015). Long short-term memory networks for anomaly detection in time series. <em>ESANN</em>.</li>
+                    <li>Jardine, A.K.S., Lin, D., Banjevic, D. (2006). A review on machinery diagnostics and prognostics. <em>Mech. Syst. Signal Process.</em>, 20(7), 1483&ndash;1510.</li>
+                    <li>Zhao, R., et al. (2019). Deep learning and its applications to machine health monitoring. <em>Mech. Syst. Signal Process.</em>, 115, 213&ndash;237.</li>
+                    <li>Peng, Y., et al. (2010). Current status of machine prognostics in condition-based maintenance. <em>Int. J. Adv. Manuf. Technol.</em>, 50, 297&ndash;313.</li>
+                </ol>
             </div>
         </section>
     </main>
@@ -466,55 +159,5 @@
             <p>&copy; 2025 Dr.-Ing. Ramez Abdalla | Research Scientist</p>
         </div>
     </footer>
-
-    <script>
-        // Classification Performance Metrics Chart
-        const ctx = document.getElementById('performanceChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['Precision', 'Recall', 'F1-Score', 'AUC', 'Accuracy', 'Specificity'],
-                datasets: [{
-                    label: 'Validation Set',
-                    data: [85, 82, 83, 95, 94, 96],
-                    backgroundColor: 'rgba(231, 76, 60, 0.2)',
-                    borderColor: 'rgba(231, 76, 60, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: 'rgba(231, 76, 60, 1)'
-                }, {
-                    label: 'Test Set',
-                    data: [80, 60, 69, 92, 91, 94],
-                    backgroundColor: 'rgba(74, 144, 226, 0.2)',
-                    borderColor: 'rgba(74, 144, 226, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: 'rgba(74, 144, 226, 1)'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            stepSize: 20
-                        }
-                    }
-                },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Model Performance Metrics (%) - Validation vs. Test Sets',
-                        font: { size: 16 }
-                    },
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
